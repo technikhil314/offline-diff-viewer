@@ -1,0 +1,26 @@
+{
+  "name": "Diff viewer",
+  "short_name": "Diff viewer",
+  "description": "Nikhil Mehta's personal website",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "url_handlers": [
+    {
+      "origin": "https://diffviewer.vercel.app/"
+    }
+  ],
+  "theme_color": "#2563EB",
+  "background_color": "#2563EB",
+  "display": "standalone"
+}

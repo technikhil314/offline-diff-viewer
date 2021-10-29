@@ -1,0 +1,31 @@
+/* Basic layout */
+html,
+body,
+#__nuxt,
+#__layout,
+main {
+  width: 100%;
+}
+html,
+body {
+  height: calc(100% - 6rem);
+}
+#__nuxt,
+#__layout,
+main {
+  height: 100%;
+}
+
+/* custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
