@@ -1,5 +1,5 @@
 <template>
-  <Tutorial/>
+  <h1 class="text-7xl">index</h1>
 </template>
 
 <script lang="ts">
