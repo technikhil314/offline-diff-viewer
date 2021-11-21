@@ -23,6 +23,8 @@
   "dependencies": {
     "@nuxtjs/pwa": "^3.3.5",
     "core-js": "^3.15.1",
+    "diff": "^5.0.0",
+    "diff-match-patch": "^1.0.5",
     "nuxt": "^2.15.7"
   },
   "devDependencies": {
