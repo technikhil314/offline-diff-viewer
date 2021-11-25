@@ -13,7 +13,7 @@
         >
           <span class="inline-flex justify-center" v-show="copied">
             <svg
-              class="w-6 h-6 mr-2"
+              class="inline-block w-6 h-6 mr-2 ml-[-4px]"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -125,10 +125,10 @@ export default {
     }
   },
   methods: {
-    copyUrlToClipboard() {
-      navigator.clipboard.writeText(window.location.href)
+    putToClipboard(textToPut, toastContent) {
+      navigator.clipboard.writeText(textToPut)
       this.$store.commit('toast/setData', {
-        content: 'Link copied to your clipboard',
+        content: toastContent,
         iconHTML: `
           <svg
             class="w-6 h-6"
@@ -148,46 +148,27 @@ export default {
         theme: 'success',
       })
       this.$store.commit('toast/toggle')
-      this.copied = true
       setTimeout(() => {
         this.$store.commit('toast/toggle')
-        this.copied = false
       }, 5000)
       setTimeout(() => {
         this.$store.commit('toast/clean')
       }, 5500)
     },
-    copyTextToClipboard(e) {
-      navigator.clipboard.writeText(
-        e.currentTarget.parentNode.parentNode.innerText.split('\n\n').join('\n')
-      )
-      this.$store.commit('toast/setData', {
-        content: 'Text copied to your clipboard',
-        iconHTML: `
-          <svg
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-            ></path>
-          </svg>
-        `,
-        theme: 'success',
-      })
-      this.$store.commit('toast/toggle')
+    copyUrlToClipboard() {
+      this.putToClipboard(window.location.href, 'Link copied to your clipboard')
+      this.copied = true
       setTimeout(() => {
-        this.$store.commit('toast/toggle')
+        this.copied = false
       }, 5000)
-      setTimeout(() => {
-        this.$store.commit('toast/clean')
-      }, 5500)
+    },
+    copyTextToClipboard(e) {
+      this.putToClipboard(
+        e.currentTarget.parentNode.parentNode.innerText
+          .split('\n\n')
+          .join('\n'),
+        'Text copied to your clipboard'
+      )
     },
   },
 }

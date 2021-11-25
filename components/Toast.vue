@@ -1,7 +1,17 @@
 <template>
-  <div class="relative mt-24 xl:container">
+  <div class="relative mt-24">
     <div
-      class="absolute top-0 right-0 flow-root p-4 transition-transform rounded-md shadow-md  z-2"
+      class="
+        absolute
+        top-0
+        right-[20px]
+        flow-root
+        p-4
+        transition-transform
+        rounded-md
+        shadow-md
+        z-2
+      "
       v-bind:class="{
         '-translate-y-screen': !toastState.show,
         '-translate-y-0': !toastState.show,
