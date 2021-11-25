@@ -15,8 +15,9 @@
       v-bind:class="{
         '-translate-y-screen': !toastState.show,
         '-translate-y-0': !toastState.show,
-        'bg-green-400': toastState.theme === 'success',
-        'bg-blue-400': toastState.theme !== 'success',
+        'bg-green-400 text-gray-800': toastState.theme === 'success',
+        'bg-red-400 text-white': toastState.theme === 'error',
+        'bg-blue-400 text-white': toastState.theme !== 'success',
       }"
     >
       <div class="flex justify-between gap-2">

@@ -8,7 +8,7 @@
           class="inline-flex justify-center px-4 py-2 text-white transition-transform transform rounded-md shadow-lg outline-none  copy-uri-button align-center focus:ring-4 active:scale-y-75"
           v-bind:class="{
             'bg-blue-600 text-white': !copied,
-            'bg-green-500 text-black': copied,
+            'bg-green-500 text-gray-800': copied,
           }"
         >
           <span class="inline-flex justify-center" v-show="copied">
