@@ -60,8 +60,8 @@ For detailed explanation on how things work, check out the [documentation](https
 
 # TODO
 
-- Add support for multiple languages like json,yaml,xml etc
-- Enable syntax highlighting
-- Auto detect language
-- Add small shadow to line numbers
-- Fix toast issue. (Click on copy button while toast is on)
+- [ ] Add support for multiple languages like json,yaml,xml etc
+- [ ] Enable syntax highlighting
+- [ ] Auto detect language
+- [ ] Add small shadow to line numbers
+- [x] Fix toast issue. (Click on copy button while toast is on)

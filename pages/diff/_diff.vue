@@ -127,7 +127,8 @@ export default {
   methods: {
     putToClipboard(textToPut, toastContent) {
       navigator.clipboard.writeText(textToPut)
-      this.$store.commit('toast/setData', {
+      this.$store.commit('toast/show', {
+        show: true,
         content: toastContent,
         iconHTML: `
           <svg
@@ -147,13 +148,6 @@ export default {
         `,
         theme: 'success',
       })
-      this.$store.commit('toast/toggle')
-      setTimeout(() => {
-        this.$store.commit('toast/toggle')
-      }, 5000)
-      setTimeout(() => {
-        this.$store.commit('toast/clean')
-      }, 5500)
     },
     copyUrlToClipboard() {
       this.putToClipboard(window.location.href, 'Link copied to your clipboard')
