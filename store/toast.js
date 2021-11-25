@@ -20,7 +20,7 @@ export const mutations = {
     }
     const isAlreadyShowing = state.show;
     state.content = content;
-    state.theme = theme;
+    state.theme = theme || "info";
     state.iconHTML = iconHTML
     state.show = content && show;
     if (isAlreadyShowing && state.show && timeoutId) {
