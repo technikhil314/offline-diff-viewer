@@ -15,7 +15,7 @@
           ></textarea>
           <div class="self-end w-full text-center">
             <button
-              class="w-64 px-4 py-3 text-white transition-transform transform bg-blue-600 rounded-md shadow-lg outline-none  focus:ring-4 active:scale-y-75"
+              class="inline-flex items-center justify-center w-48 px-4 py-2 text-white transition-transform transform bg-blue-600 rounded-md shadow-lg outline-none  focus:ring-4 active:scale-y-75"
             >
               Compare
             </button>
@@ -45,6 +45,9 @@ export default Vue.extend({
         'rhs'
       ) as HTMLTextAreaElement
       const rhs: string = rhsTextArea?.value || ''
+      if (!lhs || !rhs) {
+        return
+      }
       const originalLhs = lhs.split('\n')
       const originalRhs = rhs.split('\n')
       const diff = originalLhs.map((x, i) => {

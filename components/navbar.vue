@@ -1,7 +1,7 @@
 <template>
   <header class="fixed top-0 left-0 right-0 bg-white shadow-lg">
-    <div class="container flex h-full py-4 m-auto">
-      <div v-if="showBackButton" class="items-center mr-4">
+    <div class="container flex items-center h-full py-4 m-auto">
+      <div v-if="showBackButton" class="mr-4">
         <NuxtLink to="/">
           <svg
             class="w-6 h-6"
