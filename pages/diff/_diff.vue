@@ -5,23 +5,46 @@
         <button
           type="button"
           @click="copyUrlToClipboard"
-          class="inline-flex justify-center px-4 py-2 text-white transition-transform transform bg-blue-600 rounded-md shadow-lg outline-none  copy-uri-button align-center focus:ring-4 active:scale-y-75"
+          class="inline-flex justify-center px-4 py-2 text-white transition-transform transform rounded-md shadow-lg outline-none  copy-uri-button align-center focus:ring-4 active:scale-y-75"
+          v-bind:class="{
+            'bg-blue-600 text-white': !copied,
+            'bg-green-500 text-black': copied,
+          }"
         >
-          <svg
-            class="w-6 h-6 mr-2"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-            ></path>
-          </svg>
-          <span>Copy link</span>
+          <span class="inline-flex justify-center" v-show="copied">
+            <svg
+              class="w-6 h-6 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+              ></path>
+            </svg>
+            <span>Copied</span>
+          </span>
+          <span class="inline-flex justify-center" v-show="!copied">
+            <svg
+              class="w-6 h-6 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+              ></path>
+            </svg>
+            <span>Copy link</span>
+          </span>
         </button>
       </template>
     </Navbar>
@@ -98,6 +121,7 @@ export default {
     return {
       lhsDiff: this.lhsDiff,
       rhsDiff: this.rhsDiff,
+      copied: false,
     }
   },
   methods: {
@@ -124,8 +148,10 @@ export default {
         theme: 'success',
       })
       this.$store.commit('toast/toggle')
+      this.copied = true
       setTimeout(() => {
         this.$store.commit('toast/toggle')
+        this.copied = false
       }, 5000)
       setTimeout(() => {
         this.$store.commit('toast/clean')
