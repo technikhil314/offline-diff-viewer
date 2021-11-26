@@ -4,11 +4,11 @@ const domainAliases = [
   "https://textdiff.vercel.app/"
 ]
 const canonicalLinks = domainAliases.map(x => ({ rel: "canonical", href: x }))
-const DESCRIPTION = "A privacy focused, secure, easy sharable and simple diff viewer";
+const DESCRIPTION = "A text diff viewer that is privacy focused, secure, sharable and simple";
 export default {
   target: 'static',
   head: {
-    title: 'Diff viewer',
+    title: `Diff viewer - ${DESCRIPTION}`,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },

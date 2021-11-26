@@ -1,7 +1,7 @@
 {
   "name": "Diff viewer",
   "short_name": "Diff viewer",
-  "description": "Nikhil Mehta's personal website",
+  "description": "A text diff viewer that is privacy focused, secure, sharable and simple",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
