@@ -8,6 +8,10 @@ main {
   @apply h-full;
 }
 
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
 .page-root {
   @apply flow-root w-full;
 }

@@ -47,6 +47,9 @@ export default {
       { rel: "apple-touch-icon", sizes: "144x144", href: "/apple-touch-icon-144x144.png" },
       { rel: "apple-touch-icon", sizes: "152x152", href: "/apple-touch-icon-152x152.png" },
       { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon-180x180.png" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: true },
+      { href: "https://fonts.googleapis.com/css2?family=Open+Sans&display=swap", rel: "stylesheet" },
       ...canonicalLinks
     ]
   },

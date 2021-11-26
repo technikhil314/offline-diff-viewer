@@ -49,16 +49,13 @@
       </template>
     </Navbar>
     <main>
-      <div class="flex items-start w-full gap-4">
+      <div class="flex items-start w-full gap-4 font-mono">
         <div
           class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-sm  max-h-screen--nav line-number-gutter min-h-80"
         >
           <RTStickyCopyButton :clickHandler="copyTextToClipboard" />
           <div v-for="(lineDiff, index) in lhsDiff" :key="index">
-            <p
-              class="font-mono break-all whitespace-pre-wrap"
-              v-html="lineDiff"
-            ></p>
+            <p class="break-all whitespace-pre-wrap" v-html="lineDiff"></p>
           </div>
         </div>
         <div
@@ -66,10 +63,7 @@
         >
           <RTStickyCopyButton :clickHandler="copyTextToClipboard" />
           <div v-for="(lineDiff, index) in rhsDiff" :key="index">
-            <p
-              class="font-mono break-all whitespace-pre-wrap"
-              v-html="lineDiff"
-            ></p>
+            <p class="break-all whitespace-pre-wrap" v-html="lineDiff"></p>
           </div>
         </div>
       </div>
@@ -91,7 +85,7 @@ export default {
         const hunkState = item[0]
         if (hunkState === -1 || hunkState === 0) {
           const className = hunkState === -1 ? 'bg-red-400' : ''
-          return `<span class="font-mono break-all inline p-0 m-0 ${className}">${item[1]}</span>`
+          return `<span class="break-all inline p-0 m-0 ${className}">${item[1]}</span>`
         }
         return false
       })
@@ -103,7 +97,7 @@ export default {
         const hunkState = item[0]
         if (hunkState === 1 || hunkState === 0) {
           const className = hunkState === 1 ? 'bg-green-400' : ''
-          return `<span class="font-mono break-all inline p-0 m-0 ${className}">${item[1]}</span>`
+          return `<span class="break-all inline p-0 m-0 ${className}">${item[1]}</span>`
         }
         return false
       })
