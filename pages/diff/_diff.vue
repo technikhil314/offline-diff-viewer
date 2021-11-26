@@ -49,7 +49,9 @@
       </template>
     </Navbar>
     <main>
-      <div class="flex items-stretch w-full gap-4 font-mono dark:text-gray-50">
+      <div
+        class="flex items-stretch w-full gap-4 font-mono text-gray-800  dark:text-gray-50"
+      >
         <div
           class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md  dark:border-gray-500 max-h-screen--nav line-number-gutter min-h-80"
         >
