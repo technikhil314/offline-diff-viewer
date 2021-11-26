@@ -179,7 +179,7 @@ export default {
       document.documentElement.classList[this.darkMode ? 'add' : 'remove'](
         'dark'
       )
-      document.cookie = `darkMode=${this.darkMode}; Secure; max-age=31536000;`
+      document.cookie = `darkMode=${this.darkMode}; Secure; max-age=31536000; path=/;`
     },
   },
 }
