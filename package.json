@@ -6,7 +6,7 @@
     "clean": "rimraf ./dist",
     "dev": "npm run clean && nuxt",
     "build": "npm run clean && nuxt build",
-    "start": "npm run clean && nuxt start",
+    "start": "nuxt start",
     "generate": "npm run clean && nuxt generate",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
     "lint:style": "stylelint \"**/*.{vue,css}\" --ignore-path .gitignore",
