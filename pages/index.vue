@@ -12,11 +12,11 @@
         <div class="flex flex-wrap w-full h-full gap-4">
           <textarea
             id="lhs"
-            class="flex-1 h-full max-h-full rounded-md resize-none  form-textarea"
+            class="flex-1 h-full max-h-full bg-transparent rounded-md resize-none  form-textarea"
           ></textarea>
           <textarea
             id="rhs"
-            class="flex-1 h-full max-h-full rounded-md resize-none  form-textarea"
+            class="flex-1 h-full max-h-full bg-transparent rounded-md resize-none  form-textarea"
           ></textarea>
           <div class="self-end w-full text-center">
             <button

@@ -1,5 +1,5 @@
 <template>
-  <header class="fixed top-0 left-0 right-0 bg-white shadow-lg z-100">
+  <header class="fixed top-0 left-0 right-0 shadow-lg bg-gray-50 z-100">
     <div class="container flex items-center h-full py-4 m-auto">
       <div v-if="showBackButton" class="mr-4">
         <NuxtLink to="/">

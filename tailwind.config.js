@@ -1,5 +1,6 @@
 module.exports = {
   mode: 'jit',
+  darkMode: 'class',
   theme: {
     maxHeight: {
       'screen--nav': 'calc(100vh - 7rem)',
