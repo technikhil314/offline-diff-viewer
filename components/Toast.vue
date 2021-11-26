@@ -1,5 +1,5 @@
 <template>
-  <div class="relative mt-24">
+  <div class="absolute right-[20px] top-24" id="toast">
     <div
       class="
         absolute
@@ -11,6 +11,7 @@
         rounded-md
         shadow-md
         z-2
+        w-72
       "
       v-bind:class="{
         '-translate-y-screen': !toastState.show,

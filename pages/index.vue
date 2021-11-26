@@ -1,8 +1,13 @@
 <template>
-  <div class="contents">
+  <div class="flow-root h-full page-root">
     <Navbar />
-    <main class="flex flex-wrap h-full -mt-3 xl:container">
-      <p class="w-full mb-2 text-xl text-center">Compare any text for diff</p>
+    <main class="flex flex-wrap h-full mt-20 xl:container">
+      <h1 class="w-full mb-2 text-xl text-center">
+        Find difference in any two text blocks and get easy sharable link
+      </h1>
+      <h2 class="w-full mb-2 text-center text-md">
+        Dont worry, We dont store any of your data
+      </h2>
       <form @submit="checkForm" class="w-full h-full">
         <div class="flex flex-wrap w-full h-full gap-4">
           <textarea
@@ -105,3 +110,8 @@ export default Vue.extend({
   },
 })
 </script>
+<style>
+.page-root {
+  max-height: calc(100% - 14rem);
+}
+</style>

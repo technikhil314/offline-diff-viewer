@@ -1,5 +1,5 @@
 <template>
-  <div class="contents">
+  <div class="flow-root h-full">
     <Navbar show-back-button="true">
       <template v-slot:right>
         <button
@@ -48,7 +48,7 @@
         </button>
       </template>
     </Navbar>
-    <main class="h-full xl:container">
+    <main class="h-full mt-24 xl:container">
       <div class="flex gap-4 mt-5">
         <div
           class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-sm  max-h-screen--nav line-numbers min-h-80"
