@@ -1,7 +1,7 @@
 <template>
-  <div class="flow-root h-full page-root">
+  <div class="contents">
     <Navbar />
-    <main class="flex flex-wrap h-full mt-20 xl:container">
+    <main>
       <h1 class="w-full mb-2 text-xl text-center">
         Find difference in any two text blocks and get easy sharable link
       </h1>

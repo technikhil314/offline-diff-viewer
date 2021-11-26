@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full">
+  <div class="page-root">
     <Toast />
     <Nuxt />
   </div>

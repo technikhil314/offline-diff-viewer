@@ -3,17 +3,18 @@ html,
 body,
 #__nuxt,
 #__layout,
+.page-root,
 main {
-  width: 100%;
+  @apply h-full;
 }
-html,
-body {
-  height: 100%;
+
+.page-root {
+  @apply flow-root w-full;
 }
-#__nuxt,
-#__layout,
+
 main {
-  height: 100%;
+  @apply flex flex-wrap xl:container;
+  margin-top: 5.5rem;
 }
 
 /* custom scrollbar */
