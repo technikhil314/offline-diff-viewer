@@ -34,29 +34,40 @@ export default {
       { name: "twitter:image", property: "og:url", content: `${BASE_URL}/128x128.png` },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: "manifest", href: "/manifest.json" },
-      { rel: "shortcut icon", href: "/favicon.ico", type: "image/x-icon" },
-      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
       { rel: "sitemap", type: "application/xml", title: "Sitemap", href: "/sitemap.xml" },
-      { rel: "apple-touch-icon", sizes: "57x57", href: "/apple-touch-icon-57x57.png" },
-      { rel: "apple-touch-icon", sizes: "72x72", href: "/apple-touch-icon-72x72.png" },
-      { rel: "apple-touch-icon", sizes: "76x76", href: "/apple-touch-icon-76x76.png" },
-      { rel: "apple-touch-icon", sizes: "114x114", href: "/apple-touch-icon-114x114.png" },
-      { rel: "apple-touch-icon", sizes: "120x120", href: "/apple-touch-icon-120x120.png" },
-      { rel: "apple-touch-icon", sizes: "144x144", href: "/apple-touch-icon-144x144.png" },
-      { rel: "apple-touch-icon", sizes: "152x152", href: "/apple-touch-icon-152x152.png" },
-      { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon-180x180.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: true },
       { href: "https://fonts.googleapis.com/css2?family=Open+Sans&display=swap", rel: "stylesheet" },
+      { rel: "icon", media: "(prefers-color-scheme: light)", type: "image/x-icon", href: "/dark-favicon.ico" },
+      { rel: "shortcut icon", media: "(prefers-color-scheme: light)", href: "/dark-favicon.ico", type: "image/x-icon" },
+      { rel: "apple-touch-icon", media: "(prefers-color-scheme: light)", href: "/dark-apple-touch-icon.png" },
+      { rel: "apple-touch-icon", media: "(prefers-color-scheme: light)", sizes: "57x57", href: "/dark-apple-touch-icon-57x57.png" },
+      { rel: "apple-touch-icon", media: "(prefers-color-scheme: light)", sizes: "72x72", href: "/dark-apple-touch-icon-72x72.png" },
+      { rel: "apple-touch-icon", media: "(prefers-color-scheme: light)", sizes: "76x76", href: "/dark-apple-touch-icon-76x76.png" },
+      { rel: "apple-touch-icon", media: "(prefers-color-scheme: light)", sizes: "114x114", href: "/dark-apple-touch-icon-114x114.png" },
+      { rel: "apple-touch-icon", media: "(prefers-color-scheme: light)", sizes: "120x120", href: "/dark-apple-touch-icon-120x120.png" },
+      { rel: "apple-touch-icon", media: "(prefers-color-scheme: light)", sizes: "144x144", href: "/dark-apple-touch-icon-144x144.png" },
+      { rel: "apple-touch-icon", media: "(prefers-color-scheme: light)", sizes: "152x152", href: "/dark-apple-touch-icon-152x152.png" },
+      { rel: "apple-touch-icon", media: "(prefers-color-scheme: light)", sizes: "180x180", href: "/dark-apple-touch-icon-180x180.png" },
+      { rel: "icon", media: "(prefers-color-scheme: dark)", type: "image/x-icon", href: "/light-favicon.ico" },
+      { rel: "shortcut icon", media: "(prefers-color-scheme: dark)", href: "/light-favicon.ico", type: "image/x-icon" },
+      { rel: "apple-touch-icon", media: "(prefers-color-scheme: dark)", href: "/light-apple-touch-icon.png" },
+      { rel: "apple-touch-icon", media: "(prefers-color-scheme: dark)", sizes: "57x57", href: "/light-apple-touch-icon-57x57.png" },
+      { rel: "apple-touch-icon", media: "(prefers-color-scheme: dark)", sizes: "72x72", href: "/light-apple-touch-icon-72x72.png" },
+      { rel: "apple-touch-icon", media: "(prefers-color-scheme: dark)", sizes: "76x76", href: "/light-apple-touch-icon-76x76.png" },
+      { rel: "apple-touch-icon", media: "(prefers-color-scheme: dark)", sizes: "114x114", href: "/light-apple-touch-icon-114x114.png" },
+      { rel: "apple-touch-icon", media: "(prefers-color-scheme: dark)", sizes: "120x120", href: "/light-apple-touch-icon-120x120.png" },
+      { rel: "apple-touch-icon", media: "(prefers-color-scheme: dark)", sizes: "144x144", href: "/light-apple-touch-icon-144x144.png" },
+      { rel: "apple-touch-icon", media: "(prefers-color-scheme: dark)", sizes: "152x152", href: "/light-apple-touch-icon-152x152.png" },
+      { rel: "apple-touch-icon", media: "(prefers-color-scheme: dark)", sizes: "180x180", href: "/light-apple-touch-icon-180x180.png" },
       ...canonicalLinks
     ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    "~/static/global.scss"
+    "~/styles/global.scss"
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
