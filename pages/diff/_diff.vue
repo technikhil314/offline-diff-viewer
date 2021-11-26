@@ -5,9 +5,9 @@
         <button
           type="button"
           @click="copyUrlToClipboard"
-          class="inline-flex justify-center px-4 py-2 transition-transform transform rounded-md shadow-lg outline-none  copy-uri-button align-center focus:ring-4 active:scale-y-75"
+          class="inline-flex justify-center px-4 py-2 transition-transform transform rounded-md shadow outline-none  copy-uri-button align-center focus:ring-4 active:scale-y-75"
           v-bind:class="{
-            'bg-blue-600 text-white': !copied,
+            'bg-blue-500 text-white': !copied,
             'bg-green-500 text-gray-800': copied,
           }"
         >
@@ -49,9 +49,9 @@
       </template>
     </Navbar>
     <main>
-      <div class="flex items-start w-full gap-4 font-mono">
+      <div class="flex items-start w-full gap-4 font-mono dark:text-gray-50">
         <div
-          class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-sm  max-h-screen--nav line-number-gutter min-h-80"
+          class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md  dark:border-gray-500 max-h-screen--nav line-number-gutter min-h-80"
         >
           <RTStickyCopyButton :clickHandler="copyTextToClipboard" />
           <div v-for="(lineDiff, index) in lhsDiff" :key="index">
@@ -59,7 +59,7 @@
           </div>
         </div>
         <div
-          class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-sm  min-h-80 line-number-gutter max-h-screen--nav"
+          class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md  dark:border-gray-500 min-h-80 line-number-gutter max-h-screen--nav"
         >
           <RTStickyCopyButton :clickHandler="copyTextToClipboard" />
           <div v-for="(lineDiff, index) in rhsDiff" :key="index">
@@ -84,7 +84,8 @@ export default {
       .map((item) => {
         const hunkState = item[0]
         if (hunkState === -1 || hunkState === 0) {
-          const className = hunkState === -1 ? 'bg-red-400' : ''
+          const className =
+            hunkState === -1 ? 'bg-red-400 dark:bg-yellow-700' : ''
           return `<span class="break-all inline p-0 m-0 ${className}">${item[1]}</span>`
         }
         return false
@@ -96,7 +97,8 @@ export default {
       .map((item) => {
         const hunkState = item[0]
         if (hunkState === 1 || hunkState === 0) {
-          const className = hunkState === 1 ? 'bg-green-400' : ''
+          const className =
+            hunkState === 1 ? 'bg-green-400 dark:bg-green-700' : ''
           return `<span class="break-all inline p-0 m-0 ${className}">${item[1]}</span>`
         }
         return false
@@ -183,13 +185,13 @@ export default {
     line-height: 1.65;
     @apply relative;
     &:hover {
-      @apply bg-gray-200;
+      @apply bg-gray-200 dark:bg-gray-700;
     }
     &::before {
       counter-increment: line-numbers;
       content: counter(line-numbers);
       width: var(--line-number-gutter-width);
-      @apply absolute left-0 top-0 -mx-4 bottom-0 text-center bg-gray-200 text-gray-500 flex justify-center items-center text-sm;
+      @apply absolute left-0 top-0 -mx-4 bottom-0 text-center bg-gray-200 dark:bg-gray-700 dark:text-gray-50 text-gray-500 flex justify-center items-center text-sm;
     }
     &:first-of-type {
       &::before {

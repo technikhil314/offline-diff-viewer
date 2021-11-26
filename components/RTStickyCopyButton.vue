@@ -4,7 +4,7 @@
       @click="handleClick"
       class="absolute top-0 right-0 p-2 transition-all transform rounded-full shadow  z-1 hover:shadow-lg hover:scale-110 hover:rotate-12"
       v-bind:class="{
-        'bg-gray-100': !copied,
+        'bg-gray-100 dark:bg-gray-600': !copied,
         'bg-green-500': copied,
       }"
     >

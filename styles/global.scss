@@ -1,4 +1,7 @@
 /* Basic layout */
+:root {
+  color-scheme: dark light;
+}
 html,
 body,
 #__nuxt,
@@ -6,7 +9,7 @@ body,
 .page-root,
 main {
   @apply h-full;
-  @apply bg-gray-50;
+  @apply bg-gray-50 dark:bg-gray-900;
 }
 
 body {
@@ -27,11 +30,11 @@ main {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  @apply bg-gray-50 dark:bg-gray-700;
 }
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  @apply bg-gray-500 dark:bg-gray-500;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  @apply bg-gray-400 dark:bg-gray-400;
 }

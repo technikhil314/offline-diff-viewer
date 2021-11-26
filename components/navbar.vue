@@ -1,5 +1,7 @@
 <template>
-  <header class="fixed top-0 left-0 right-0 shadow-lg bg-gray-50 z-100">
+  <header
+    class="fixed top-0 left-0 right-0 shadow-lg  dark:shadow-dark bg-gray-50 dark:bg-gray-900 z-100 dark:text-gray-50"
+  >
     <div class="container flex items-center h-full py-4 m-auto">
       <div v-if="showBackButton" class="mr-4">
         <NuxtLink to="/">
@@ -24,7 +26,9 @@
           <svg
             height="40px"
             width="40px"
+            class="dark:text-white"
             fill="#000000"
+            stroke="currentColor"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
             version="1.1"
@@ -55,6 +59,42 @@
         </div>
         <div class="items-center">
           <slot name="right" />
+          <button
+            type="button"
+            class="inline-flex items-center justify-center ml-4 text-gray-800 bg-transparent border-2 border-gray-700 rounded-full shadow-lg  dark:text-gray-50 w-9 h-9 active:scale-y-75"
+            @click="toggleDarkMode"
+          >
+            <svg
+              fill="none"
+              stroke="currentColor"
+              class="w-6 h-6"
+              viewBox="0 0 24 24"
+              v-if="!darkMode"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+              ></path>
+            </svg>
+            <svg
+              fill="none"
+              class="w-6 h-6"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              v-if="darkMode"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+              ></path>
+            </svg>
+          </button>
         </div>
       </div>
       <!-- buttons -->
@@ -113,5 +153,34 @@
 <script>
 export default {
   props: ['showBackButton'],
+  data() {
+    return {
+      darkMode: false,
+    }
+  },
+  mounted() {
+    const cookies = document.cookie.split(';')
+    const cookieMap = {}
+    cookies.forEach((element) => {
+      const [name, val] = element.split('=')
+      cookieMap[name] = val
+    })
+    if (
+      window.matchMedia('(prefers-color-scheme: dark)').matches &&
+      (cookieMap.darkMode === undefined || cookieMap.darkMode === 'true')
+    ) {
+      this.toggleDarkMode(null, true)
+    }
+  },
+  methods: {
+    toggleDarkMode(e, val) {
+      e && e.preventDefault()
+      this.darkMode = val || !this.darkMode
+      document.documentElement.classList[this.darkMode ? 'add' : 'remove'](
+        'dark'
+      )
+      document.cookie = `darkMode=${this.darkMode}; Secure; max-age=31536000;`
+    },
+  },
 }
 </script>

@@ -34,6 +34,7 @@ The simplest solution in my opinion will be
 In the chase of one such tool I ended up creating one as I did not find any that satisfied my requirements.
 This is open source and has very easy user interface. Here is the link to the tool https://diffviewer.vercel.app/
 It has following benefits
+
 1. Since the tool does not store your data on its server there is no server required in the tool
 2. The tool is blazing fast
 3. Most importantly the link can be shared with anyone without security concerns(Unless you share link itself over some insecure network)
@@ -65,3 +66,4 @@ For detailed explanation on how things work, check out the [documentation](https
 - [ ] Auto detect language
 - [ ] Add small shadow to line numbers
 - [x] Fix toast issue. (Click on copy button while toast is on)
+- [ ] Handle line gutter issue when last line in data is empty

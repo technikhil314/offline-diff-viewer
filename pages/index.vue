@@ -1,7 +1,7 @@
 <template>
   <div class="contents">
     <Navbar />
-    <main>
+    <main class="text-gray-800 dark:text-gray-50">
       <h1 class="w-full mb-2 text-xl text-center">
         Find difference in any two text blocks and get easy sharable link
       </h1>
@@ -20,7 +20,7 @@
           ></textarea>
           <div class="self-end w-full text-center">
             <button
-              class="inline-flex items-center justify-center w-48 px-4 py-2 text-white transition-transform transform bg-blue-600 rounded-md shadow-lg outline-none  focus:ring-4 active:scale-y-75"
+              class="inline-flex items-center justify-center w-48 px-4 py-2 transition-transform transform bg-blue-600 rounded-md shadow-lg outline-none  text-gray-50 focus:ring-4 active:scale-y-75"
             >
               Compare
             </button>
