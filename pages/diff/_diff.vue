@@ -87,7 +87,7 @@ export default {
         const hunkState = item[0]
         if (hunkState === -1 || hunkState === 0) {
           const className =
-            hunkState === -1 ? 'bg-red-400 dark:bg-yellow-700' : ''
+            hunkState === -1 ? 'bg-red-300 dark:bg-yellow-800' : ''
           return `<span class="break-all inline p-0 m-0 ${className}">${item[1]}</span>`
         }
         return false
@@ -100,7 +100,7 @@ export default {
         const hunkState = item[0]
         if (hunkState === 1 || hunkState === 0) {
           const className =
-            hunkState === 1 ? 'bg-green-400 dark:bg-green-700' : ''
+            hunkState === 1 ? 'bg-green-300 dark:bg-green-800' : ''
           return `<span class="break-all inline p-0 m-0 ${className}">${item[1]}</span>`
         }
         return false

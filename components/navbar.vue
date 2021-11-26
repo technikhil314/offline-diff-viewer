@@ -1,6 +1,6 @@
 <template>
   <header
-    class="fixed top-0 left-0 right-0 shadow-lg  dark:shadow-dark bg-gray-50 dark:bg-gray-900 z-100 dark:text-gray-50"
+    class="fixed top-0 left-0 right-0 text-gray-800 shadow-lg  dark:shadow-dark bg-gray-50 dark:bg-gray-900 z-100 dark:text-gray-50"
   >
     <div class="container flex items-center h-full py-4 m-auto">
       <div v-if="showBackButton" class="mr-4">
@@ -61,7 +61,7 @@
           <slot name="right" />
           <button
             type="button"
-            class="inline-flex items-center justify-center ml-4 text-gray-800 bg-transparent border-2 border-gray-700 rounded-full shadow-lg  dark:text-gray-50 w-9 h-9 active:scale-y-75"
+            class="inline-flex items-center justify-center ml-4 bg-transparent border-2 border-gray-700 rounded-full shadow-lg  w-9 h-9 active:scale-y-75"
             @click="toggleDarkMode"
           >
             <svg
