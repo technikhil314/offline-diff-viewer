@@ -34,10 +34,10 @@ The simplest solution in my opinion will be
 In the chase of one such tool I ended up creating one as I did not find any that satisfied my requirements.
 This is open source and has very easy user interface. Here is the link to the tool https://diffviewer.vercel.app/
 It has following benefits
-Since the tool does not store your data on its server there is no server required in the tool
-that makes the tools blazing fast
-most importantly the link can be shared with anyone without security concerns(Unless you share it over some insecure media)
-as the link contains data whomever you share link with can get data too
+1. Since the tool does not store your data on its server there is no server required in the tool
+2. The tool is blazing fast
+3. Most importantly the link can be shared with anyone without security concerns(Unless you share link itself over some insecure network)
+4. As the link contains data whomever you share link with can get data too
 
 ## Build Setup
 
