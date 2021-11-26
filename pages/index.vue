@@ -74,32 +74,9 @@ export default Vue.extend({
         })
         return
       }
-      const originalLhs = lhs.split('\n')
-      const originalRhs = rhs.split('\n')
-      const diff = originalLhs.map((x, i) => {
-        if (!originalRhs[i]) {
-          originalRhs[i] = ''
-        }
-        return dmp.diff_main(x, originalRhs[i])
-      })
-      if (originalLhs.length > originalRhs.length) {
-        for (
-          let i = originalLhs.length - diff.length;
-          i < originalLhs.length;
-          i++
-        ) {
-          diff.push([[-1, originalLhs[i]]])
-        }
-      }
-      if (originalLhs.length < originalRhs.length) {
-        for (
-          let i = originalRhs.length - diff.length;
-          i < originalRhs.length;
-          i++
-        ) {
-          diff.push([[1, originalRhs[i]]])
-        }
-      }
+      const originalLhs = lhs
+      const originalRhs = rhs
+      const diff = dmp.diff_main(originalLhs, originalRhs)
       const gzip = Buffer.from(pako.gzip(JSON.stringify(diff))).toString(
         'base64'
       )

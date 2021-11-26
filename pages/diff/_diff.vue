@@ -5,7 +5,7 @@
         <button
           type="button"
           @click="copyUrlToClipboard"
-          class="inline-flex justify-center px-4 py-2 text-white transition-transform transform rounded-md shadow-lg outline-none  copy-uri-button align-center focus:ring-4 active:scale-y-75"
+          class="inline-flex justify-center px-4 py-2 transition-transform transform rounded-md shadow-lg outline-none  copy-uri-button align-center focus:ring-4 active:scale-y-75"
           v-bind:class="{
             'bg-blue-600 text-white': !copied,
             'bg-green-500 text-gray-800': copied,
@@ -51,20 +51,26 @@
     <main>
       <div class="flex items-start w-full gap-4">
         <div
-          class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-sm  max-h-screen--nav line-numbers min-h-80"
+          class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-sm  max-h-screen--nav line-number-gutter min-h-80"
         >
           <RTStickyCopyButton :clickHandler="copyTextToClipboard" />
-          <p v-for="(lineDiff, index) in lhsDiff" :key="index">
-            <span v-html="lineDiff"></span>
-          </p>
+          <div v-for="(lineDiff, index) in lhsDiff" :key="index">
+            <p
+              class="font-mono break-all whitespace-pre-wrap"
+              v-html="lineDiff"
+            ></p>
+          </div>
         </div>
         <div
-          class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-sm  min-h-80 line-numbers max-h-screen--nav"
+          class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-sm  min-h-80 line-number-gutter max-h-screen--nav"
         >
           <RTStickyCopyButton :clickHandler="copyTextToClipboard" />
-          <p v-for="(lineDiff, index) in rhsDiff" :key="index">
-            <span v-html="lineDiff"></span>
-          </p>
+          <div v-for="(lineDiff, index) in rhsDiff" :key="index">
+            <p
+              class="font-mono break-all whitespace-pre-wrap"
+              v-html="lineDiff"
+            ></p>
+          </div>
         </div>
       </div>
     </main>
@@ -81,33 +87,29 @@ export default {
     const gunzip = pako.ungzip(Buffer.from(undoUrlSafeBase64(_diff), 'base64'))
     const diff = JSON.parse(Buffer.from(gunzip).toString('utf8'))
     this.lhsDiff = diff
-      .map((lineDiff) => {
-        return lineDiff
-          .map((item) => {
-            if (item[0] === -1 || item[0] === 0) {
-              const className = item[0] === -1 ? 'bg-red-300' : ''
-              return `<span class="whitespace-pre-wrap font-mono break-all inline mr-[-4px] p-0 m-0 ${className}">${item[1]}</span>`
-            }
-            return ''
-          })
-          .filter(Boolean)
-          .join('\n')
+      .map((item) => {
+        const hunkState = item[0]
+        if (hunkState === -1 || hunkState === 0) {
+          const className = hunkState === -1 ? 'bg-red-400' : ''
+          return `<span class="font-mono break-all inline p-0 m-0 ${className}">${item[1]}</span>`
+        }
+        return false
       })
       .filter(Boolean)
+      .join('')
+      .split('\n')
     this.rhsDiff = diff
-      .map((lineDiff) => {
-        return lineDiff
-          .map((item) => {
-            if (item[0] === 1 || item[0] === 0) {
-              const className = item[0] === 1 ? 'bg-green-300' : ''
-              return `<span class="whitespace-pre-wrap font-mono break-all inline mr-[-4px] p-0 m-0 ${className}">${item[1]}</span>`
-            }
-            return ''
-          })
-          .filter(Boolean)
-          .join('\n')
+      .map((item) => {
+        const hunkState = item[0]
+        if (hunkState === 1 || hunkState === 0) {
+          const className = hunkState === 1 ? 'bg-green-400' : ''
+          return `<span class="font-mono break-all inline p-0 m-0 ${className}">${item[1]}</span>`
+        }
+        return false
       })
       .filter(Boolean)
+      .join('')
+      .split('\n')
     const maxLineCount =
       this.lhsDiff.length > this.rhsDiff.length
         ? this.lhsDiff.length
@@ -177,11 +179,14 @@ export default {
 }
 
 /* line numbers in diff view */
-.line-numbers {
+.line-number-gutter {
   counter-reset: line-numbers;
+
+  --line-number-gutter-width: calc(var(--max-line-number-characher) + 10px);
   @apply relative;
   p {
-    padding-left: calc(var(--max-line-number-characher) - 4px);
+    padding-left: calc(var(--line-number-gutter-width) - 10px);
+    line-height: 1.65;
     @apply relative;
     &:hover {
       @apply bg-gray-200;
@@ -189,7 +194,7 @@ export default {
     &::before {
       counter-increment: line-numbers;
       content: counter(line-numbers);
-      width: calc(var(--max-line-number-characher) + 4px);
+      width: var(--line-number-gutter-width);
       @apply absolute left-0 top-0 -mx-4 bottom-0 text-center bg-gray-200 text-gray-500 flex justify-center items-center text-sm;
     }
     &:first-of-type {
