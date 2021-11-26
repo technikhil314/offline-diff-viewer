@@ -67,3 +67,4 @@ For detailed explanation on how things work, check out the [documentation](https
 - [ ] Add small shadow to line numbers
 - [x] Fix toast issue. (Click on copy button while toast is on)
 - [ ] Handle line gutter issue when last line in data is empty
+- [ ] Handle consecutive empty lines in input should be preserved in output
