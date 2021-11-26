@@ -193,7 +193,7 @@ export default {
       counter-increment: line-numbers;
       content: counter(line-numbers);
       width: var(--line-number-gutter-width);
-      @apply absolute left-0 top-0 -mx-4 bottom-0 text-center bg-gray-200 dark:bg-gray-700 dark:text-gray-50 text-gray-500 flex justify-center items-center text-sm;
+      @apply absolute left-0 top-0 -mx-4 bottom-0 text-center bg-gray-200 dark:bg-gray-700 dark:text-gray-50 text-gray-500 flex justify-center text-sm;
     }
     &:first-of-type {
       &::before {
