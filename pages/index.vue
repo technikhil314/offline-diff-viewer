@@ -6,7 +6,7 @@
         Find difference in any two text blocks and get easy sharable link
       </h1>
       <h2 class="w-full mb-2 text-center text-md">
-        Dont worry, We dont store any of your data
+        Don’t worry, We don’t store any of your data
       </h2>
       <form @submit="checkForm" class="w-full h-full">
         <div class="flex flex-wrap w-full h-full gap-4">
