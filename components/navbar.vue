@@ -166,8 +166,7 @@ export default {
       cookieMap[name] = val
     })
     if (
-      window.matchMedia('(prefers-color-scheme: dark)').matches &&
-      (cookieMap.darkMode === undefined || cookieMap.darkMode === 'true')
+      ((window.matchMedia('(prefers-color-scheme: dark)').matches && cookieMap.darkMode === undefined) || cookieMap.darkMode === 'true')
     ) {
       this.toggleDarkMode(null, true)
     }
