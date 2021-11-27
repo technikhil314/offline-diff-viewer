@@ -56,7 +56,13 @@
           class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md  dark:border-gray-500 max-h-screen--nav line-number-gutter min-h-80"
         >
           <RTStickyCopyButton :clickHandler="copyTextToClipboard" />
-          <div v-for="(lineDiff, index) in lhsDiff" :key="index">
+          <div
+            v-for="(lineDiff, index) in lhsDiff"
+            :key="index"
+            v-bind:class="{
+              'bg-red-100 dark:bg-yellow-700': lineDiff.includes('isModified'),
+            }"
+          >
             <p class="break-all whitespace-pre-wrap" v-html="lineDiff"></p>
           </div>
         </div>
@@ -64,7 +70,13 @@
           class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md  dark:border-gray-500 min-h-80 line-number-gutter max-h-screen--nav"
         >
           <RTStickyCopyButton :clickHandler="copyTextToClipboard" />
-          <div v-for="(lineDiff, index) in rhsDiff" :key="index">
+          <div
+            v-for="(lineDiff, index) in rhsDiff"
+            :key="index"
+            v-bind:class="{
+              'bg-green-100 dark:bg-green-700': lineDiff.includes('isModified'),
+            }"
+          >
             <p class="break-all whitespace-pre-wrap" v-html="lineDiff"></p>
           </div>
         </div>
@@ -87,7 +99,7 @@ export default {
         const hunkState = item[0]
         if (hunkState === -1 || hunkState === 0) {
           const className =
-            hunkState === -1 ? 'bg-red-300 dark:bg-yellow-800' : ''
+            hunkState === -1 ? 'isModified bg-red-300 dark:bg-yellow-900' : ''
           return `<span class="break-all inline p-0 m-0 ${className}">${item[1]}</span>`
         }
         return false
@@ -100,7 +112,7 @@ export default {
         const hunkState = item[0]
         if (hunkState === 1 || hunkState === 0) {
           const className =
-            hunkState === 1 ? 'bg-green-300 dark:bg-green-800' : ''
+            hunkState === 1 ? 'isModified bg-green-300 dark:bg-green-900' : ''
           return `<span class="break-all inline p-0 m-0 ${className}">${item[1]}</span>`
         }
         return false
