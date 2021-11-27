@@ -108,6 +108,11 @@ export default {
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    extractCSS: true
+    extractCSS: true,
+    extend(config, { isClient }) {
+      if (isClient && process.env.NODE_ENV === "development") {
+        config.devtool = 'source-map'
+      }
+    }
   }
 }
