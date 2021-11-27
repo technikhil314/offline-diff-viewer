@@ -21,7 +21,7 @@
         'bg-blue-400 text-gray-800': toastState.theme === 'info',
       }"
     >
-      <div class="flex justify-between gap-2">
+      <div class="flex items-center justify-between gap-2">
         <div v-html="toastState.iconHTML"></div>
         <h1>{{ toastState.content }}</h1>
       </div>
