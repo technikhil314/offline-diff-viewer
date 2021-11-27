@@ -159,15 +159,7 @@ export default {
     }
   },
   mounted() {
-    const cookies = document.cookie.split(';')
-    const cookieMap = {}
-    cookies.forEach((element) => {
-      const [name, val] = element.split('=')
-      cookieMap[name] = val
-    })
-    if (
-      ((window.matchMedia('(prefers-color-scheme: dark)').matches && cookieMap.darkMode === undefined) || cookieMap.darkMode === 'true')
-    ) {
+    if (this.$isDarkMode) {
       this.toggleDarkMode(null, true)
     }
   },
