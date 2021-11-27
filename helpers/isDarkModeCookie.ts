@@ -1,7 +1,7 @@
 export default function () {
   const cookies = document.cookie.split(';')
   const cookieMap: {
-    darkMode: string
+    darkMode?: string
   } = {}
   cookies.forEach((element) => {
     const [name, val] = element.split('=')
