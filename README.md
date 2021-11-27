@@ -1,8 +1,6 @@
 # offline-diff-viewer
 
-## Why another diff viewer and motivation behind the tool
-
-### Resoning for building yet another diff viewer tool
+## Resoning for building yet another diff viewer tool
 
 I realise we are missing a diff viewer that is
 
@@ -10,7 +8,7 @@ I realise we are missing a diff viewer that is
 - Simple to use
 - And most importantly does not store any data on server to give sharable diff urls
 
-### Motivation
+## Motivation
 
 I realise as a developer community we are missing on a diff viewer tool that does not store your data on their server to give you links to diff view to share with your teams.
 There can be serious implications of storing your enterprise data on some server that you don’t know anything about
