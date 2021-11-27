@@ -9,8 +9,8 @@ export default function () {
       cookieMap[name] = val
     }
   })
-  return (
-    window.matchMedia('(prefers-color-scheme: dark)').matches &&
-    (cookieMap.darkMode === undefined || cookieMap.darkMode === 'true')
-  )
+  if(cookieMap.darkMode) {
+    return cookieMap.darkMode === "true";
+  }
+  return window.matchMedia('(prefers-color-scheme: dark)').matches;
 }
