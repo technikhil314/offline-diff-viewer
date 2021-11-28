@@ -18,7 +18,7 @@
     "node": ">=14"
   },
   "lint-staged": {
-    "*.{js,vue}": "eslint",
+    "*.{js,vue,ts}": "eslint",
     "*.{css,vue}": "stylelint"
   },
   "dependencies": {
