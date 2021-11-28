@@ -87,11 +87,11 @@
 
 <script>
 import pako from 'pako'
-import { undoUrlSafeBase64 } from '../../helpers/utils'
+import { undoUrlSafeBase64 } from '../helpers/utils'
 export default {
   layout: 'main',
   mounted() {
-    const { diff: _diff } = this.$route.params
+    const _diff = this.$route.hash
     const gunzip = pako.ungzip(Buffer.from(undoUrlSafeBase64(_diff), 'base64'))
     const diff = JSON.parse(Buffer.from(gunzip).toString('utf8'))
     this.lhsDiff = diff

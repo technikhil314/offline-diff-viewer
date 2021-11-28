@@ -12,47 +12,15 @@
         <div class="flex flex-wrap w-full h-full gap-4">
           <textarea
             id="lhs"
-            class="
-              flex-1
-              h-full
-              max-h-full
-              bg-transparent
-              rounded-md
-              resize-none
-              form-textarea
-            "
+            class="flex-1 h-full max-h-full bg-transparent rounded-md resize-none  form-textarea"
           ></textarea>
           <textarea
             id="rhs"
-            class="
-              flex-1
-              h-full
-              max-h-full
-              bg-transparent
-              rounded-md
-              resize-none
-              form-textarea
-            "
+            class="flex-1 h-full max-h-full bg-transparent rounded-md resize-none  form-textarea"
           ></textarea>
           <div class="self-end flex-grow-0 w-full text-center">
             <button
-              class="
-                inline-flex
-                items-center
-                justify-center
-                w-48
-                px-4
-                py-2
-                transition-transform
-                transform
-                bg-blue-600
-                rounded-md
-                shadow-lg
-                outline-none
-                text-gray-50
-                focus:ring-4
-                active:scale-y-75
-              "
+              class="inline-flex items-center justify-center w-48 px-4 py-2 transition-transform transform bg-blue-600 rounded-md shadow-lg outline-none  text-gray-50 focus:ring-4 active:scale-y-75"
             >
               Compare
             </button>
@@ -113,7 +81,8 @@ export default Vue.extend({
         'base64'
       )
       this.$router.push({
-        path: `/diff/${doUrlSafeBase64(gzip)}`,
+        path: '/diff',
+        hash: `#${doUrlSafeBase64(gzip)}`,
       })
     },
   },
