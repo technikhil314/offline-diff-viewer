@@ -1,8 +1,9 @@
 name: Release
 on:
   push:
-    tags:
-      - "*"
+    branches:
+      - main
+      - master
 
 jobs:
   changelog:
@@ -17,7 +18,7 @@ jobs:
         id: changelog
         uses: TriPSs/conventional-changelog-action@v3
         with:
-          skip-commit: "true"
+          skip-commit: 'true'
 
       - name: Create Release
         uses: actions/create-release@v1
