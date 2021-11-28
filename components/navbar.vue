@@ -153,7 +153,10 @@
 <script>
 export default {
   props: {
-    showBackButton: Boolean,
+    showBackButton: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {

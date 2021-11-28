@@ -1,6 +1,6 @@
 <template>
   <div class="contents">
-    <Navbar show-back-button="true">
+    <Navbar :show-back-button="true">
       <template #right>
         <button
           type="button"
