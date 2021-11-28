@@ -13,11 +13,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-        # This action generates change long with then the release action consumes
+        # This action generates changelog which then the release action consumes
       - name: Conventional Changelog Action
         id: changelog
         uses: TriPSs/conventional-changelog-action@v3
         with:
+          github-token: ${{ secrets.github_token }}
           skip-commit: 'true'
 
       - name: Create Release
