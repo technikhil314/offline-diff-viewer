@@ -1,0 +1,30 @@
+name: Release
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+    name: create release on tag
+
+    steps:
+      - uses: actions/checkout@v2
+
+        # This action generates change long with then the release action consumes
+      - name: Conventional Changelog Action
+        id: changelog
+        uses: TriPSs/conventional-changelog-action@v3
+        with:
+          skip-commit: "true"
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.github_token }}
+        with:
+          tag_name: ${{ steps.changelog.outputs.tag }}
+          release_name: ${{ steps.changelog.outputs.tag }}
+          body: ${{ steps.changelog.outputs.clean_changelog }}
