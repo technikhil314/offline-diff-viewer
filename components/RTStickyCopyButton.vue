@@ -1,12 +1,12 @@
 <template>
   <div class="sticky top-0 text-right z-1">
     <button
-      @click="handleClick"
       class="absolute top-0 right-0 p-2 text-gray-800 transition-all transform rounded-full shadow  dark:text-gray-50 z-1 hover:shadow-lg hover:scale-110 hover:rotate-12"
-      v-bind:class="{
+      :class="{
         'bg-gray-100 dark:bg-gray-600': !copied,
         'bg-green-500': copied,
       }"
+      @click="handleClick"
     >
       <svg
         v-show="!copied"
@@ -44,7 +44,12 @@
 
 <script>
 export default {
-  props: ['clickHandler'],
+  props: {
+    clickHandler: {
+      type: Function,
+      default: () => {},
+    },
+  },
   data() {
     return {
       copied: false,

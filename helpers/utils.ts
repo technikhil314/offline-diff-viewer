@@ -9,7 +9,7 @@ export function undoUrlSafeBase64(_encoded: string) {
 }
 
 export function urlEncode(unencoded: string): string {
-  let encoded = globalThis.btoa(unencoded)
+  const encoded = globalThis.btoa(unencoded)
   return doUrlSafeBase64(encoded)
 }
 

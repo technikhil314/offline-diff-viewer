@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute right-[20px] top-24" id="toast">
+  <div id="toast" class="absolute right-[20px] top-24">
     <div
       class="
         absolute
@@ -13,7 +13,7 @@
         z-2
         w-72
       "
-      v-bind:class="{
+      :class="{
         '-translate-y-screen': !toastState.show,
         'translate-y-0': toastState.show,
         'bg-green-400 text-gray-800': toastState.theme === 'success',

@@ -1,17 +1,17 @@
 <template>
   <div class="contents">
     <Navbar show-back-button="true">
-      <template v-slot:right>
+      <template #right>
         <button
           type="button"
-          @click="copyUrlToClipboard"
           class="inline-flex justify-center px-4 py-2 transition-transform transform rounded-md shadow outline-none  copy-uri-button align-center focus:ring-4 active:scale-y-75"
-          v-bind:class="{
+          :class="{
             'bg-blue-500 text-white': !copied,
             'bg-green-500 text-gray-800': copied,
           }"
+          @click="copyUrlToClipboard"
         >
-          <span class="inline-flex justify-center" v-show="copied">
+          <span v-show="copied" class="inline-flex justify-center">
             <svg
               class="inline-block w-6 h-6 ml-[-4px]"
               fill="none"
@@ -28,7 +28,7 @@
             </svg>
             <span class="hidden ml-2 md:inline-block">Copied</span>
           </span>
-          <span class="inline-flex justify-center" v-show="!copied">
+          <span v-show="!copied" class="inline-flex justify-center">
             <svg
               class="w-6 h-6"
               fill="none"
@@ -55,11 +55,11 @@
         <div
           class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md  dark:border-gray-500 max-h-screen--nav line-number-gutter min-h-80"
         >
-          <RTStickyCopyButton :clickHandler="copyTextToClipboard" />
+          <RTStickyCopyButton :click-handler="copyTextToClipboard" />
           <div
             v-for="(lineDiff, index) in lhsDiff"
             :key="index"
-            v-bind:class="{
+            :class="{
               'bg-red-100 dark:bg-yellow-700': lineDiff.includes('isModified'),
             }"
           >
@@ -69,11 +69,11 @@
         <div
           class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md  dark:border-gray-500 min-h-80 line-number-gutter max-h-screen--nav"
         >
-          <RTStickyCopyButton :clickHandler="copyTextToClipboard" />
+          <RTStickyCopyButton :click-handler="copyTextToClipboard" />
           <div
             v-for="(lineDiff, index) in rhsDiff"
             :key="index"
-            v-bind:class="{
+            :class="{
               'bg-green-100 dark:bg-green-700': lineDiff.includes('isModified'),
             }"
           >
@@ -90,6 +90,13 @@ import pako from 'pako'
 import { undoUrlSafeBase64 } from '../helpers/utils'
 export default {
   layout: 'main',
+  data() {
+    return {
+      lhsDiff: this.lhsDiff,
+      rhsDiff: this.rhsDiff,
+      copied: false,
+    }
+  },
   mounted() {
     const _diff = this.$route.hash
     const gunzip = pako.ungzip(Buffer.from(undoUrlSafeBase64(_diff), 'base64'))
@@ -128,13 +135,6 @@ export default {
       '--max-line-number-characher',
       `${`${maxLineCount}`.split('').length}ch`
     )
-  },
-  data() {
-    return {
-      lhsDiff: this.lhsDiff,
-      rhsDiff: this.rhsDiff,
-      copied: false,
-    }
   },
   methods: {
     putToClipboard(textToPut, toastContent) {

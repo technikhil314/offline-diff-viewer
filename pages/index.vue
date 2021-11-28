@@ -8,7 +8,7 @@
       <h2 class="w-full mb-2 text-center text-md">
         Don’t worry, We don’t store any of your data
       </h2>
-      <form @submit="checkForm" class="w-full h-full">
+      <form class="w-full h-full" @submit="checkForm">
         <div class="flex flex-wrap w-full h-full gap-4">
           <textarea
             id="lhs"

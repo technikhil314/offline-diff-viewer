@@ -1,4 +1,4 @@
-import { GetterTree, Store, MutationTree } from 'vuex'
+import { GetterTree, MutationTree, Store } from 'vuex/types'
 
 export const state = () => ({
   show: false,

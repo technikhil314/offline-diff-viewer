@@ -65,11 +65,11 @@
             @click="toggleDarkMode"
           >
             <svg
+              v-if="!darkMode"
               fill="none"
               stroke="currentColor"
               class="w-6 h-6"
               viewBox="0 0 24 24"
-              v-if="!darkMode"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
@@ -80,11 +80,11 @@
               ></path>
             </svg>
             <svg
+              v-if="darkMode"
               fill="none"
               class="w-6 h-6"
               stroke="currentColor"
               viewBox="0 0 24 24"
-              v-if="darkMode"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
@@ -152,7 +152,9 @@
 
 <script>
 export default {
-  props: ['showBackButton'],
+  props: {
+    showBackButton: Boolean,
+  },
   data() {
     return {
       darkMode: false,

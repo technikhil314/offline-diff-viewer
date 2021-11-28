@@ -21,11 +21,11 @@ declare module '@nuxt/types' {
 declare module 'vuex/types/index' {
   // this.$isDarkModeinside Vuex stores
   interface Store<S> {
-    $isDarkMode: boolean
+    $isDarkMode: boolean | S
   }
 }
 
-const myPlugin: Plugin = (context, inject) => {
+const myPlugin: Plugin = (_context, inject) => {
   inject('isDarkMode', isDarkModeCookie())
 }
 
