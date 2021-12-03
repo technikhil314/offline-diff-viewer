@@ -87,7 +87,7 @@
 
 <script>
 import pako from 'pako'
-import { undoUrlSafeBase64 } from '../helpers/utils'
+import { undoUrlSafeBase64, escapeHtml } from '../helpers/utils'
 export default {
   layout: 'main',
   data() {
@@ -107,7 +107,9 @@ export default {
         if (hunkState === -1 || hunkState === 0) {
           const className =
             hunkState === -1 ? 'isModified bg-red-300 dark:bg-yellow-900' : ''
-          return `<span class="break-all inline p-0 m-0 ${className}">${item[1]}</span>`
+          return `<span class="break-all inline p-0 m-0 ${className}">${escapeHtml(
+            item[1]
+          )}</span>`
         }
         return false
       })
@@ -120,7 +122,9 @@ export default {
         if (hunkState === 1 || hunkState === 0) {
           const className =
             hunkState === 1 ? 'isModified bg-green-300 dark:bg-green-900' : ''
-          return `<span class="break-all inline p-0 m-0 ${className}">${item[1]}</span>`
+          return `<span class="break-all inline p-0 m-0 ${className}">${escapeHtml(
+            item[1]
+          )}</span>`
         }
         return false
       })

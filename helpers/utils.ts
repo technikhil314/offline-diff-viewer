@@ -17,3 +17,12 @@ export function urlDecode(_encoded: string): string {
   const encoded = undoUrlSafeBase64(_encoded)
   return globalThis.atob(encoded)
 }
+
+export function escapeHtml(unsafe: string) {
+  return unsafe
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;')
+}
