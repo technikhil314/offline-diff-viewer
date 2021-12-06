@@ -197,6 +197,11 @@ export default {
   counter-reset: line-numbers;
 
   --line-number-gutter-width: calc(var(--max-line-number-characher) + 10px);
+  &::before {
+    content: '';
+    width: var(--line-number-gutter-width);
+    @apply bg-gray-200 dark:bg-gray-700 inline-block left-0 top-0 bottom-0 absolute text-sm;
+  }
   @apply relative;
   p {
     padding-left: calc(var(--line-number-gutter-width) - 10px);
