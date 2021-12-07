@@ -2,6 +2,15 @@
 
 A diff viewer that gives you sharable diff view links but does not store your data. (This takes inspiration from typescript playground how it stores your code in url itself) but the for very large data we will be doing end to end encryption just like `excalidraw` so you can still have sharable links without worrying if you should store your enterprise data or not.
 
+# Formats currently supported
+
+1. Any texual format (JSON, HTML, Plain text, JS, CSS and any text based file content)
+
+# Upcoming support
+
+1. Images
+2. Audio wave format
+
 ## Resoning for building yet another diff viewer tool
 
 I realise we are missing a diff viewer that is
