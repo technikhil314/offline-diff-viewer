@@ -1,5 +1,7 @@
 # offline-diff-viewer
 
+A diff viewer that gives you sharable diff view links but does not store your data. (This takes inspiration from typescript playground how it stores your code in url itself) but the for very large data we will be doing end to end encryption just like `excalidraw` so you can still have sharable links without worrying if you should store your enterprise data or not.
+
 ## Resoning for building yet another diff viewer tool
 
 I realise we are missing a diff viewer that is
@@ -61,5 +63,3 @@ $ npm run start
 # generate static project
 $ npm run generate
 ```
-
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
