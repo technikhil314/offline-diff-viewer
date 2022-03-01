@@ -11,6 +11,7 @@ export default {
     title: `Diff viewer - ${DESCRIPTION}`,
     meta: [
       { charset: 'utf-8' },
+      { name: 'color-scheme', content: 'dark light' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { name: 'format-detection', content: 'telephone=no' },
       { name: "theme-color", content: "#2563EB" },

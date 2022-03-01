@@ -1,5 +1,5 @@
 <template>
-  <div class="sticky top-0 pt-12 text-right z-1">
+  <div class="sticky top-0 text-right z-1">
     <button
       class="absolute top-0 right-0 p-2 text-gray-800 transition-all transform rounded-full shadow  dark:text-gray-50 z-1 hover:shadow-lg hover:scale-110 hover:rotate-12"
       :class="{
