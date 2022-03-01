@@ -52,6 +52,7 @@
       <div
         class="flex items-stretch w-full gap-4 font-mono text-gray-800  dark:text-gray-50"
       >
+        <h1>{{ name }}</h1>
         <div
           class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md  dark:border-gray-500 max-h-screen--nav line-number-gutter min-h-80"
         >
@@ -96,6 +97,9 @@ export default {
       rhsDiff: this.rhsDiff,
       copied: false,
     }
+  },
+  asyncData() {
+    return { name: 'World' }
   },
   mounted() {
     const _diff = this.$route.hash

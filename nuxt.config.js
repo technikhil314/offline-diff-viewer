@@ -107,6 +107,7 @@ export default {
   sitemap: {
     hostname: BASE_URL
   },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     extractCSS: true,
@@ -115,5 +116,9 @@ export default {
         config.devtool = 'source-map'
       }
     }
-  }
+  },
+
+  serverMiddleware: [
+    { path: '/test', handler: '~/serverMiddleware/ok.js' },
+  ]
 }
