@@ -16,6 +16,11 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
 .page-root {
   @apply flow-root w-full;
 }

@@ -176,6 +176,7 @@ export default {
         'dark'
       )
       document.cookie = `darkMode=${this.darkMode}; Secure; max-age=31536000; path=/;`
+      document.documentElement.classList.remove('hidden')
     },
   },
 }
