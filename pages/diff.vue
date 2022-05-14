@@ -1,5 +1,5 @@
 <template>
-  <div class="contents">
+  <div class="page-contents">
     <Navbar :show-back-button="true">
       <template #right>
         <button
@@ -52,7 +52,6 @@
       <div
         class="flex items-stretch w-full gap-4 font-mono text-gray-800  dark:text-gray-50"
       >
-        <h1>{{ name }}</h1>
         <div
           class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md  dark:border-gray-500 max-h-screen--nav line-number-gutter min-h-80"
         >
@@ -83,13 +82,16 @@
         </div>
       </div>
     </main>
+    <Footer />
   </div>
 </template>
 
 <script>
 import pako from 'pako'
 import { undoUrlSafeBase64, escapeHtml } from '../helpers/utils'
+import footer from '~/components/footer.vue'
 export default {
+  components: { footer },
   layout: 'main',
   data() {
     return {

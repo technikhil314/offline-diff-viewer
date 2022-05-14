@@ -1,22 +1,28 @@
 <template>
-  <div class="contents">
+  <div class="page-contents">
     <Navbar />
     <main class="text-gray-800 dark:text-gray-50">
-      <h1 class="w-full mb-2 text-xl text-center">
-        Find difference in any two text blocks and get easy sharable link
-      </h1>
-      <h2 class="w-full mb-2 text-center text-md">
-        Don’t worry, We don’t store any of your data
-      </h2>
-      <form class="w-full h-full" @submit="checkForm">
-        <div class="flex flex-wrap w-full h-full gap-4">
+      <section>
+        <header>
+          <h1 class="w-full mb-2 text-xl text-center">
+            Find difference in any two text blocks and get easy sharable link
+          </h1>
+          <h2 class="w-full mb-2 text-center text-md">
+            Don’t worry, We don’t store any of your data
+          </h2>
+        </header>
+      </section>
+      <form class="w-full" @submit="checkForm">
+        <div class="flex flex-wrap w-full gap-4">
           <textarea
+            rows="28"
             id="lhs"
-            class="flex-1 h-full max-h-full bg-transparent rounded-md resize-none  form-textarea"
+            class="flex-1 bg-transparent rounded-md resize-none form-textarea"
           ></textarea>
           <textarea
             id="rhs"
-            class="flex-1 h-full max-h-full bg-transparent rounded-md resize-none  form-textarea"
+            rows="28"
+            class="flex-1 bg-transparent rounded-md resize-none form-textarea"
           ></textarea>
           <div class="self-end flex-grow-0 w-full text-center">
             <button
@@ -28,6 +34,7 @@
         </div>
       </form>
     </main>
+    <Footer />
   </div>
 </template>
 
@@ -88,8 +95,14 @@ export default Vue.extend({
   },
 })
 </script>
-<style>
-.page-root {
-  max-height: calc(100% - 14rem);
+
+<style scoped>
+main {
+  @apply grid gap-4;
+
+  grid-template-rows: 100px 1fr;
+  @media screen and (min-width: 768px) {
+    grid-template-rows: 60px 1fr;
+  }
 }
 </style>
