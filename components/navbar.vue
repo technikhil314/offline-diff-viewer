@@ -1,8 +1,8 @@
 <template>
-  <header
-    class="fixed top-0 left-0 right-0 text-gray-800 shadow-lg  dark:shadow-dark bg-gray-50 dark:bg-gray-900 z-100 dark:text-gray-50"
+  <nav
+    class="sticky top-0 left-0 right-0 z-10 text-gray-800 shadow-lg  dark:shadow-dark bg-gray-50 dark:bg-gray-900 dark:text-gray-50"
   >
-    <div class="container flex items-center h-full py-4 m-auto">
+    <div class="container flex items-center py-4 m-auto">
       <div v-if="showBackButton" class="hidden mr-4 md:block">
         <NuxtLink to="/">
           <svg
@@ -147,7 +147,7 @@
         </ul>
       </nav>
     </div>
-  </header>
+  </nav>
 </template>
 
 <script>
@@ -176,6 +176,7 @@ export default {
         'dark'
       )
       document.cookie = `darkMode=${this.darkMode}; Secure; max-age=31536000; path=/;`
+      document.documentElement.classList.remove('hidden')
     },
   },
 }

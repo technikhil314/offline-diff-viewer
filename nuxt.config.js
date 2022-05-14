@@ -6,11 +6,12 @@ const domainAliases = [
 const canonicalLinks = domainAliases.map(x => ({ rel: "canonical", href: x }))
 const DESCRIPTION = "A text diff viewer that is privacy focused, secure, sharable and simple";
 export default {
-  target: 'static',
+  ssr: true,
   head: {
     title: `Diff viewer - ${DESCRIPTION}`,
     meta: [
       { charset: 'utf-8' },
+      { name: 'color-scheme', content: 'dark light' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { name: 'format-detection', content: 'telephone=no' },
       { name: "theme-color", content: "#2563EB" },
@@ -106,6 +107,7 @@ export default {
   sitemap: {
     hostname: BASE_URL
   },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     extractCSS: true,
@@ -114,5 +116,9 @@ export default {
         config.devtool = 'source-map'
       }
     }
-  }
+  },
+
+  serverMiddleware: [
+    { path: '/test', handler: '~/serverMiddleware/ok.js' },
+  ]
 }

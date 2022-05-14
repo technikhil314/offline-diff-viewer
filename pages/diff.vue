@@ -1,5 +1,5 @@
 <template>
-  <div class="contents">
+  <div class="page-contents">
     <Navbar :show-back-button="true">
       <template #right>
         <button
@@ -82,13 +82,16 @@
         </div>
       </div>
     </main>
+    <Footer />
   </div>
 </template>
 
 <script>
 import pako from 'pako'
 import { undoUrlSafeBase64, escapeHtml } from '../helpers/utils'
+import footer from '~/components/footer.vue'
 export default {
+  components: { footer },
   layout: 'main',
   data() {
     return {
@@ -96,6 +99,9 @@ export default {
       rhsDiff: this.rhsDiff,
       copied: false,
     }
+  },
+  asyncData() {
+    return { name: 'World' }
   },
   mounted() {
     const _diff = this.$route.hash

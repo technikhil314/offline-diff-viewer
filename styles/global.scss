@@ -2,13 +2,21 @@
 :root {
   color-scheme: dark light;
 }
+
+html,
+body,
+#__nuxt,
+#__layout,
+.page-root {
+  @apply min-h-[100vh];
+}
+
 html,
 body,
 #__nuxt,
 #__layout,
 .page-root,
 main {
-  @apply h-full;
   @apply bg-gray-50 dark:bg-gray-900;
 }
 
@@ -20,9 +28,14 @@ body {
   @apply flow-root w-full;
 }
 
+.page-contents {
+  @apply grid;
+  grid-template-rows: 80px 1fr 80px;
+}
+
 main {
   @apply flex flex-wrap xl:container;
-  margin-top: 5.5rem;
+  margin-top: 2rem;
 }
 
 /* custom scrollbar */
