@@ -49,6 +49,7 @@
         <div class="items-center">
           <a
             href="https://github.com/technikhil314/offline-diff-viewer/stargazers"
+            title="github stars on this open source project"
           >
             <img
               src="https://img.shields.io/github/stars/technikhil314/offline-diff-viewer?style=social"
@@ -104,6 +105,7 @@
             <a
               class=""
               href="https://github.com/technikhil314/offline-diff-viewer"
+              title="go to github repository of this open source project"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
