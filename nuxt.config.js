@@ -1,10 +1,13 @@
 const BASE_URL = "https://diffviewer.vercel.app";
 const domainAliases = [
   "https://diffchecker.vercel.app/",
-  "https://textdiff.vercel.app/"
+  "https://textdiff.vercel.app/",
+  "https://differencer.vercel.app/",
+  "https://diffie.vercel.app/",
+  "https://differencefinder.vercel.app/"
 ]
 const canonicalLinks = domainAliases.map(x => ({ rel: "canonical", href: x }))
-const DESCRIPTION = "A text diff viewer that is privacy focused, secure, sharable and simple";
+const DESCRIPTION = "A privacy first diff viewer that is secure, easy, simple and for any text type";
 export default {
   ssr: true,
   head: {
