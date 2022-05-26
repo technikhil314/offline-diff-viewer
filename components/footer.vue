@@ -3,7 +3,11 @@
     class="py-4 mt-4 text-center text-gray-800  bg-inherit dark:text-gray-50 min-h-max"
   >
     Made with &hearts; using
-    <a href="https://nuxtjs.org">
+    <a
+      href="https://nuxtjs.org"
+      title="nuxtjs a vuejs based framework inspired by nextjs"
+      aria-label="nuxtjs a vuejs based framework inspired by nextjs"
+    >
       <svg
         class="inline w-4 h-4"
         viewBox="0 0 124 124"
@@ -23,7 +27,11 @@
       </svg>
     </a>
     <span>&</span>
-    <a href="https://tailwindcss.com/">
+    <a
+      href="https://tailwindcss.com/"
+      title="tailwind css"
+      aria-label="tailwind css"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
