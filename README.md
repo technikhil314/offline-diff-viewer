@@ -11,7 +11,9 @@ I realise we are missing a diff viewer that is
 ## Motivation
 
 I realise as a developer community we are missing on a diff viewer tool that does not store your data on their server to give you links to diff view to share with your teams.
-There can be serious implications of storing your enterprise data on some server that you don’t know anything about
+There can be serious implications of storing your enterprise data on some server that you don’t know anything about.
+
+Also current diff tools lack one major ability that is to compare any two text blocks. Many diff viewers out there target specific text types like JSON etc which is not what we want most of the time.
 
 Also due to lack of such tool, if you want to see the the diff again you have to do the following
 
