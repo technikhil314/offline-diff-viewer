@@ -123,7 +123,9 @@ export default {
         const hunkState = item[0]
         if (hunkState === -1 || hunkState === 0) {
           const className =
-            hunkState === -1 ? 'isModified bg-red-300 dark:bg-yellow-900' : ''
+            hunkState === -1
+              ? 'isModified bg-red-300 dark:bg-yellow-900 mix-blend-overlay'
+              : ''
           return `<span class="break-all inline p-0 m-0 ${className}">${escapeHtml(
             item[1]
           )}</span>`
@@ -138,7 +140,9 @@ export default {
         const hunkState = item[0]
         if (hunkState === 1 || hunkState === 0) {
           const className =
-            hunkState === 1 ? 'isModified bg-green-300 dark:bg-green-900' : ''
+            hunkState === 1
+              ? 'isModified bg-green-300 dark:bg-green-900 mix-blend-overlay'
+              : ''
           return `<span class="break-all inline p-0 m-0 ${className}">${escapeHtml(
             item[1]
           )}</span>`
