@@ -4,21 +4,7 @@
       <template #right>
         <button
           type="button"
-          class="
-            inline-flex
-            justify-center
-            px-4
-            py-2
-            transition-transform
-            transform
-            rounded-md
-            shadow
-            outline-none
-            copy-uri-button
-            align-center
-            focus:ring-4
-            active:scale-y-75
-          "
+          class="inline-flex justify-center px-4 py-2 transition-transform transform rounded-md shadow outline-none  copy-uri-button align-center focus:ring-4 active:scale-y-75"
           :class="{
             'bg-blue-500 text-white': !copied,
             'bg-green-500 text-gray-800': copied,
@@ -63,82 +49,38 @@
       </template>
     </Navbar>
     <main>
-      <section
-        class="
-          flex
-          items-stretch
-          w-full
-          gap-4
-          font-mono
-          text-gray-800
-          dark:text-gray-50
-        "
+      <div
+        class="flex items-stretch w-full gap-4 font-mono text-gray-800  dark:text-gray-50"
       >
-        <div class="flex flex-col w-1/2 gap-2">
-          <p class="flex-grow-0 text-lg">{{ lhsLabel }}</p>
+        <div
+          class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md  dark:border-gray-500 max-h-screen--nav line-number-gutter min-h-80"
+        >
+          <RTStickyCopyButton :click-handler="copyTextToClipboard" />
           <div
-            class="
-              relative
-              flex-1
-              px-4
-              py-2
-              overflow-y-auto
-              border-2
-              rounded-md
-              dark:border-gray-500
-              max-h-screen--nav
-              line-number-gutter
-              min-h-80
-            "
+            v-for="(lineDiff, index) in lhsDiff"
+            :key="index"
+            :class="{
+              'bg-red-200 dark:bg-red-800': lineDiff.includes('isModified'),
+            }"
           >
-            <RTStickyCopyButton :click-handler="copyTextToClipboard" />
-            <div
-              v-for="(lineDiff, index) in lhsDiff"
-              :key="index"
-              :class="{
-                'bg-red-200 dark:bg-red-800': lineDiff.includes('isModified'),
-              }"
-            >
-              <p class="break-all whitespace-pre-wrap">
-                <span v-html="lineDiff"></span>
-              </p>
-            </div>
+            <p class="break-all whitespace-pre-wrap" v-html="lineDiff"></p>
           </div>
         </div>
-
-        <div class="flex flex-col w-1/2 gap-2">
-          <p class="flex-grow-0 text-lg">{{ rhsLabel }}</p>
+        <div
+          class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md  dark:border-gray-500 min-h-80 line-number-gutter max-h-screen--nav"
+        >
+          <RTStickyCopyButton :click-handler="copyTextToClipboard" />
           <div
-            class="
-              relative
-              flex-1
-              px-4
-              py-2
-              overflow-y-auto
-              border-2
-              rounded-md
-              dark:border-gray-500
-              min-h-80
-              line-number-gutter
-              max-h-screen--nav
-            "
+            v-for="(lineDiff, index) in rhsDiff"
+            :key="index"
+            :class="{
+              'bg-green-200 dark:bg-green-700': lineDiff.includes('isModified'),
+            }"
           >
-            <RTStickyCopyButton :click-handler="copyTextToClipboard" />
-            <div
-              v-for="(lineDiff, index) in rhsDiff"
-              :key="index"
-              :class="{
-                'bg-green-200 dark:bg-green-700':
-                  lineDiff.includes('isModified'),
-              }"
-            >
-              <p class="break-all whitespace-pre-wrap">
-                <span v-html="lineDiff"></span>
-              </p>
-            </div>
+            <p class="break-all whitespace-pre-wrap" v-html="lineDiff"></p>
           </div>
         </div>
-      </section>
+      </div>
     </main>
     <Footer />
   </div>
@@ -155,8 +97,6 @@ export default {
     return {
       lhsDiff: this.lhsDiff,
       rhsDiff: this.rhsDiff,
-      rhsLabel: this.rhsLabel,
-      lhsLabel: this.lhsLabel,
       copied: false,
     }
   },
