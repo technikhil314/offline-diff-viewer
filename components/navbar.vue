@@ -167,8 +167,9 @@ export default {
   },
   mounted() {
     if (this.$isDarkMode) {
-      this.toggleDarkMode(null, true)
+      this.toggleDarkMode(null, false)
     }
+    document.documentElement.classList.remove('hidden')
   },
   methods: {
     toggleDarkMode(e, val) {
@@ -178,7 +179,6 @@ export default {
         'dark'
       )
       document.cookie = `darkMode=${this.darkMode}; Secure; max-age=31536000; path=/;`
-      document.documentElement.classList.remove('hidden')
     },
   },
 }

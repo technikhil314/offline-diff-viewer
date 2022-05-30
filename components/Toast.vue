@@ -1,5 +1,5 @@
 <template>
-  <div id="toast" class="absolute right-[20px] top-24">
+  <div id="toast" class="fixed right-[20px] top-24">
     <div
       class="
         absolute
