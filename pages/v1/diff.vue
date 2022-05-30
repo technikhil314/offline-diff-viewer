@@ -49,38 +49,50 @@
       </template>
     </Navbar>
     <main>
-      <div
+      <section
         class="flex items-stretch w-full gap-4 font-mono text-gray-800  dark:text-gray-50"
       >
-        <div
-          class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md  dark:border-gray-500 max-h-screen--nav line-number-gutter min-h-80"
-        >
-          <RTStickyCopyButton :click-handler="copyTextToClipboard" />
+        <div class="flex flex-col w-1/2 gap-2">
+          <p class="flex-grow-0 text-lg font-bold text-center capitalize">
+            {{ lhsLabel }}
+          </p>
           <div
-            v-for="(lineDiff, index) in lhsDiff"
-            :key="index"
-            :class="{
-              'bg-red-200 dark:bg-red-800': lineDiff.includes('isModified'),
-            }"
+            class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md  dark:border-gray-500 max-h-screen--nav line-number-gutter min-h-80"
           >
-            <p class="break-all whitespace-pre-wrap" v-html="lineDiff"></p>
+            <RTStickyCopyButton :click-handler="copyTextToClipboard" />
+            <div
+              v-for="(lineDiff, index) in lhsDiff"
+              :key="index"
+              :class="{
+                'bg-red-200 dark:bg-red-800': lineDiff.includes('isModified'),
+              }"
+            >
+              <p class="break-all whitespace-pre-wrap" v-html="lineDiff"></p>
+            </div>
           </div>
         </div>
-        <div
-          class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md  dark:border-gray-500 min-h-80 line-number-gutter max-h-screen--nav"
-        >
-          <RTStickyCopyButton :click-handler="copyTextToClipboard" />
+
+        <div class="flex flex-col w-1/2 gap-2">
+          <p class="flex-grow-0 text-lg font-bold text-center capitalize">
+            {{ rhsLabel }}
+          </p>
           <div
-            v-for="(lineDiff, index) in rhsDiff"
-            :key="index"
-            :class="{
-              'bg-green-200 dark:bg-green-700': lineDiff.includes('isModified'),
-            }"
+            class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md  dark:border-gray-500 min-h-80 line-number-gutter max-h-screen--nav"
           >
-            <p class="break-all whitespace-pre-wrap" v-html="lineDiff"></p>
+            <RTStickyCopyButton :click-handler="copyTextToClipboard" />
+            <div
+              v-for="(lineDiff, index) in rhsDiff"
+              :key="index"
+              :class="{
+                'bg-green-200 dark:bg-green-700':
+                  lineDiff.includes('isModified'),
+              }"
+            >
+              <p class="break-all whitespace-pre-wrap" v-html="lineDiff"></p>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </main>
     <Footer />
   </div>
@@ -88,7 +100,7 @@
 
 <script>
 import pako from 'pako'
-import { undoUrlSafeBase64, escapeHtml } from '../helpers/utils'
+import { undoUrlSafeBase64, escapeHtml } from '../../helpers/utils'
 import Footer from '~/components/footer.vue'
 export default {
   components: { Footer },
@@ -97,13 +109,18 @@ export default {
     return {
       lhsDiff: this.lhsDiff,
       rhsDiff: this.rhsDiff,
+      rhsLabel: this.rhsLabel,
+      lhsLabel: this.lhsLabel,
       copied: false,
     }
   },
   mounted() {
     const _diff = this.$route.hash
     const gunzip = pako.ungzip(Buffer.from(undoUrlSafeBase64(_diff), 'base64'))
-    const diff = JSON.parse(Buffer.from(gunzip).toString('utf8'))
+    const diffData = JSON.parse(Buffer.from(gunzip).toString('utf8'))
+    const { diff, lhsLabel, rhsLabel } = diffData
+    this.lhsLabel = lhsLabel
+    this.rhsLabel = rhsLabel
     this.lhsDiff = diff
       .map((item) => {
         const hunkState = item[0]
@@ -215,7 +232,7 @@ export default {
     @apply relative;
     &:hover {
       @apply bg-gray-200 dark:bg-gray-600;
-      span {
+      & > span {
         @apply dark:mix-blend-hard-light dark:bg-blend-multiply;
       }
     }

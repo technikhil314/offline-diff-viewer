@@ -12,25 +12,47 @@
           </h2>
         </header>
       </section>
-      <form class="w-full" @submit="checkForm">
-        <div class="flex flex-wrap w-full gap-4">
-          <textarea
-            rows="28"
-            id="lhs"
-            class="flex-1 bg-transparent rounded-md resize-none form-textarea"
-          ></textarea>
-          <textarea
-            id="rhs"
-            rows="28"
-            class="flex-1 bg-transparent rounded-md resize-none form-textarea"
-          ></textarea>
-          <div class="self-end flex-grow-0 w-full text-center">
-            <button
-              class="inline-flex items-center justify-center w-48 px-4 py-2 transition-transform transform bg-blue-600 rounded-md shadow-lg outline-none  text-gray-50 focus:ring-4 active:scale-y-75"
-            >
-              Compare
-            </button>
+      <form class="flex flex-col w-full gap-4" @submit="checkForm">
+        <section class="flex w-full gap-4">
+          <div class="flex flex-col flex-wrap w-1/2 gap-4">
+            <label for="lhsLabel" class="relative">
+              <input
+                id="lhsLabel"
+                name="lhsLabel"
+                type="text"
+                class="flex-1 flex-grow-0 w-full bg-transparent rounded-md  material-input"
+                placeholder="Add label to this text block"
+              />
+            </label>
+            <textarea
+              id="lhs"
+              rows="28"
+              name="lhs"
+              class="flex-1 w-full bg-transparent rounded-md resize-none  form-textarea"
+            ></textarea>
           </div>
+          <div class="flex flex-col flex-wrap w-1/2 gap-4">
+            <input
+              id="rhsLabel"
+              name="rhsLabel"
+              type="text"
+              class="flex-1 flex-grow-0 w-full bg-transparent rounded-md  material-input"
+              placeholder="Add label to this text block"
+            />
+            <textarea
+              id="rhs"
+              rows="28"
+              name="rhs"
+              class="flex-1 w-full bg-transparent rounded-md resize-none  form-textarea"
+            ></textarea>
+          </div>
+        </section>
+        <div class="self-end flex-grow-0 w-full text-center">
+          <button
+            class="inline-flex items-center justify-center w-48 px-4 py-2 transition-transform transform bg-blue-600 rounded-md shadow-lg outline-none  text-gray-50 focus:ring-4 active:scale-y-75"
+          >
+            Compare
+          </button>
         </div>
       </form>
     </main>
@@ -49,14 +71,12 @@ export default Vue.extend({
   methods: {
     checkForm(e: Event) {
       e.preventDefault()
-      const lhsTextArea: HTMLTextAreaElement = document.getElementById(
-        'lhs'
-      ) as HTMLTextAreaElement
-      const lhs: string = lhsTextArea?.value || ''
-      const rhsTextArea: HTMLTextAreaElement = document.getElementById(
-        'rhs'
-      ) as HTMLTextAreaElement
-      const rhs: string = rhsTextArea?.value || ''
+      const formData = new FormData(e.currentTarget as HTMLFormElement)
+      // const formDataJson = Object.fromEntries(formData.entries())
+      const lhs = formData.get('lhs')
+      const rhs = formData.get('rhs')
+      const lhsLabel = formData.get('lhsLabel')
+      const rhsLabel = formData.get('rhsLabel')
       if (!lhs || !rhs) {
         this.$store.commit('toast/show', {
           show: true,
@@ -84,11 +104,17 @@ export default Vue.extend({
       const originalLhs = lhs
       const originalRhs = rhs
       const diff = dmp.diff_main(originalLhs, originalRhs)
-      const gzip = Buffer.from(pako.gzip(JSON.stringify(diff))).toString(
-        'base64'
-      )
+      const gzip = Buffer.from(
+        pako.gzip(
+          JSON.stringify({
+            diff,
+            lhsLabel,
+            rhsLabel,
+          })
+        )
+      ).toString('base64')
       this.$router.push({
-        path: '/diff',
+        path: '/v1/diff',
         hash: `#${doUrlSafeBase64(gzip)}`,
       })
     },
