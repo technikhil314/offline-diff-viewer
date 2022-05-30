@@ -4,7 +4,21 @@
       <template #right>
         <button
           type="button"
-          class="inline-flex justify-center px-4 py-2 transition-transform transform rounded-md shadow outline-none  copy-uri-button align-center focus:ring-4 active:scale-y-75"
+          class="
+            inline-flex
+            justify-center
+            px-4
+            py-2
+            transition-transform
+            transform
+            rounded-md
+            shadow
+            outline-none
+            copy-uri-button
+            align-center
+            focus:ring-4
+            active:scale-y-75
+          "
           :class="{
             'bg-blue-500 text-white': !copied,
             'bg-green-500 text-gray-800': copied,
@@ -49,38 +63,82 @@
       </template>
     </Navbar>
     <main>
-      <div
-        class="flex items-stretch w-full gap-4 font-mono text-gray-800  dark:text-gray-50"
+      <section
+        class="
+          flex
+          items-stretch
+          w-full
+          gap-4
+          font-mono
+          text-gray-800
+          dark:text-gray-50
+        "
       >
-        <div
-          class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md  dark:border-gray-500 max-h-screen--nav line-number-gutter min-h-80"
-        >
-          <RTStickyCopyButton :click-handler="copyTextToClipboard" />
+        <div class="flex flex-col w-1/2 gap-2">
+          <p class="flex-grow-0 text-lg">{{ lhsLabel }}</p>
           <div
-            v-for="(lineDiff, index) in lhsDiff"
-            :key="index"
-            :class="{
-              'bg-red-100 dark:bg-yellow-700': lineDiff.includes('isModified'),
-            }"
+            class="
+              relative
+              flex-1
+              px-4
+              py-2
+              overflow-y-auto
+              border-2
+              rounded-md
+              dark:border-gray-500
+              max-h-screen--nav
+              line-number-gutter
+              min-h-80
+            "
           >
-            <p class="break-all whitespace-pre-wrap" v-html="lineDiff"></p>
+            <RTStickyCopyButton :click-handler="copyTextToClipboard" />
+            <div
+              v-for="(lineDiff, index) in lhsDiff"
+              :key="index"
+              :class="{
+                'bg-red-200 dark:bg-red-800': lineDiff.includes('isModified'),
+              }"
+            >
+              <p class="break-all whitespace-pre-wrap">
+                <span v-html="lineDiff"></span>
+              </p>
+            </div>
           </div>
         </div>
-        <div
-          class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md  dark:border-gray-500 min-h-80 line-number-gutter max-h-screen--nav"
-        >
-          <RTStickyCopyButton :click-handler="copyTextToClipboard" />
+
+        <div class="flex flex-col w-1/2 gap-2">
+          <p class="flex-grow-0 text-lg">{{ rhsLabel }}</p>
           <div
-            v-for="(lineDiff, index) in rhsDiff"
-            :key="index"
-            :class="{
-              'bg-green-100 dark:bg-green-700': lineDiff.includes('isModified'),
-            }"
+            class="
+              relative
+              flex-1
+              px-4
+              py-2
+              overflow-y-auto
+              border-2
+              rounded-md
+              dark:border-gray-500
+              min-h-80
+              line-number-gutter
+              max-h-screen--nav
+            "
           >
-            <p class="break-all whitespace-pre-wrap" v-html="lineDiff"></p>
+            <RTStickyCopyButton :click-handler="copyTextToClipboard" />
+            <div
+              v-for="(lineDiff, index) in rhsDiff"
+              :key="index"
+              :class="{
+                'bg-green-200 dark:bg-green-700':
+                  lineDiff.includes('isModified'),
+              }"
+            >
+              <p class="break-all whitespace-pre-wrap">
+                <span v-html="lineDiff"></span>
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </main>
     <Footer />
   </div>
@@ -89,14 +147,16 @@
 <script>
 import pako from 'pako'
 import { undoUrlSafeBase64, escapeHtml } from '../helpers/utils'
-import footer from '~/components/footer.vue'
+import Footer from '~/components/footer.vue'
 export default {
-  components: { footer },
+  components: { Footer },
   layout: 'main',
   data() {
     return {
       lhsDiff: this.lhsDiff,
       rhsDiff: this.rhsDiff,
+      rhsLabel: this.rhsLabel,
+      lhsLabel: this.lhsLabel,
       copied: false,
     }
   },
@@ -109,7 +169,7 @@ export default {
         const hunkState = item[0]
         if (hunkState === -1 || hunkState === 0) {
           const className =
-            hunkState === -1 ? 'isModified bg-red-300 dark:bg-yellow-900' : ''
+            hunkState === -1 ? 'isModified bg-red-300 dark:bg-red-500' : ''
           return `<span class="break-all inline p-0 m-0 ${className}">${escapeHtml(
             item[1]
           )}</span>`
@@ -124,7 +184,7 @@ export default {
         const hunkState = item[0]
         if (hunkState === 1 || hunkState === 0) {
           const className =
-            hunkState === 1 ? 'isModified bg-green-300 dark:bg-green-900' : ''
+            hunkState === 1 ? 'isModified bg-green-400 dark:bg-green-900' : ''
           return `<span class="break-all inline p-0 m-0 ${className}">${escapeHtml(
             item[1]
           )}</span>`
@@ -188,6 +248,9 @@ export default {
 </script>
 
 <style lang="scss">
+::selection {
+  @apply bg-gray-800 text-gray-300 dark:bg-gray-200 dark:text-gray-800;
+}
 .copy-uri-button:hover {
   @apply shadow-lg;
   svg {
@@ -203,7 +266,7 @@ export default {
   &::before {
     content: '';
     width: var(--line-number-gutter-width);
-    @apply bg-gray-200 dark:bg-gray-700 inline-block left-0 top-0 bottom-0 absolute text-sm;
+    @apply bg-gray-300 dark:bg-gray-700 inline-block left-0 top-0 bottom-0 absolute text-sm;
   }
   @apply relative;
   p {
@@ -211,23 +274,16 @@ export default {
     line-height: 1.65;
     @apply relative;
     &:hover {
-      @apply bg-gray-200 dark:bg-gray-700;
+      @apply bg-gray-200 dark:bg-gray-600;
+      span {
+        @apply dark:mix-blend-hard-light dark:bg-blend-multiply;
+      }
     }
     &::before {
       counter-increment: line-numbers;
       content: counter(line-numbers);
       width: var(--line-number-gutter-width);
-      @apply absolute left-0 top-[2px] -mx-4 bottom-0 text-center bg-gray-200 dark:bg-gray-700 dark:text-gray-50 text-gray-500 flex justify-center text-sm;
-    }
-    &:first-of-type {
-      &::before {
-        @apply -mt-2 pt-2;
-      }
-    }
-    &:last-of-type {
-      &::before {
-        @apply -mb-2 pb-2;
-      }
+      @apply absolute left-0 top-0 -mx-4 bg-gray-200 dark:bg-gray-700 dark:text-gray-50 text-gray-500 inline-flex justify-center items-center text-sm h-full;
     }
   }
 }
