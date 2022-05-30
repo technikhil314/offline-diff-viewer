@@ -4,7 +4,7 @@
       <template #right>
         <button
           type="button"
-          class="inline-flex justify-center px-4 py-2 transition-transform transform rounded-md shadow outline-none copy-uri-button align-center focus:ring-4 active:scale-y-75"
+          class="inline-flex justify-center px-4 py-2 transition-transform transform rounded-md shadow outline-none  copy-uri-button align-center focus:ring-4 active:scale-y-75"
           :class="{
             'bg-blue-500 text-white': !copied,
             'bg-green-500 text-gray-800': copied,
@@ -50,12 +50,14 @@
     </Navbar>
     <main>
       <section
-        class="flex items-stretch w-full gap-4 font-mono text-gray-800 dark:text-gray-50"
+        class="flex items-stretch w-full gap-4 font-mono text-gray-800  dark:text-gray-50"
       >
         <div class="flex flex-col w-1/2 gap-2">
-          <p class="flex-grow-0 text-lg">{{ lhsLabel }}</p>
+          <p class="flex-grow-0 text-lg font-bold text-center capitalize">
+            {{ lhsLabel }}
+          </p>
           <div
-            class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md dark:border-gray-500 max-h-screen--nav line-number-gutter min-h-80"
+            class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md  dark:border-gray-500 max-h-screen--nav line-number-gutter min-h-80"
           >
             <RTStickyCopyButton :click-handler="copyTextToClipboard" />
             <div
@@ -71,9 +73,11 @@
         </div>
 
         <div class="flex flex-col w-1/2 gap-2">
-          <p class="flex-grow-0 text-lg">{{ rhsLabel }}</p>
+          <p class="flex-grow-0 text-lg font-bold text-center capitalize">
+            {{ rhsLabel }}
+          </p>
           <div
-            class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md dark:border-gray-500 min-h-80 line-number-gutter max-h-screen--nav"
+            class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md  dark:border-gray-500 min-h-80 line-number-gutter max-h-screen--nav"
           >
             <RTStickyCopyButton :click-handler="copyTextToClipboard" />
             <div
