@@ -82,16 +82,13 @@
         </div>
       </div>
     </main>
-    <Footer />
   </div>
 </template>
 
 <script>
 import pako from 'pako'
 import { undoUrlSafeBase64, escapeHtml } from '../helpers/utils'
-import Footer from '~/components/footer.vue'
 export default {
-  components: { Footer },
   layout: 'main',
   data() {
     return {

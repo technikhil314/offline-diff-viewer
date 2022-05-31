@@ -26,11 +26,12 @@ body {
 
 .page-root {
   @apply flow-root w-full;
+  min-height: 100vh;
 }
 
 .page-contents {
   @apply grid;
-  grid-template-rows: 70px 1fr 70px;
+  grid-template-rows: 70px 1fr;
 }
 
 main {

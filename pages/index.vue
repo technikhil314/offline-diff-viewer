@@ -14,13 +14,13 @@
       </section>
       <form class="flex flex-col w-full gap-4" @submit="checkForm">
         <section class="flex w-full gap-4">
-          <div class="flex flex-col flex-wrap w-1/2 gap-4">
+          <div class="flex flex-col w-1/2 gap-4">
             <label for="lhsLabel" class="relative">
               <input
                 id="lhsLabel"
                 name="lhsLabel"
                 type="text"
-                class="flex-1 flex-grow-0 w-full bg-transparent rounded-md  material-input"
+                class="flex-1 flex-grow-0 w-full bg-transparent rounded-md"
                 placeholder="Add label to this text block"
               />
             </label>
@@ -31,12 +31,12 @@
               class="flex-1 w-full bg-transparent rounded-md resize-none  form-textarea"
             ></textarea>
           </div>
-          <div class="flex flex-col flex-wrap w-1/2 gap-4">
+          <div class="flex flex-col w-1/2 gap-4">
             <input
               id="rhsLabel"
               name="rhsLabel"
               type="text"
-              class="flex-1 flex-grow-0 w-full bg-transparent rounded-md  material-input"
+              class="flex-1 flex-grow-0 w-full bg-transparent rounded-md"
               placeholder="Add label to this text block"
             />
             <textarea
@@ -56,7 +56,6 @@
         </div>
       </form>
     </main>
-    <Footer />
   </div>
 </template>
 
