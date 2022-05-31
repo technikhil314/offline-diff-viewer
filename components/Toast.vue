@@ -1,5 +1,5 @@
 <template>
-  <div id="toast" class="fixed right-[20px] top-24">
+  <div id="toast" class="fixed right-[20px] top-24 z-2">
     <div
       class="
         absolute
@@ -10,7 +10,6 @@
         transition-transform
         rounded-md
         shadow-md
-        z-2
         w-72
       "
       :class="{
