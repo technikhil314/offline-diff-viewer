@@ -1,6 +1,6 @@
 <template>
   <footer
-    class="py-4 mt-4 text-center text-gray-800  bg-inherit dark:text-gray-50 min-h-max"
+    class="sticky py-4 mt-4 text-center text-gray-800  top-full bg-inherit dark:text-gray-50 min-h-max"
   >
     Made with &hearts; using
     <a

@@ -14,13 +14,13 @@
       </section>
       <form class="flex flex-col w-full gap-4" @submit="checkForm">
         <section class="flex w-full gap-4">
-          <div class="flex flex-col flex-wrap w-1/2 gap-4">
+          <div class="flex flex-col w-1/2 gap-4">
             <label for="lhsLabel" class="relative">
               <input
                 id="lhsLabel"
                 name="lhsLabel"
                 type="text"
-                class="flex-1 flex-grow-0 w-full bg-transparent rounded-md  material-input"
+                class="flex-1 flex-grow-0 w-full bg-transparent rounded-md"
                 placeholder="Add label to this text block"
               />
             </label>
@@ -31,12 +31,12 @@
               class="flex-1 w-full bg-transparent rounded-md resize-none  form-textarea"
             ></textarea>
           </div>
-          <div class="flex flex-col flex-wrap w-1/2 gap-4">
+          <div class="flex flex-col w-1/2 gap-4">
             <input
               id="rhsLabel"
               name="rhsLabel"
               type="text"
-              class="flex-1 flex-grow-0 w-full bg-transparent rounded-md  material-input"
+              class="flex-1 flex-grow-0 w-full bg-transparent rounded-md"
               placeholder="Add label to this text block"
             />
             <textarea
@@ -56,7 +56,6 @@
         </div>
       </form>
     </main>
-    <Footer />
   </div>
 </template>
 
@@ -68,11 +67,44 @@ import { doUrlSafeBase64 } from '../helpers/utils'
 const dmp = new DiffMatchPatch()
 export default Vue.extend({
   layout: 'main',
+  data() {
+    return {
+      isSkipTutorial: this.$isSkipTutorial,
+    }
+  },
+  async mounted() {
+    const { default: Driver } = await import('driver.js')
+    const driver = new Driver({
+      closeBtnText: 'Skip',
+      onReset: () => {
+        document.cookie = 'isSkipTutorial=true; max-age=31536000; path=/;'
+      },
+    })
+    // Define the steps for introduction
+    if (!this.isSkipTutorial) {
+      driver.defineSteps([
+        {
+          element: '#lhsLabel',
+          popover: {
+            title: 'Labels',
+            description: 'Now you can add labels to text blocks',
+          },
+        },
+        {
+          element: '#rhsLabel',
+          popover: {
+            title: 'Labels',
+            description: 'Now you can add labels to text blocks',
+          },
+        },
+      ])
+      driver.start()
+    }
+  },
   methods: {
     checkForm(e: Event) {
       e.preventDefault()
       const formData = new FormData(e.currentTarget as HTMLFormElement)
-      // const formDataJson = Object.fromEntries(formData.entries())
       const lhs = formData.get('lhs')
       const rhs = formData.get('rhs')
       const lhsLabel = formData.get('lhsLabel')
