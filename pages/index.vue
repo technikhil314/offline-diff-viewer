@@ -69,6 +69,7 @@ export default Vue.extend({
   layout: 'main',
   data() {
     return {
+      isDarkMode: this.$isDarkMode,
       isSkipTutorial: this.$isSkipTutorial,
     }
   },
@@ -76,6 +77,8 @@ export default Vue.extend({
     const { default: Driver } = await import('driver.js')
     const driver = new Driver({
       closeBtnText: 'Skip',
+      className: 'dark:filter dark:invert',
+      stageBackground: this.isDarkMode ? 'hsl(221deg 30% 70%)' : '#ffffff',
       onReset: () => {
         document.cookie = 'isSkipTutorial=true; max-age=31536000; path=/;'
       },
@@ -86,14 +89,14 @@ export default Vue.extend({
         {
           element: '#lhsLabel',
           popover: {
-            title: 'Labels',
+            title: 'New feature',
             description: 'Now you can add labels to text blocks',
           },
         },
         {
           element: '#rhsLabel',
           popover: {
-            title: 'Labels',
+            title: 'New feature',
             description: 'Now you can add labels to text blocks',
           },
         },
