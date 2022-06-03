@@ -22,6 +22,7 @@
                 type="text"
                 class="flex-1 flex-grow-0 w-full bg-transparent rounded-md"
                 placeholder="Add label to this text block"
+                value="Original Text"
               />
             </label>
             <textarea
@@ -38,6 +39,7 @@
               type="text"
               class="flex-1 flex-grow-0 w-full bg-transparent rounded-md"
               placeholder="Add label to this text block"
+              value="Changed text"
             />
             <textarea
               id="rhs"
@@ -90,14 +92,14 @@ export default Vue.extend({
           element: '#lhsLabel',
           popover: {
             title: 'New feature',
-            description: 'Now you can add labels to text blocks',
+            description: 'Now you can add custom labels to text blocks',
           },
         },
         {
           element: '#rhsLabel',
           popover: {
             title: 'New feature',
-            description: 'Now you can add labels to text blocks',
+            description: 'Now you can add custom labels to text blocks',
           },
         },
       ])
