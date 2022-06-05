@@ -2,8 +2,8 @@
 
 A diff viewer that gives you sharable diff view links but does not store your data. (This takes inspiration from typescript playground how it stores your code in url itself) but the for very large data we will be doing end to end encryption just like `excalidraw` so you can still have sharable links without worrying if you should store your enterprise data or not.
 
-# :bangbang: No data sent to server
-You can take a look at the source code itself. All your data is kept as hash fragment in URL which never makes its way to server. Totally avoiding man in middle and XSS attacks to steal your data. The data always stays in your URL and browser and never makes its way on the wire. Thats the main motive behind developing this tool. More about reasoning, why and how can be found in [Motivation](#motivation) section below. 
+## :bangbang: No data sent to server
+You can take a look at the source code itself. All your data is kept as hash fragment in URL which never makes its way to server. Totally avoiding man in middle and XSS attacks to steal your data or any data breach. The data always stays in your URL and browser and never makes its way on the wire. Thats the main motive behind developing this tool. More about reasoning, why and how can be found in [Motivation](#motivation) section below. 
 
 # Formats currently supported
 
