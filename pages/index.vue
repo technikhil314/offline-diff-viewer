@@ -96,7 +96,6 @@ export default Vue.extend({
         document.cookie = 'isSkipTutorial=true; max-age=31536000; path=/;'
       },
     })
-    // Define the steps for introduction
     if (!this.isSkipTutorial) {
       driver.defineSteps([
         {
