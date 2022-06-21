@@ -2,18 +2,6 @@
   <div class="page-contents">
     <Navbar :show-back-button="true">
       <template #right>
-        <div class="inline-flex items-center gap-1">
-          <label for="toggleScrollInSync" class="select-none"
-            >Scroll in sync</label
-          >
-          <input
-            id="toggleScrollInSync"
-            type="checkbox"
-            :checked="scrollInSync"
-            class="form-checkbox filter mix-blend-luminosity"
-            @click="toggleInSyncScroll"
-          />
-        </div>
         <button
           type="button"
           class="inline-flex justify-center px-4 py-2 transition-transform transform rounded-md shadow outline-none  copy-uri-button align-center focus:ring-4 active:scale-y-75"
@@ -62,6 +50,26 @@
       </template>
     </Navbar>
     <main>
+      <section class="flex items-center gap-4 py-4">
+        <div
+          class="inline-flex items-center gap-1"
+          id="toggleScrollInSyncSection"
+        >
+          <label
+            for="toggleScrollInSync"
+            class="text-gray-800 select-none dark:text-gray-50"
+          >
+            Scroll in sync
+          </label>
+          <input
+            id="toggleScrollInSync"
+            type="checkbox"
+            :checked="isSrollInSyncEnabled"
+            class="form-checkbox"
+            @click="toggleInSyncScroll"
+          />
+        </div>
+      </section>
       <section
         class="flex items-stretch w-full gap-4 font-mono text-gray-800  dark:text-gray-50"
       >
@@ -72,7 +80,7 @@
           <div
             class="relative flex-1 px-4 py-2 border-2 rounded-md  dark:border-gray-500 line-number-gutter min-h-80"
             :class="{
-              'overflow-y-auto max-h-screen--nav': !scrollInSync,
+              'overflow-y-auto max-h-screen--nav': !isSrollInSyncEnabled,
             }"
           >
             <RTStickyCopyButton
@@ -97,7 +105,7 @@
           <div
             class="relative flex-1 px-4 py-2 border-2 rounded-md  dark:border-gray-500 line-number-gutter min-h-80"
             :class="{
-              'overflow-y-auto max-h-screen--nav': !scrollInSync,
+              'overflow-y-auto max-h-screen--nav': !isSrollInSyncEnabled,
             }"
           >
             <RTStickyCopyButton
@@ -133,17 +141,19 @@ export default {
       rhsLabel: this.rhsLabel,
       lhsLabel: this.lhsLabel,
       copied: false,
-      scrollInSync: this.scrollInSync,
+      isSrollInSyncEnabled: this.isSrollInSyncEnabled,
+      isDarkMode: this.$isDarkMode,
+      isSkipScrollInSyncTutorial: this.$isSkipScrollInSyncTutorial,
     }
   },
-  mounted() {
+  async mounted() {
     const _diff = this.$route.hash
     const gunzip = pako.ungzip(Buffer.from(undoUrlSafeBase64(_diff), 'base64'))
     const diffData = JSON.parse(Buffer.from(gunzip).toString('utf8'))
     const { diff, lhsLabel, rhsLabel } = diffData
     this.lhsLabel = lhsLabel
     this.rhsLabel = rhsLabel
-    this.scrollInSync = true
+    this.isSrollInSyncEnabled = true
     this.lhsDiff = diff
       .map((item) => {
         const hunkState = item[0]
@@ -182,6 +192,32 @@ export default {
       '--max-line-number-characher',
       `${`${maxLineCount}`.split('').length}ch`
     )
+    const { default: Driver } = await import('driver.js')
+    const driver = new Driver({
+      // ...driverJSConfig(this.$isDarkMode),
+      closeBtnText: 'Skip',
+      className: 'dark:filter dark:invert',
+      stageBackground: this.isDarkMode
+        ? 'hsl(221deg 50% 90% / 0.5)'
+        : '#ffffff',
+      onReset: () => {
+        document.cookie =
+          'isSkipScrollInSyncTutorial=true; max-age=31536000; path=/;'
+      },
+    })
+    // Define the steps for introduction
+    if (!this.isSkipScrollInSyncTutorial) {
+      driver.defineSteps([
+        {
+          element: '#toggleScrollInSyncSection',
+          popover: {
+            title: 'Scroll In Sync',
+            description: 'Now you can choose to scroll both sides in sync.',
+          },
+        },
+      ])
+      driver.start()
+    }
   },
   methods: {
     putToClipboard(textToPut, toastContent) {
@@ -224,7 +260,7 @@ export default {
       )
     },
     toggleInSyncScroll() {
-      this.scrollInSync = !this.scrollInSync
+      this.isSrollInSyncEnabled = !this.isSrollInSyncEnabled
     },
   },
 }

@@ -89,7 +89,9 @@ export default Vue.extend({
     const driver = new Driver({
       closeBtnText: 'Skip',
       className: 'dark:filter dark:invert',
-      stageBackground: this.isDarkMode ? 'hsl(221deg 30% 70%)' : '#ffffff',
+      stageBackground: this.isDarkMode
+        ? 'hsl(221deg 50% 90% / 0.5)'
+        : '#ffffff',
       onReset: () => {
         document.cookie = 'isSkipTutorial=true; max-age=31536000; path=/;'
       },
