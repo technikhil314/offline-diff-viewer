@@ -2,9 +2,22 @@
   <div class="page-contents">
     <Navbar :show-back-button="true">
       <template #right>
+        <div class="inline-flex items-center gap-1">
+          <label for="toggleScrollInSync" class="select-none"
+            >Scroll in sync</label
+          >
+          <input
+            id="toggleScrollInSync"
+            type="checkbox"
+            :checked="scrollInSync"
+            class="form-checkbox filter mix-blend-luminosity"
+            @click="toggleInSyncScroll"
+          />
+        </div>
         <button
           type="button"
           class="inline-flex justify-center px-4 py-2 transition-transform transform rounded-md shadow outline-none  copy-uri-button align-center focus:ring-4 active:scale-y-75"
+          aria-label="Copy url to clipboard"
           :class="{
             'bg-blue-500 text-white': !copied,
             'bg-green-500 text-gray-800': copied,
@@ -57,9 +70,15 @@
             {{ lhsLabel }}
           </p>
           <div
-            class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md  dark:border-gray-500 max-h-screen--nav line-number-gutter min-h-80"
+            class="relative flex-1 px-4 py-2 border-2 rounded-md  dark:border-gray-500 line-number-gutter min-h-80"
+            :class="{
+              'overflow-y-auto max-h-screen--nav': !scrollInSync,
+            }"
           >
-            <RTStickyCopyButton :click-handler="copyTextToClipboard" />
+            <RTStickyCopyButton
+              :aria-label="'Copy the content to clipboard'"
+              :click-handler="copyTextToClipboard"
+            />
             <div
               v-for="(lineDiff, index) in lhsDiff"
               :key="index"
@@ -71,15 +90,20 @@
             </div>
           </div>
         </div>
-
         <div class="flex flex-col w-1/2 gap-2">
           <p class="flex-grow-0 text-lg font-bold text-center capitalize">
             {{ rhsLabel }}
           </p>
           <div
-            class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md  dark:border-gray-500 min-h-80 line-number-gutter max-h-screen--nav"
+            class="relative flex-1 px-4 py-2 border-2 rounded-md  dark:border-gray-500 line-number-gutter min-h-80"
+            :class="{
+              'overflow-y-auto max-h-screen--nav': !scrollInSync,
+            }"
           >
-            <RTStickyCopyButton :click-handler="copyTextToClipboard" />
+            <RTStickyCopyButton
+              :click-handler="copyTextToClipboard"
+              :aria-label="'Copy the content to clipboard'"
+            />
             <div
               v-for="(lineDiff, index) in rhsDiff"
               :key="index"
@@ -109,6 +133,7 @@ export default {
       rhsLabel: this.rhsLabel,
       lhsLabel: this.lhsLabel,
       copied: false,
+      scrollInSync: this.scrollInSync,
     }
   },
   mounted() {
@@ -118,6 +143,7 @@ export default {
     const { diff, lhsLabel, rhsLabel } = diffData
     this.lhsLabel = lhsLabel
     this.rhsLabel = rhsLabel
+    this.scrollInSync = true
     this.lhsDiff = diff
       .map((item) => {
         const hunkState = item[0]
@@ -196,6 +222,9 @@ export default {
           .join('\n'),
         'Text copied to your clipboard'
       )
+    },
+    toggleInSyncScroll() {
+      this.scrollInSync = !this.scrollInSync
     },
   },
 }

@@ -46,7 +46,7 @@
       </div>
 
       <div class="flex items-center justify-between flex-1">
-        <div class="items-center">
+        <div class="items-center w-1/2">
           <a
             href="https://github.com/technikhil314/offline-diff-viewer/stargazers"
             title="github stars on this open source project"
@@ -58,15 +58,16 @@
           </a>
           <slot name="left" />
         </div>
-        <div class="items-center">
+        <div class="flex items-center justify-end w-1/2 gap-4">
           <slot name="right" />
           <button
             type="button"
             class="inline-flex items-center justify-center ml-4 bg-transparent border-2 border-gray-700 rounded-full shadow-lg  w-9 h-9 active:scale-y-75"
+            aria-label="Toggle Dark Mode"
             @click="toggleDarkMode"
           >
             <svg
-              v-if="!darkMode"
+              v-if="darkMode"
               fill="none"
               stroke="currentColor"
               class="w-6 h-6"
@@ -81,7 +82,7 @@
               ></path>
             </svg>
             <svg
-              v-if="darkMode"
+              v-if="!darkMode"
               fill="none"
               class="w-6 h-6"
               stroke="currentColor"
