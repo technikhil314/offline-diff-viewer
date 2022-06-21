@@ -50,10 +50,27 @@
       </template>
     </Navbar>
     <main>
-      <section class="flex items-center gap-4 py-4">
+      <section
+        class="
+          flex
+          items-center
+          gap-4
+          px-4
+          py-2
+          mb-4
+          sticky
+          top-[80px]
+          dark:bg-gray-700
+          bg-gray-300
+          rounded-md
+          shadow-sm
+          w-full
+          z-1
+        "
+      >
         <div
-          class="inline-flex items-center gap-1"
           id="toggleScrollInSyncSection"
+          class="inline-flex items-center gap-1"
         >
           <label
             for="toggleScrollInSync"
@@ -69,6 +86,56 @@
             @click="toggleInSyncScroll"
           />
         </div>
+        <div id="nextDiffSection" class="inline-flex items-center gap-1">
+          <button
+            id="nextDiff"
+            class="inline-flex items-center justify-center px-1 py-1 text-sm text-gray-600 transition-transform transform bg-gray-300 border border-gray-800 rounded-sm outline-none  dark:border-gray-400 dark:text-white dark:bg-gray-800 align-center focus:ring-4 active:scale-y-75"
+            aria-label="Go to next diff"
+            type="button"
+            @click="goToNextDiff"
+          >
+            Next diff
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M16 17l-4 4m0 0l-4-4m4 4V3"
+              ></path>
+            </svg>
+          </button>
+        </div>
+        <div id="prevDiffSection" class="inline-flex items-center gap-1">
+          <button
+            id="prevDiff"
+            class="inline-flex items-center justify-center px-1 py-1 text-sm text-gray-600 transition-transform transform bg-gray-300 border border-gray-800 rounded-sm outline-none  dark:border-gray-400 dark:text-white dark:bg-gray-800 align-center focus:ring-4 active:scale-y-75"
+            aria-label="Go to previous diff"
+            type="button"
+            @click="goToPreviousDiff"
+          >
+            Previous diff
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 7l4-4m0 0l4 4m-4-4v18"
+              ></path>
+            </svg>
+          </button>
+        </div>
       </section>
       <section
         class="flex items-stretch w-full gap-4 font-mono text-gray-800  dark:text-gray-50"
@@ -78,6 +145,7 @@
             {{ lhsLabel }}
           </p>
           <div
+            id="lhsDiff"
             class="relative flex-1 px-4 py-2 border-2 rounded-md  dark:border-gray-500 line-number-gutter min-h-80"
             :class="{
               'overflow-y-auto max-h-screen--nav': !isSrollInSyncEnabled,
@@ -103,6 +171,7 @@
             {{ rhsLabel }}
           </p>
           <div
+            id="rhsDiff"
             class="relative flex-1 px-4 py-2 border-2 rounded-md  dark:border-gray-500 line-number-gutter min-h-80"
             :class="{
               'overflow-y-auto max-h-screen--nav': !isSrollInSyncEnabled,
@@ -135,6 +204,47 @@ import { undoUrlSafeBase64, escapeHtml } from '../../helpers/utils'
 export default {
   layout: 'main',
   data() {
+    const _diff = this.$route.hash
+    if (_diff) {
+      const gunzip = pako.ungzip(
+        Buffer.from(undoUrlSafeBase64(_diff), 'base64')
+      )
+      const diffData = JSON.parse(Buffer.from(gunzip).toString('utf8'))
+      const { diff, lhsLabel, rhsLabel } = diffData
+      this.lhsLabel = lhsLabel
+      this.rhsLabel = rhsLabel
+      this.isSrollInSyncEnabled = true
+      this.lhsDiff = diff
+        .map((item) => {
+          const hunkState = item[0]
+          if (hunkState === -1 || hunkState === 0) {
+            const className =
+              hunkState === -1 ? 'isModified bg-red-300 dark:bg-red-500' : ''
+            return `<span class="break-all inline p-0 m-0 ${className}">${escapeHtml(
+              item[1]
+            )}</span>`
+          }
+          return false
+        })
+        .filter(Boolean)
+        .join('')
+        .split('\n')
+      this.rhsDiff = diff
+        .map((item) => {
+          const hunkState = item[0]
+          if (hunkState === 1 || hunkState === 0) {
+            const className =
+              hunkState === 1 ? 'isModified bg-green-400 dark:bg-green-900' : ''
+            return `<span class="break-all inline p-0 m-0 ${className}">${escapeHtml(
+              item[1]
+            )}</span>`
+          }
+          return false
+        })
+        .filter(Boolean)
+        .join('')
+        .split('\n')
+    }
     return {
       lhsDiff: this.lhsDiff,
       rhsDiff: this.rhsDiff,
@@ -147,43 +257,15 @@ export default {
     }
   },
   async mounted() {
-    const _diff = this.$route.hash
-    const gunzip = pako.ungzip(Buffer.from(undoUrlSafeBase64(_diff), 'base64'))
-    const diffData = JSON.parse(Buffer.from(gunzip).toString('utf8'))
-    const { diff, lhsLabel, rhsLabel } = diffData
-    this.lhsLabel = lhsLabel
-    this.rhsLabel = rhsLabel
-    this.isSrollInSyncEnabled = true
-    this.lhsDiff = diff
-      .map((item) => {
-        const hunkState = item[0]
-        if (hunkState === -1 || hunkState === 0) {
-          const className =
-            hunkState === -1 ? 'isModified bg-red-300 dark:bg-red-500' : ''
-          return `<span class="break-all inline p-0 m-0 ${className}">${escapeHtml(
-            item[1]
-          )}</span>`
-        }
-        return false
-      })
-      .filter(Boolean)
-      .join('')
-      .split('\n')
-    this.rhsDiff = diff
-      .map((item) => {
-        const hunkState = item[0]
-        if (hunkState === 1 || hunkState === 0) {
-          const className =
-            hunkState === 1 ? 'isModified bg-green-400 dark:bg-green-900' : ''
-          return `<span class="break-all inline p-0 m-0 ${className}">${escapeHtml(
-            item[1]
-          )}</span>`
-        }
-        return false
-      })
-      .filter(Boolean)
-      .join('')
-      .split('\n')
+    this.treeWalker = document.createTreeWalker(
+      document.getElementById('lhsDiff'),
+      NodeFilter.SHOW_ELEMENT,
+      {
+        acceptNode: (node) => {
+          return node.classList.contains('bg-red-200')
+        },
+      }
+    )
     const maxLineCount =
       this.lhsDiff.length > this.rhsDiff.length
         ? this.lhsDiff.length
@@ -194,7 +276,6 @@ export default {
     )
     const { default: Driver } = await import('driver.js')
     const driver = new Driver({
-      // ...driverJSConfig(this.$isDarkMode),
       closeBtnText: 'Skip',
       className: 'dark:filter dark:invert',
       stageBackground: this.isDarkMode
@@ -205,7 +286,6 @@ export default {
           'isSkipScrollInSyncTutorial=true; max-age=31536000; path=/;'
       },
     })
-    // Define the steps for introduction
     if (!this.isSkipScrollInSyncTutorial) {
       driver.defineSteps([
         {
@@ -213,6 +293,22 @@ export default {
           popover: {
             title: 'Scroll In Sync',
             description: 'Now you can choose to scroll both sides in sync.',
+          },
+        },
+        {
+          element: '#nextDiffSection',
+          popover: {
+            title: 'Travel through diff hunks',
+            description:
+              'Now you can move between next and previous diff hunks.',
+          },
+        },
+        {
+          element: '#prevDiffSection',
+          popover: {
+            title: 'Travel through diff hunks',
+            description:
+              'Now you can move between next and previous diff hunks.',
           },
         },
       ])
@@ -262,6 +358,26 @@ export default {
     toggleInSyncScroll() {
       this.isSrollInSyncEnabled = !this.isSrollInSyncEnabled
     },
+    goToNextDiff() {
+      const currentNode = this.treeWalker.currentNode
+      const nextNode = this.treeWalker.nextNode()
+      if (nextNode) {
+        currentNode.querySelector('p').classList.remove('selected')
+        nextNode.focus()
+        nextNode.querySelector('p').classList.add('selected')
+        nextNode.scrollIntoView()
+      }
+    },
+    goToPreviousDiff() {
+      const currentNode = this.treeWalker.currentNode
+      const prevNode = this.treeWalker.previousNode()
+      if (prevNode) {
+        currentNode.querySelector('p').classList.remove('selected')
+        prevNode.focus()
+        prevNode.querySelector('p').classList.add('selected')
+        prevNode.scrollIntoView()
+      }
+    },
   },
 }
 </script>
@@ -292,6 +408,9 @@ export default {
     padding-left: calc(var(--line-number-gutter-width) - 10px);
     line-height: 1.65;
     @apply relative;
+    &.selected {
+      @apply dark:bg-blue-800 bg-blue-200;
+    }
     &:hover {
       @apply bg-gray-200 dark:bg-gray-600;
       & > span {
