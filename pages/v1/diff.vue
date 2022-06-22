@@ -1,7 +1,7 @@
 <template>
   <div class="page-contents">
     <Navbar :show-back-button="true" />
-    <main>
+    <main class="outline-none" tabindex="0">
       <section
         class="
           flex

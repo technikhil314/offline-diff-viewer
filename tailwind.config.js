@@ -16,7 +16,8 @@ module.exports = {
     zIndex: {
       '1': 1,
       '2': 2,
-      '10': 10
+      '10': 10,
+      '11': 11
     },
     minHeight: {
       '80': '20rem'
