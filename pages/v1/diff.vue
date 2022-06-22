@@ -159,7 +159,8 @@
               v-for="(lineDiff, index) in lhsDiff"
               :key="index"
               :class="{
-                'bg-red-200 dark:bg-red-800': lineDiff.includes('isModified'),
+                'bg-red-200 dark:bg-red-800 rounded-sm':
+                  lineDiff.includes('isModified'),
               }"
             >
               <p class="break-all whitespace-pre-wrap" v-html="lineDiff"></p>
@@ -185,7 +186,7 @@
               v-for="(lineDiff, index) in rhsDiff"
               :key="index"
               :class="{
-                'bg-green-200 dark:bg-green-700':
+                'bg-green-200 dark:bg-green-700 rounded-sm':
                   lineDiff.includes('isModified'),
               }"
             >
@@ -257,22 +258,34 @@ export default {
     }
   },
   async mounted() {
-    this.treeWalker = document.createTreeWalker(
-      document.getElementById('lhsDiff'),
-      NodeFilter.SHOW_ELEMENT,
-      {
-        acceptNode: (node) => {
-          return node.classList.contains('bg-red-200')
-        },
-      }
-    )
-    const maxLineCount =
-      this.lhsDiff.length > this.rhsDiff.length
-        ? this.lhsDiff.length
-        : this.rhsDiff.length
+    const isLHSBigger = this.lhsDiff.length > this.rhsDiff.length
+    const maxLineCount = isLHSBigger ? this.lhsDiff.length : this.rhsDiff.length
     document.documentElement.style.setProperty(
       '--max-line-number-characher',
       `${`${maxLineCount}`.split('').length}ch`
+    )
+    const lhsDiffNode = document.getElementById('lhsDiff')
+    const rhsDiffNode = document.getElementById('rhsDiff')
+    let comparator, comparer
+    if (isLHSBigger) {
+      comparer = lhsDiffNode
+      comparator = rhsDiffNode
+    } else {
+      comparer = rhsDiffNode
+      comparator = lhsDiffNode
+    }
+    this.comparator = comparator
+    this.treeWalker = document.createTreeWalker(
+      comparer,
+      NodeFilter.SHOW_ELEMENT,
+      {
+        acceptNode: (node) => {
+          return (
+            node.classList.contains('bg-red-200') ||
+            node.classList.contains('bg-green-200')
+          )
+        },
+      }
     )
     const { default: Driver } = await import('driver.js')
     const driver = new Driver({
@@ -362,20 +375,44 @@ export default {
       const currentNode = this.treeWalker.currentNode
       const nextNode = this.treeWalker.nextNode()
       if (nextNode) {
+        const currentNodeIndex = Array.prototype.indexOf.call(
+          currentNode.parentElement.children,
+          currentNode
+        )
+        const nextNodeIndex = Array.prototype.indexOf.call(
+          nextNode.parentElement.children,
+          nextNode
+        )
+        const comparatorCurrentNode = this.comparator.children[currentNodeIndex]
+        const comparatorNextNode = this.comparator.children[nextNodeIndex]
         currentNode.querySelector('p').classList.remove('selected')
-        nextNode.focus()
+        comparatorCurrentNode.querySelector('p').classList.remove('selected')
         nextNode.querySelector('p').classList.add('selected')
+        comparatorNextNode.querySelector('p').classList.add('selected')
         nextNode.scrollIntoView()
+        comparatorNextNode.scrollIntoView()
       }
     },
     goToPreviousDiff() {
       const currentNode = this.treeWalker.currentNode
       const prevNode = this.treeWalker.previousNode()
       if (prevNode) {
+        const currentNodeIndex = Array.prototype.indexOf.call(
+          currentNode.parentElement.children,
+          currentNode
+        )
+        const prevNodeIndex = Array.prototype.indexOf.call(
+          prevNode.parentElement.children,
+          prevNode
+        )
+        const comparatorCurrentNode = this.comparator.children[currentNodeIndex]
+        const comparatorPrevNode = this.comparator.children[prevNodeIndex]
         currentNode.querySelector('p').classList.remove('selected')
-        prevNode.focus()
+        comparatorCurrentNode.querySelector('p').classList.remove('selected')
         prevNode.querySelector('p').classList.add('selected')
+        comparatorPrevNode.querySelector('p').classList.add('selected')
         prevNode.scrollIntoView()
+        comparatorPrevNode.scrollIntoView()
       }
     },
   },
