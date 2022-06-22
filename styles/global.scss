@@ -21,6 +21,7 @@ body,
 main {
   @apply bg-gray-50 dark:bg-gray-900;
   scroll-padding-block: 140px;
+  scroll-behavior: smooth;
 }
 
 body {
