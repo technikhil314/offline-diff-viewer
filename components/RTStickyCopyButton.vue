@@ -6,6 +6,7 @@
         'bg-gray-100 dark:bg-gray-600': !copied,
         'bg-green-500': copied,
       }"
+      :aria-label="ariaLabel"
       @click="handleClick"
     >
       <svg
@@ -48,6 +49,10 @@ export default {
     clickHandler: {
       type: Function,
       default: () => {},
+    },
+    ariaLabel: {
+      type: String,
+      default: 'Copy to clipboard',
     },
   },
   data() {

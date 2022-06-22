@@ -22,7 +22,11 @@
                 type="text"
                 class="flex-1 flex-grow-0 w-full bg-transparent rounded-md"
                 placeholder="Add label to this text block"
+                value="Original Text"
               />
+              <span class="sr-only"
+                >Add label to this original text bloack</span
+              >
             </label>
             <textarea
               id="lhs"
@@ -32,13 +36,19 @@
             ></textarea>
           </div>
           <div class="flex flex-col w-1/2 gap-4">
-            <input
-              id="rhsLabel"
-              name="rhsLabel"
-              type="text"
-              class="flex-1 flex-grow-0 w-full bg-transparent rounded-md"
-              placeholder="Add label to this text block"
-            />
+            <label for="lhsLabel" class="relative">
+              <input
+                id="rhsLabel"
+                name="rhsLabel"
+                type="text"
+                class="flex-1 flex-grow-0 w-full bg-transparent rounded-md"
+                placeholder="Add label to this text block"
+                value="Changed text"
+              />
+              <span class="sr-only"
+                >Add label to this original text bloack</span
+              >
+            </label>
             <textarea
               id="rhs"
               rows="28"
@@ -50,6 +60,7 @@
         <div class="self-end flex-grow-0 w-full text-center">
           <button
             class="inline-flex items-center justify-center w-48 px-4 py-2 transition-transform transform bg-blue-600 rounded-md shadow-lg outline-none  text-gray-50 focus:ring-4 active:scale-y-75"
+            aria-label="Click here to compare the inputted text blocks"
           >
             Compare
           </button>
@@ -78,26 +89,27 @@ export default Vue.extend({
     const driver = new Driver({
       closeBtnText: 'Skip',
       className: 'dark:filter dark:invert',
-      stageBackground: this.isDarkMode ? 'hsl(221deg 30% 70%)' : '#ffffff',
+      stageBackground: this.isDarkMode
+        ? 'hsl(221deg 50% 90% / 0.5)'
+        : '#ffffff',
       onReset: () => {
         document.cookie = 'isSkipTutorial=true; max-age=31536000; path=/;'
       },
     })
-    // Define the steps for introduction
     if (!this.isSkipTutorial) {
       driver.defineSteps([
         {
           element: '#lhsLabel',
           popover: {
             title: 'New feature',
-            description: 'Now you can add labels to text blocks',
+            description: 'Now you can add custom labels to text blocks',
           },
         },
         {
           element: '#rhsLabel',
           popover: {
             title: 'New feature',
-            description: 'Now you can add labels to text blocks',
+            description: 'Now you can add custom labels to text blocks',
           },
         },
       ])
