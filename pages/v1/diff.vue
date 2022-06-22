@@ -18,7 +18,8 @@
           bg-opacity-50
           backdrop-blur-sm
           rounded-md
-          shadow-sm
+          shadow-lg
+          border border-gray-500
           w-full
           z-10
         "
