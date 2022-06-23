@@ -31,7 +31,7 @@
           >
             <label
               for="toggleScrollInSync"
-              class="text-gray-800 select-none dark:text-gray-50"
+              class="text-sm text-gray-800 select-none dark:text-gray-50"
             >
               Scroll in sync
             </label>
