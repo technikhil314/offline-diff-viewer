@@ -1,7 +1,7 @@
 <template>
   <div class="page-contents">
     <Navbar />
-    <main class="text-gray-800 dark:text-gray-50">
+    <main class="text-gray-800 outline-none dark:text-gray-50" tabindex="0">
       <section>
         <header>
           <h1 class="w-full mb-2 text-xl text-center">

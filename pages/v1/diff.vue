@@ -1,7 +1,7 @@
 <template>
   <div class="page-contents">
     <Navbar :show-back-button="true" />
-    <main>
+    <main class="outline-none" tabindex="0">
       <section
         class="
           flex
@@ -18,7 +18,8 @@
           bg-opacity-50
           backdrop-blur-sm
           rounded-md
-          shadow-sm
+          shadow-lg
+          border border-gray-500
           w-full
           z-10
         "
@@ -30,7 +31,7 @@
           >
             <label
               for="toggleScrollInSync"
-              class="text-gray-800 select-none dark:text-gray-50"
+              class="text-sm text-gray-800 select-none dark:text-gray-50"
             >
               Scroll in sync
             </label>

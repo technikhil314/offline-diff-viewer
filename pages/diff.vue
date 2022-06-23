@@ -48,7 +48,7 @@
         </button>
       </template>
     </Navbar>
-    <main>
+    <main class="outline-none" tabindex="0">
       <div
         class="flex items-stretch w-full gap-4 font-mono text-gray-800  dark:text-gray-50"
       >
