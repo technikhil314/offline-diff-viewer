@@ -1,3 +1,6 @@
+import { Store } from 'vuex'
+import { ToastState } from '~/store/toast'
+
 export function doUrlSafeBase64(decoded: string) {
   return decoded.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
 }
@@ -25,4 +28,33 @@ export function escapeHtml(unsafe: string) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;')
+}
+
+export function putToClipboard(
+  textToPut: string,
+  toastContent: string,
+  store: Store<ToastState>
+) {
+  navigator.clipboard.writeText(textToPut)
+  store.commit('toast/show', {
+    show: true,
+    content: toastContent,
+    iconHTML: `
+      <svg
+        class="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+        ></path>
+      </svg>
+    `,
+    theme: 'success',
+  })
 }
