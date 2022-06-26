@@ -8,7 +8,7 @@
       py-2
       mb-4
       sticky
-      top-[80px]
+      top-[70px]
       dark:bg-gray-700
       bg-gray-300
       dark:bg-opacity-50
@@ -43,7 +43,7 @@
       <div id="nextDiffSection" class="inline-flex items-center gap-1">
         <button
           id="nextDiff"
-          class="inline-flex items-center justify-center px-1 py-1 text-sm text-gray-600 transition-transform transform bg-gray-300 border border-gray-800 rounded-sm outline-none  dark:border-gray-400 dark:text-white dark:bg-gray-800 align-center focus:ring-4 active:scale-y-75"
+          class="inline-flex items-center justify-center px-1 py-1 text-sm text-gray-600 transition-transform transform bg-gray-300 border border-gray-800 rounded-sm outline-none  dark:border-gray-400 dark:text-white dark:bg-gray-800 align-center focus:ring-4 active:scale-y-75 hover:scale-105 hover:shadow-lg"
           aria-label="Go to next diff"
           type="button"
           @click="goToNextDiff"
@@ -68,7 +68,7 @@
       <div id="prevDiffSection" class="inline-flex items-center gap-1">
         <button
           id="prevDiff"
-          class="inline-flex items-center justify-center px-1 py-1 text-sm text-gray-600 transition-transform transform bg-gray-300 border border-gray-800 rounded-sm outline-none  dark:border-gray-400 dark:text-white dark:bg-gray-800 align-center focus:ring-4 active:scale-y-75"
+          class="inline-flex items-center justify-center px-1 py-1 text-sm text-gray-600 transition-transform transform bg-gray-300 border border-gray-800 rounded-sm outline-none  dark:border-gray-400 dark:text-white dark:bg-gray-800 align-center focus:ring-4 active:scale-y-75 hover:scale-105 hover:shadow-lg"
           aria-label="Go to previous diff"
           type="button"
           @click="goToPreviousDiff"
@@ -94,7 +94,7 @@
     <div>
       <button
         type="button"
-        class="inline-flex items-center justify-center gap-1 p-2 text-sm transition-transform transform rounded-md shadow outline-none  justify-self-end focus:ring-4 active:scale-y-75"
+        class="inline-flex items-center justify-center gap-1 p-2 text-sm transition-transform transform rounded-md shadow outline-none  justify-self-end focus:ring-4 active:scale-y-75 hover:scale-105 hover:shadow-lg copy-uri-button"
         aria-label="Copy url to clipboard"
         :class="{
           'bg-blue-500 text-white': !copied,
@@ -142,6 +142,7 @@
 </template>
 
 <script>
+import { putToClipboard } from '~/helpers/utils'
 export default {
   data() {
     return {
@@ -181,32 +182,12 @@ export default {
     }
   },
   methods: {
-    putToClipboard(textToPut, toastContent) {
-      navigator.clipboard.writeText(textToPut)
-      this.$store.commit('toast/show', {
-        show: true,
-        content: toastContent,
-        iconHTML: `
-          <svg
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-            ></path>
-          </svg>
-        `,
-        theme: 'success',
-      })
-    },
     copyUrlToClipboard() {
-      this.putToClipboard(window.location.href, 'Link copied to your clipboard')
+      putToClipboard(
+        window.location.href,
+        'Link copied to your clipboard',
+        this.$store
+      )
       this.copied = true
       setTimeout(() => {
         this.copied = false
@@ -262,3 +243,8 @@ export default {
   },
 }
 </script>
+<style lang="scss">
+.copy-uri-button:hover svg {
+  @apply rotate-12;
+}
+</style>

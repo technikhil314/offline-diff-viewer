@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { putToClipboard } from '~/helpers/utils'
 export default {
   props: {
     diff: {
@@ -55,11 +56,12 @@ export default {
   },
   methods: {
     copyTextToClipboard(e) {
-      this.putToClipboard(
+      putToClipboard(
         e.currentTarget.parentNode.parentNode.innerText
           .split('\n\n')
           .join('\n'),
-        'Text copied to your clipboard'
+        'Text copied to your clipboard',
+        this.$store
       )
     },
   },
