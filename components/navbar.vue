@@ -5,6 +5,7 @@
     <div class="container flex items-center py-4 m-auto">
       <div
         v-if="showBackButton"
+        id="backToDataLink"
         class="hidden mr-4 md:block hover:scale-110 filter hover:drop-shadow-md"
       >
         <NuxtLink to="/">
@@ -169,7 +170,7 @@ export default {
     }
   },
   mounted() {
-    if (this.$isDarkMode) {
+    if (this.$cookies.isDarkMode) {
       this.toggleDarkMode(null, false)
     }
     document.documentElement.classList.remove('hidden')
