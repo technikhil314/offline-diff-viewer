@@ -10,7 +10,7 @@
         'overflow-y-auto max-h-screen--nav': !isSrollInSyncEnabled,
       }"
     >
-      <RTStickyCopyButton
+      <StickyCopy
         :aria-label="'Copy the content to clipboard'"
         :click-handler="copyTextToClipboard"
       />
@@ -29,8 +29,10 @@
 </template>
 
 <script>
+import StickyCopy from './buttons/stickyCopy.vue'
 import { putToClipboard } from '~/helpers/utils'
 export default {
+  components: { StickyCopy },
   props: {
     diff: {
       type: Array,

@@ -22,128 +22,22 @@
     "
   >
     <div class="flex gap-4">
-      <div
-        id="toggleScrollInSyncSection"
-        class="inline-flex items-center gap-1"
-      >
-        <label
-          for="toggleScrollInSync"
-          class="text-gray-800 select-none dark:text-gray-50"
-        >
-          Scroll in sync
-        </label>
-        <input
-          id="toggleScrollInSync"
-          type="checkbox"
-          checked
-          class="form-checkbox"
-          @click="toggleInSyncScroll"
-        />
-      </div>
-      <div id="nextDiffSection" class="inline-flex items-center gap-1">
-        <button
-          id="nextDiff"
-          class="inline-flex items-center justify-center px-1 py-1 text-sm text-gray-600 transition-transform transform bg-gray-300 border border-gray-800 rounded-sm outline-none  dark:border-gray-400 dark:text-white dark:bg-gray-800 align-center focus:ring-4 active:scale-y-75 hover:scale-105 hover:shadow-lg"
-          aria-label="Go to next diff"
-          type="button"
-          @click="goToNextDiff"
-        >
-          Next diff
-          <svg
-            class="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M16 17l-4 4m0 0l-4-4m4 4V3"
-            ></path>
-          </svg>
-        </button>
-      </div>
-      <div id="prevDiffSection" class="inline-flex items-center gap-1">
-        <button
-          id="prevDiff"
-          class="inline-flex items-center justify-center px-1 py-1 text-sm text-gray-600 transition-transform transform bg-gray-300 border border-gray-800 rounded-sm outline-none  dark:border-gray-400 dark:text-white dark:bg-gray-800 align-center focus:ring-4 active:scale-y-75 hover:scale-105 hover:shadow-lg"
-          aria-label="Go to previous diff"
-          type="button"
-          @click="goToPreviousDiff"
-        >
-          Previous diff
-          <svg
-            class="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M8 7l4-4m0 0l4 4m-4-4v18"
-            ></path>
-          </svg>
-        </button>
-      </div>
+      <ToggleInSync :click-handler="toggleInSyncScroll" />
+      <NextDiff :click-handler="goToNextDiff" />
+      <PrevDiff :click-handler="goToPreviousDiff" />
     </div>
-    <div>
-      <button
-        type="button"
-        class="inline-flex items-center justify-center gap-1 p-2 text-sm transition-transform transform rounded-md shadow outline-none  justify-self-end focus:ring-4 active:scale-y-75 hover:scale-105 hover:shadow-lg copy-uri-button"
-        aria-label="Copy url to clipboard"
-        :class="{
-          'bg-blue-500 text-white': !copied,
-          'bg-green-500 text-gray-800': copied,
-        }"
-        @click="copyUrlToClipboard"
-      >
-        <span v-show="copied" class="inline">
-          <svg
-            class="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
-            ></path>
-          </svg>
-        </span>
-        <span v-show="copied" class="hidden md:inline-block">Copied</span>
-        <span v-show="!copied" class="inline">
-          <svg
-            class="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-            ></path>
-          </svg>
-        </span>
-        <span v-show="!copied" class="hidden md:inline-block">Copy link</span>
-      </button>
-    </div>
+    <CopyLink :click-handler="copyUrlToClipboard" :copied="copied"></CopyLink>
   </section>
 </template>
 
 <script>
+import PrevDiff from './buttons/prevDiff.vue'
+import ToggleInSync from './buttons/toggleInSync.vue'
+import NextDiff from './buttons/nextDiff.vue'
+import CopyLink from './buttons/copyLink.vue'
 import { putToClipboard } from '~/helpers/utils'
 export default {
+  components: { PrevDiff, NextDiff, ToggleInSync, CopyLink },
   data() {
     return {
       copied: this.copied,
@@ -210,12 +104,10 @@ export default {
         )
         const comparatorCurrentNode = this.comparator.children[currentNodeIndex]
         const comparatorNextNode = this.comparator.children[nextNodeIndex]
-        currentNode.querySelector('p').classList.remove('selected')
-        comparatorCurrentNode.querySelector('p').classList.remove('selected')
-        nextNode.querySelector('p').classList.add('selected')
-        comparatorNextNode.querySelector('p').classList.add('selected')
-        nextNode.scrollIntoView()
-        comparatorNextNode.scrollIntoView()
+        this.toggleDiffHunkAndScrollIntoView(
+          [currentNode, comparatorCurrentNode],
+          [nextNode, comparatorNextNode]
+        )
       }
     },
     goToPreviousDiff() {
@@ -232,13 +124,20 @@ export default {
         )
         const comparatorCurrentNode = this.comparator.children[currentNodeIndex]
         const comparatorPrevNode = this.comparator.children[prevNodeIndex]
-        currentNode.querySelector('p').classList.remove('selected')
-        comparatorCurrentNode.querySelector('p').classList.remove('selected')
-        prevNode.querySelector('p').classList.add('selected')
-        comparatorPrevNode.querySelector('p').classList.add('selected')
-        prevNode.scrollIntoView()
-        comparatorPrevNode.scrollIntoView()
+        this.toggleDiffHunkAndScrollIntoView(
+          [currentNode, comparatorCurrentNode],
+          [prevNode, comparatorPrevNode]
+        )
       }
+    },
+    toggleDiffHunkAndScrollIntoView(unselectedNodes, selectedNodes) {
+      unselectedNodes.forEach((element) => {
+        element.querySelector('p').classList.remove('selected')
+      })
+      selectedNodes.forEach((element) => {
+        element.querySelector('p').classList.add('selected')
+        element.scrollIntoView()
+      })
     },
   },
 }

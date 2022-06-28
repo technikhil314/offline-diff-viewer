@@ -22,17 +22,16 @@
                 type="text"
                 class="flex-1 flex-grow-0 w-full bg-transparent rounded-md"
                 placeholder="Add label to this text block"
-                value="Original Text"
+                :value="lhsLabel"
               />
-              <span class="sr-only"
-                >Add label to this original text bloack</span
-              >
+              <span class="sr-only">Add label to this original text block</span>
             </label>
             <textarea
               id="lhs"
               rows="28"
               name="lhs"
               class="flex-1 w-full bg-transparent rounded-md resize-none  form-textarea"
+              v-html="lhs"
             ></textarea>
           </div>
           <div class="flex flex-col w-1/2 gap-4">
@@ -43,18 +42,18 @@
                 type="text"
                 class="flex-1 flex-grow-0 w-full bg-transparent rounded-md"
                 placeholder="Add label to this text block"
-                value="Changed text"
+                :value="rhsLabel"
               />
-              <span class="sr-only"
-                >Add label to this original text bloack</span
-              >
+              <span class="sr-only">Add label to this changed text block</span>
             </label>
             <textarea
               id="rhs"
               rows="28"
               name="rhs"
               class="flex-1 w-full bg-transparent rounded-md resize-none  form-textarea"
-            ></textarea>
+              v-html="rhs"
+            >
+            </textarea>
           </div>
         </section>
         <div class="self-end flex-grow-0 w-full text-center">
@@ -75,46 +74,17 @@ import DiffMatchPatch from 'diff-match-patch'
 import Vue from 'vue'
 import pako from 'pako'
 import { doUrlSafeBase64 } from '../helpers/utils'
+import showTutorials from '../helpers/driverjsTutorials'
 const dmp = new DiffMatchPatch()
 export default Vue.extend({
   layout: 'main',
   data() {
     return {
-      isDarkMode: this.$isDarkMode,
-      isSkipTutorial: this.$isSkipTutorial,
+      ...this.$store.state.data,
     }
   },
-  async mounted() {
-    const { default: Driver } = await import('driver.js')
-    const driver = new Driver({
-      closeBtnText: 'Skip',
-      className: 'dark:filter dark:invert',
-      stageBackground: this.isDarkMode
-        ? 'hsl(221deg 50% 90% / 0.5)'
-        : '#ffffff',
-      onReset: () => {
-        document.cookie = 'isSkipTutorial=true; max-age=31536000; path=/;'
-      },
-    })
-    if (!this.isSkipTutorial) {
-      driver.defineSteps([
-        {
-          element: '#lhsLabel',
-          popover: {
-            title: 'New feature',
-            description: 'Now you can add custom labels to text blocks',
-          },
-        },
-        {
-          element: '#rhsLabel',
-          popover: {
-            title: 'New feature',
-            description: 'Now you can add custom labels to text blocks',
-          },
-        },
-      ])
-      driver.start()
-    }
+  mounted() {
+    showTutorials(this.$cookies, this.$route.path, this.$cookies.isDarkMode)
   },
   methods: {
     checkForm(e: Event) {
@@ -125,10 +95,37 @@ export default Vue.extend({
       const lhsLabel = formData.get('lhsLabel')
       const rhsLabel = formData.get('rhsLabel')
       if (!lhs || !rhs) {
-        this.$store.commit('toast/show', {
-          show: true,
-          content: 'Please enter some data on both sides to compare',
-          iconHTML: `
+        this.showError()
+        return
+      }
+      const originalLhs = lhs
+      const originalRhs = rhs
+      this.$store.commit('data/set', {
+        lhs,
+        rhs,
+        lhsLabel,
+        rhsLabel,
+      })
+      const diff = dmp.diff_main(originalLhs, originalRhs)
+      const gzip = Buffer.from(
+        pako.gzip(
+          JSON.stringify({
+            diff,
+            lhsLabel,
+            rhsLabel,
+          })
+        )
+      ).toString('base64')
+      this.$router.push({
+        path: '/v1/diff',
+        hash: `#${doUrlSafeBase64(gzip)}`,
+      })
+    },
+    showError() {
+      this.$store.commit('toast/show', {
+        show: true,
+        content: 'Please enter some data on both sides to compare',
+        iconHTML: `
             <svg
               class="w-6 h-6"
               fill="none"
@@ -144,25 +141,7 @@ export default Vue.extend({
               ></path>
             </svg>
           `,
-          theme: 'error',
-        })
-        return
-      }
-      const originalLhs = lhs
-      const originalRhs = rhs
-      const diff = dmp.diff_main(originalLhs, originalRhs)
-      const gzip = Buffer.from(
-        pako.gzip(
-          JSON.stringify({
-            diff,
-            lhsLabel,
-            rhsLabel,
-          })
-        )
-      ).toString('base64')
-      this.$router.push({
-        path: '/v1/diff',
-        hash: `#${doUrlSafeBase64(gzip)}`,
+        theme: 'error',
       })
     },
   },
