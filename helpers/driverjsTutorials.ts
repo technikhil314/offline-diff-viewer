@@ -109,6 +109,8 @@ export default async function showTutorials(
       cookiesToSet.push(x.cookieName)
     }
   })
-  driver.defineSteps(finalTutorial)
-  driver.start()
+  if (finalTutorial.length) {
+    driver.defineSteps(finalTutorial)
+    driver.start()
+  }
 }
