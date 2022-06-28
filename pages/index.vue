@@ -22,17 +22,16 @@
                 type="text"
                 class="flex-1 flex-grow-0 w-full bg-transparent rounded-md"
                 placeholder="Add label to this text block"
-                value="Original Text"
+                :value="lhsLabel"
               />
-              <span class="sr-only"
-                >Add label to this original text bloack</span
-              >
+              <span class="sr-only">Add label to this original text block</span>
             </label>
             <textarea
               id="lhs"
               rows="28"
               name="lhs"
               class="flex-1 w-full bg-transparent rounded-md resize-none  form-textarea"
+              v-html="lhs"
             ></textarea>
           </div>
           <div class="flex flex-col w-1/2 gap-4">
@@ -43,18 +42,18 @@
                 type="text"
                 class="flex-1 flex-grow-0 w-full bg-transparent rounded-md"
                 placeholder="Add label to this text block"
-                value="Changed text"
+                :value="rhsLabel"
               />
-              <span class="sr-only"
-                >Add label to this original text bloack</span
-              >
+              <span class="sr-only">Add label to this changed text block</span>
             </label>
             <textarea
               id="rhs"
               rows="28"
               name="rhs"
               class="flex-1 w-full bg-transparent rounded-md resize-none  form-textarea"
-            ></textarea>
+              v-html="rhs"
+            >
+            </textarea>
           </div>
         </section>
         <div class="self-end flex-grow-0 w-full text-center">
@@ -82,6 +81,7 @@ export default Vue.extend({
     return {
       isDarkMode: this.$isDarkMode,
       isSkipTutorial: this.$isSkipTutorial,
+      ...this.$store.state.data,
     }
   },
   async mounted() {
@@ -125,10 +125,37 @@ export default Vue.extend({
       const lhsLabel = formData.get('lhsLabel')
       const rhsLabel = formData.get('rhsLabel')
       if (!lhs || !rhs) {
-        this.$store.commit('toast/show', {
-          show: true,
-          content: 'Please enter some data on both sides to compare',
-          iconHTML: `
+        this.showError()
+        return
+      }
+      const originalLhs = lhs
+      const originalRhs = rhs
+      this.$store.commit('data/set', {
+        lhs,
+        rhs,
+        lhsLabel,
+        rhsLabel,
+      })
+      const diff = dmp.diff_main(originalLhs, originalRhs)
+      const gzip = Buffer.from(
+        pako.gzip(
+          JSON.stringify({
+            diff,
+            lhsLabel,
+            rhsLabel,
+          })
+        )
+      ).toString('base64')
+      this.$router.push({
+        path: '/v1/diff',
+        hash: `#${doUrlSafeBase64(gzip)}`,
+      })
+    },
+    showError() {
+      this.$store.commit('toast/show', {
+        show: true,
+        content: 'Please enter some data on both sides to compare',
+        iconHTML: `
             <svg
               class="w-6 h-6"
               fill="none"
@@ -144,25 +171,7 @@ export default Vue.extend({
               ></path>
             </svg>
           `,
-          theme: 'error',
-        })
-        return
-      }
-      const originalLhs = lhs
-      const originalRhs = rhs
-      const diff = dmp.diff_main(originalLhs, originalRhs)
-      const gzip = Buffer.from(
-        pako.gzip(
-          JSON.stringify({
-            diff,
-            lhsLabel,
-            rhsLabel,
-          })
-        )
-      ).toString('base64')
-      this.$router.push({
-        path: '/v1/diff',
-        hash: `#${doUrlSafeBase64(gzip)}`,
+        theme: 'error',
       })
     },
   },
