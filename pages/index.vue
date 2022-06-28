@@ -74,47 +74,17 @@ import DiffMatchPatch from 'diff-match-patch'
 import Vue from 'vue'
 import pako from 'pako'
 import { doUrlSafeBase64 } from '../helpers/utils'
+import showTutorials from '../helpers/driverjsTutorials'
 const dmp = new DiffMatchPatch()
 export default Vue.extend({
   layout: 'main',
   data() {
     return {
-      isDarkMode: this.$isDarkMode,
-      isSkipTutorial: this.$isSkipTutorial,
       ...this.$store.state.data,
     }
   },
-  async mounted() {
-    const { default: Driver } = await import('driver.js')
-    const driver = new Driver({
-      closeBtnText: 'Skip',
-      className: 'dark:filter dark:invert',
-      stageBackground: this.isDarkMode
-        ? 'hsl(221deg 50% 90% / 0.5)'
-        : '#ffffff',
-      onReset: () => {
-        document.cookie = 'isSkipTutorial=true; max-age=31536000; path=/;'
-      },
-    })
-    if (!this.isSkipTutorial) {
-      driver.defineSteps([
-        {
-          element: '#lhsLabel',
-          popover: {
-            title: 'New feature',
-            description: 'Now you can add custom labels to text blocks',
-          },
-        },
-        {
-          element: '#rhsLabel',
-          popover: {
-            title: 'New feature',
-            description: 'Now you can add custom labels to text blocks',
-          },
-        },
-      ])
-      driver.start()
-    }
+  mounted() {
+    showTutorials(this.$cookies, this.$route.path, this.$cookies.isDarkMode)
   },
   methods: {
     checkForm(e: Event) {

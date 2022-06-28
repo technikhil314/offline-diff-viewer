@@ -28,6 +28,7 @@
 <script>
 import pako from 'pako'
 import { undoUrlSafeBase64, escapeHtml } from '../../helpers/utils'
+import showTutorials from '../../helpers/driverjsTutorials'
 export default {
   layout: 'main',
   beforeCreate() {
@@ -78,59 +79,17 @@ export default {
       rhsDiff: this.rhsDiff || [],
       rhsLabel: this.rhsLabel || '',
       lhsLabel: this.lhsLabel || '',
-      copied: false,
       isSrollInSyncEnabled: this.isSrollInSyncEnabled,
-      isDarkMode: this.$isDarkMode,
-      isSkipScrollInSyncTutorial: this.$isSkipScrollInSyncTutorial,
     }
   },
-  async mounted() {
+  mounted() {
     const isLHSBigger = this.lhsDiff.length > this.rhsDiff.length
     const maxLineCount = isLHSBigger ? this.lhsDiff.length : this.rhsDiff.length
     document.documentElement.style.setProperty(
       '--max-line-number-characher',
       `${`${maxLineCount}`.split('').length}ch`
     )
-    const { default: Driver } = await import('driver.js')
-    const driver = new Driver({
-      closeBtnText: 'Skip',
-      className: 'dark:filter dark:invert',
-      stageBackground: this.isDarkMode
-        ? 'hsl(221deg 50% 90% / 0.5)'
-        : '#ffffff',
-      onReset: () => {
-        document.cookie =
-          'isSkipScrollInSyncTutorial=true; max-age=31536000; path=/;'
-      },
-    })
-    if (!this.isSkipScrollInSyncTutorial) {
-      driver.defineSteps([
-        {
-          element: '#toggleScrollInSyncSection',
-          popover: {
-            title: 'Scroll In Sync',
-            description: 'Now you can choose to scroll both sides in sync.',
-          },
-        },
-        {
-          element: '#nextDiffSection',
-          popover: {
-            title: 'Travel through diff hunks',
-            description:
-              'Now you can move between next and previous diff hunks.',
-          },
-        },
-        {
-          element: '#prevDiffSection',
-          popover: {
-            title: 'Travel through diff hunks',
-            description:
-              'Now you can move between next and previous diff hunks.',
-          },
-        },
-      ])
-      driver.start()
-    }
+    showTutorials(this.$cookies, this.$route.path, this.$cookies.isDarkMode)
   },
 }
 </script>
