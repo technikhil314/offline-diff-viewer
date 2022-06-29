@@ -30,13 +30,14 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue'
 import PrevDiff from './buttons/prevDiff.vue'
 import ToggleInSync from './buttons/toggleInSync.vue'
 import NextDiff from './buttons/nextDiff.vue'
 import CopyLink from './buttons/copyLink.vue'
 import { putToClipboard } from '~/helpers/utils'
-export default {
+export default Vue.extend({
   components: { PrevDiff, NextDiff, ToggleInSync, CopyLink },
   data() {
     return {
@@ -140,7 +141,7 @@ export default {
       })
     },
   },
-}
+})
 </script>
 <style lang="scss">
 .copy-uri-button:hover svg {

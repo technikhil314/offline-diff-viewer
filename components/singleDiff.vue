@@ -28,10 +28,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue'
 import StickyCopy from './buttons/stickyCopy.vue'
 import { putToClipboard } from '~/helpers/utils'
-export default {
+export default Vue.extend({
   components: { StickyCopy },
   props: {
     diff: {
@@ -67,7 +68,7 @@ export default {
       )
     },
   },
-}
+})
 </script>
 
 <style lang="scss" scoped>

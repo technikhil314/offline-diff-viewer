@@ -85,10 +85,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue'
 import pako from 'pako'
 import { undoUrlSafeBase64, escapeHtml } from '../helpers/utils'
-export default {
+export default Vue.extend({
   layout: 'main',
   data() {
     return {
@@ -181,7 +182,7 @@ export default {
       )
     },
   },
-}
+})
 </script>
 
 <style lang="scss">

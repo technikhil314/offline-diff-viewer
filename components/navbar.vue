@@ -157,8 +157,9 @@
 </template>
 
 <script lang="ts">
+import Vue from 'vue'
 let darkMode: Boolean | null = null
-export default {
+export default Vue.extend({
   props: {
     showBackButton: {
       type: Boolean,
@@ -187,5 +188,5 @@ export default {
       document.cookie = `darkMode=${darkMode}; Secure; max-age=31536000; path=/;`
     },
   },
-}
+})
 </script>

@@ -26,11 +26,21 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import pako from 'pako'
 import { undoUrlSafeBase64, escapeHtml } from '../../helpers/utils'
 import showTutorials from '../../helpers/driverjsTutorials'
-export default {
+export default Vue.extend({
   layout: 'main',
+  data() {
+    return {
+      lhsDiff: this.lhsDiff || [],
+      rhsDiff: this.rhsDiff || [],
+      rhsLabel: this.rhsLabel || '',
+      lhsLabel: this.lhsLabel || '',
+      isSrollInSyncEnabled: this.isSrollInSyncEnabled,
+    }
+  },
   beforeCreate() {
     const _diff = this.$route.hash
     if (_diff) {
@@ -73,15 +83,6 @@ export default {
         .split('\n')
     }
   },
-  data() {
-    return {
-      lhsDiff: this.lhsDiff || [],
-      rhsDiff: this.rhsDiff || [],
-      rhsLabel: this.rhsLabel || '',
-      lhsLabel: this.lhsLabel || '',
-      isSrollInSyncEnabled: this.isSrollInSyncEnabled,
-    }
-  },
   mounted() {
     const isLHSBigger = this.lhsDiff.length > this.rhsDiff.length
     const maxLineCount = isLHSBigger ? this.lhsDiff.length : this.rhsDiff.length
@@ -91,5 +92,5 @@ export default {
     )
     showTutorials(this.$cookies, this.$route.path, this.$cookies.isDarkMode)
   },
-}
+})
 </script>
