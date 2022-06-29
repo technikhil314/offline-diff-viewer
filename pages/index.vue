@@ -100,23 +100,23 @@ export default Vue.extend({
     checkForm(e: Event) {
       e.preventDefault()
       const formData = new FormData(e.currentTarget as HTMLFormElement)
-      const lhs = formData.get('lhs')
-      const rhs = formData.get('rhs')
-      const lhsLabel = formData.get('lhsLabel')
-      const rhsLabel = formData.get('rhsLabel')
-      if (!lhs || !rhs) {
+      const originalLhs = formData.get('lhs') as string
+      const originalRhs = formData.get('rhs') as string
+      const lhsLabel = formData.get('lhsLabel') as string
+      const rhsLabel = formData.get('rhsLabel') as string
+      if (!originalLhs || !originalRhs) {
         this.showError()
         return
       }
-      const originalLhs = lhs
-      const originalRhs = rhs
+      const lhs = originalLhs.trim()
+      const rhs = originalRhs.trim()
       this.$store.commit('data/set', {
-        lhs,
-        rhs,
+        lhs: originalLhs,
+        rhs: originalRhs,
         lhsLabel,
         rhsLabel,
       })
-      const diff = dmp.diff_main(originalLhs, originalRhs)
+      const diff = dmp.diff_main(lhs, rhs)
       const gzip = Buffer.from(
         pako.gzip(
           JSON.stringify({
