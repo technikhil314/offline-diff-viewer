@@ -37,15 +37,10 @@ import ToggleInSync from './buttons/toggleInSync.vue'
 import NextDiff from './buttons/nextDiff.vue'
 import CopyLink from './buttons/copyLink.vue'
 import { putToClipboard } from '~/helpers/utils'
-interface Data {
-  comparator: HTMLElement | null
-  comparer: HTMLElement | null
-  copied: Boolean
-  treeWalker: TreeWalker | null
-}
+import { DiffActionBarData } from '~/helpers/types'
 export default Vue.extend({
   components: { PrevDiff, NextDiff, ToggleInSync, CopyLink },
-  data(): Data {
+  data(): DiffActionBarData {
     return {
       copied: false,
       comparator: null,

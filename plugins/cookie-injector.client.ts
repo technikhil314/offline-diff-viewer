@@ -4,14 +4,8 @@ import isSkipTutorialCookie from '~/helpers/isSkipTutorialCookie'
 import isSkipScrollInSyncTutorial from '~/helpers/isSkipScrollInSyncTutorial'
 import isSkipBackButtonPersistsDataTutorial from '~/helpers/isSkipBackButtonPersistsDataTutorial'
 import isSkipSubmitKbdShortcutTutorial from '~/helpers/isSkipSubmitKbdShortcutTutorial'
+import { Cookies } from '~/helpers/types'
 
-interface Cookies {
-  isDarkMode: boolean
-  isSkipTutorial: boolean
-  isSkipScrollInSyncTutorial: boolean
-  isSkipBackButtonPersistsDataTutorial: boolean
-  isSkipSubmitKbdShortcutTutorial: boolean
-}
 declare module 'vue/types/vue' {
   interface Vue {
     $cookies: Cookies
