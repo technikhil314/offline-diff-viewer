@@ -3,13 +3,9 @@ import isDarkModeCookie from '~/helpers/isDarkModeCookie'
 import isSkipTutorialCookie from '~/helpers/isSkipTutorialCookie'
 import isSkipScrollInSyncTutorial from '~/helpers/isSkipScrollInSyncTutorial'
 import isSkipBackButtonPersistsDataTutorial from '~/helpers/isSkipBackButtonPersistsDataTutorial'
+import isSkipSubmitKbdShortcutTutorial from '~/helpers/isSkipSubmitKbdShortcutTutorial'
+import { Cookies } from '~/helpers/types'
 
-interface Cookies {
-  isDarkMode: boolean
-  isSkipTutorial: boolean
-  isSkipScrollInSyncTutorial: boolean
-  isSkipBackButtonPersistsDataTutorial: boolean
-}
 declare module 'vue/types/vue' {
   interface Vue {
     $cookies: Cookies
@@ -41,6 +37,7 @@ const cookieInjectorPlugin: Plugin = (_context, inject) => {
     isSkipScrollInSyncTutorial: isSkipScrollInSyncTutorial(),
     isSkipBackButtonPersistsDataTutorial:
       isSkipBackButtonPersistsDataTutorial(),
+    isSkipSubmitKbdShortcutTutorial: isSkipSubmitKbdShortcutTutorial(),
   })
 }
 

@@ -6,14 +6,15 @@
     Skip to main content
   </button>
 </template>
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
   methods: {
     focusOnMain() {
       document.getElementsByTagName('main')[0].focus()
     },
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

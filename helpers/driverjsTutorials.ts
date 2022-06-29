@@ -1,18 +1,6 @@
-interface Tutorial {
-  element: string
-  popover: {
-    title: string
-    description: string
-  }
-}
-
-interface TutorialMetadata {
-  tutorial: Tutorial[]
-  cookieName: string
-}
-
-type TutorialsMetadata = Record<string, TutorialMetadata[]>
-
+import { Cookies, Tutorial, TutorialsMetadata, TutorialMetadata } from './types'
+// Need this to keep track of latest value of cookie otherwise users sees same tutorial untill they refresh the page after the cookie is dropped
+const _cookies: Partial<Cookies> = {}
 const labelsTutorial: Tutorial[] = [
   {
     element: '#lhsLabel',
@@ -26,6 +14,17 @@ const labelsTutorial: Tutorial[] = [
     popover: {
       title: 'New feature',
       description: 'Now you can add custom labels to text blocks',
+    },
+  },
+]
+
+const submitShortcutTutorial: Tutorial[] = [
+  {
+    element: '#submitButton',
+    popover: {
+      title: 'New keyboard shortcut',
+      description:
+        'Now you can press <kbd>Cmd</kbd> + <kbd>Enter</kbd>/<kbd>Ctrl</kbd> + <kbd>Enter</kbd> to go to compare screen.',
     },
   },
 ]
@@ -60,7 +59,7 @@ const backButtonTutorial: Tutorial[] = [
     popover: {
       title: 'Go back to edit screen',
       description:
-        'Now your data persists between the page navigation. Only if you have clicked on "Compare" button',
+        'Now your data persists between the page navigation. <br/> PS: Works only if you have clicked on "Compare" button',
     },
   },
 ]
@@ -81,32 +80,37 @@ const tutorialsMetadata: TutorialsMetadata = {
       tutorial: labelsTutorial,
       cookieName: 'isSkipTutorial',
     },
+    {
+      tutorial: submitShortcutTutorial,
+      cookieName: 'isSkipSubmitKbdShortcutTutorial',
+    },
   ],
 }
 
 export default async function showTutorials(
-  cookies: Record<string, boolean>,
+  cookies: Cookies,
   route: string,
   isDarkMode: boolean
 ) {
   const { default: Driver } = await import('driver.js')
-  const possibleTutorialsToShow = tutorialsMetadata[route]
+  const possibleTutorialsToShow: TutorialMetadata[] = tutorialsMetadata[route]
   let finalTutorial: Tutorial[] = []
-  const cookiesToSet: string[] = []
+  const cookiesToSet: TutorialMetadata[] = []
   const driver = new Driver({
     closeBtnText: 'Skip',
     className: 'dark:filter dark:invert',
     stageBackground: isDarkMode ? 'hsl(221deg 50% 90% / 0.5)' : '#ffffff',
     onReset: () => {
-      cookiesToSet.forEach((x) => {
-        document.cookie = `${x}=true; max-age=31536000; path=/;`
+      cookiesToSet.forEach((x: TutorialMetadata) => {
+        _cookies[x.cookieName] = true
+        document.cookie = `${x.cookieName}=true; max-age=31536000; path=/;`
       })
     },
   })
   possibleTutorialsToShow.forEach((x) => {
-    if (!cookies[x.cookieName]) {
+    if (!cookies[x.cookieName] && !_cookies[x.cookieName]) {
       finalTutorial = finalTutorial.concat(x.tutorial)
-      cookiesToSet.push(x.cookieName)
+      cookiesToSet.push(x)
     }
   })
   if (finalTutorial.length) {

@@ -43,12 +43,13 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
   props: {
     clickHandler: {
       type: Function,
-      default: () => {},
+      required: true,
     },
     ariaLabel: {
       type: String,
@@ -61,7 +62,7 @@ export default {
     }
   },
   methods: {
-    handleClick(e) {
+    handleClick(e: MouseEvent) {
       this.copied = true
       this.clickHandler(e)
       setTimeout(() => {
@@ -69,5 +70,5 @@ export default {
       }, 5000)
     },
   },
-}
+})
 </script>

@@ -28,12 +28,13 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
   computed: {
     toastState() {
       return this.$store.state.toast
     },
   },
-}
+})
 </script>

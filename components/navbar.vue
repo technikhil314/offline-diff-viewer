@@ -156,8 +156,10 @@
   </nav>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+let darkMode: Boolean | null = null
+export default Vue.extend({
   props: {
     showBackButton: {
       type: Boolean,
@@ -166,24 +168,25 @@ export default {
   },
   data() {
     return {
-      darkMode: false,
+      darkMode,
     }
   },
   mounted() {
-    if (this.$cookies.isDarkMode) {
-      this.toggleDarkMode(null, false)
+    if (darkMode === null) {
+      darkMode = this.$cookies.isDarkMode
+      if (darkMode) {
+        document.documentElement.classList.add('dark')
+        document.cookie = `darkMode=${darkMode}; Secure; max-age=31536000; path=/;`
+      }
     }
     document.documentElement.classList.remove('hidden')
   },
   methods: {
-    toggleDarkMode(e, val) {
-      e && e.preventDefault()
-      this.darkMode = val || !this.darkMode
-      document.documentElement.classList[this.darkMode ? 'add' : 'remove'](
-        'dark'
-      )
-      document.cookie = `darkMode=${this.darkMode}; Secure; max-age=31536000; path=/;`
+    toggleDarkMode() {
+      darkMode = !darkMode
+      document.documentElement.classList[darkMode ? 'add' : 'remove']('dark')
+      document.cookie = `darkMode=${darkMode}; Secure; max-age=31536000; path=/;`
     },
   },
-}
+})
 </script>

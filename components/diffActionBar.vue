@@ -30,21 +30,23 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue'
 import PrevDiff from './buttons/prevDiff.vue'
 import ToggleInSync from './buttons/toggleInSync.vue'
 import NextDiff from './buttons/nextDiff.vue'
 import CopyLink from './buttons/copyLink.vue'
 import { putToClipboard } from '~/helpers/utils'
-export default {
+import { DiffActionBarData } from '~/helpers/types'
+export default Vue.extend({
   components: { PrevDiff, NextDiff, ToggleInSync, CopyLink },
-  data() {
+  data(): DiffActionBarData {
     return {
-      copied: this.copied,
+      copied: false,
+      comparator: null,
+      comparer: null,
+      treeWalker: null,
     }
-  },
-  beforeCreate() {
-    this.copied = false
   },
   mounted() {
     const lhsDiffNode = document.getElementById('lhsDiff')
@@ -65,11 +67,14 @@ export default {
         comparer,
         NodeFilter.SHOW_ELEMENT,
         {
-          acceptNode: (node) => {
-            return (
-              node.classList.contains('bg-red-200') ||
-              node.classList.contains('bg-green-200')
-            )
+          acceptNode: (node: Node) => {
+            if (
+              (node as HTMLDivElement).classList.contains('bg-red-200') ||
+              (node as HTMLDivElement).classList.contains('bg-green-200')
+            ) {
+              return NodeFilter.FILTER_ACCEPT
+            }
+            return NodeFilter.FILTER_REJECT
           },
         }
       )
@@ -91,56 +96,67 @@ export default {
       this.$store.commit('scrollInSync/toggle')
     },
     goToNextDiff() {
-      const currentNode = this.treeWalker.currentNode
-      const nextNode = this.treeWalker.nextNode()
+      const currentNode = this.treeWalker?.currentNode
+      const nextNode = this.treeWalker?.nextNode()
       if (nextNode) {
         const currentNodeIndex = Array.prototype.indexOf.call(
-          currentNode.parentElement.children,
+          currentNode?.parentElement?.children,
           currentNode
         )
         const nextNodeIndex = Array.prototype.indexOf.call(
-          nextNode.parentElement.children,
+          nextNode.parentElement?.children,
           nextNode
         )
-        const comparatorCurrentNode = this.comparator.children[currentNodeIndex]
-        const comparatorNextNode = this.comparator.children[nextNodeIndex]
+        const comparatorCurrentNode =
+          this.comparator?.children[currentNodeIndex]
+        const comparatorNextNode = this.comparator?.children[nextNodeIndex]
         this.toggleDiffHunkAndScrollIntoView(
-          [currentNode, comparatorCurrentNode],
-          [nextNode, comparatorNextNode]
+          [
+            currentNode as HTMLDivElement,
+            comparatorCurrentNode as HTMLDivElement,
+          ],
+          [nextNode as HTMLDivElement, comparatorNextNode as HTMLDivElement]
         )
       }
     },
     goToPreviousDiff() {
-      const currentNode = this.treeWalker.currentNode
-      const prevNode = this.treeWalker.previousNode()
+      const currentNode = this.treeWalker?.currentNode
+      const prevNode = this.treeWalker?.previousNode()
       if (prevNode) {
         const currentNodeIndex = Array.prototype.indexOf.call(
-          currentNode.parentElement.children,
+          currentNode?.parentElement?.children,
           currentNode
         )
         const prevNodeIndex = Array.prototype.indexOf.call(
-          prevNode.parentElement.children,
+          prevNode.parentElement?.children,
           prevNode
         )
-        const comparatorCurrentNode = this.comparator.children[currentNodeIndex]
-        const comparatorPrevNode = this.comparator.children[prevNodeIndex]
+        const comparatorCurrentNode =
+          this.comparator?.children[currentNodeIndex]
+        const comparatorPrevNode = this.comparator?.children[prevNodeIndex]
         this.toggleDiffHunkAndScrollIntoView(
-          [currentNode, comparatorCurrentNode],
-          [prevNode, comparatorPrevNode]
+          [
+            currentNode as HTMLDivElement,
+            comparatorCurrentNode as HTMLDivElement,
+          ],
+          [prevNode as HTMLDivElement, comparatorPrevNode as HTMLDivElement]
         )
       }
     },
-    toggleDiffHunkAndScrollIntoView(unselectedNodes, selectedNodes) {
+    toggleDiffHunkAndScrollIntoView(
+      unselectedNodes: Array<HTMLDivElement | undefined> = [],
+      selectedNodes: Array<HTMLDivElement | undefined> = []
+    ) {
       unselectedNodes.forEach((element) => {
-        element.querySelector('p').classList.remove('selected')
+        element?.querySelector('p')?.classList.remove('selected')
       })
       selectedNodes.forEach((element) => {
-        element.querySelector('p').classList.add('selected')
-        element.scrollIntoView()
+        element?.querySelector('p')?.classList.add('selected')
+        element?.scrollIntoView()
       })
     },
   },
-}
+})
 </script>
 <style lang="scss">
 .copy-uri-button:hover svg {

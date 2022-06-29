@@ -28,10 +28,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue'
 import StickyCopy from './buttons/stickyCopy.vue'
 import { putToClipboard } from '~/helpers/utils'
-export default {
+export default Vue.extend({
   components: { StickyCopy },
   props: {
     diff: {
@@ -57,9 +58,10 @@ export default {
     },
   },
   methods: {
-    copyTextToClipboard(e) {
+    copyTextToClipboard(e: Event) {
+      const copyTextButton = e.currentTarget as HTMLButtonElement
       putToClipboard(
-        e.currentTarget.parentNode.parentNode.innerText
+        (copyTextButton.parentNode?.parentNode as HTMLElement).innerText
           .split('\n\n')
           .join('\n'),
         'Text copied to your clipboard',
@@ -67,7 +69,7 @@ export default {
       )
     },
   },
-}
+})
 </script>
 
 <style lang="scss" scoped>
