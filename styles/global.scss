@@ -43,6 +43,15 @@ main {
   margin-top: 2rem;
 }
 
+kbd {
+  @apply bg-gray-100 dark:bg-gray-800 border bottom-1 dark:border-gray-600 border-gray-300 shadow rounded-sm text-gray-700 dark:text-gray-50 inline-block;
+  font-size: 0.85em;
+  font-weight: 700;
+  line-height: 1;
+  padding: 2px 4px;
+  white-space: nowrap;
+}
+
 /* custom scrollbar */
 ::-webkit-scrollbar {
   width: 10px;

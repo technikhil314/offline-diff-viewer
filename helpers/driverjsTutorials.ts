@@ -30,6 +30,17 @@ const labelsTutorial: Tutorial[] = [
   },
 ]
 
+const submitShortcutTutorial: Tutorial[] = [
+  {
+    element: '#submitButton',
+    popover: {
+      title: 'New keyboard shortcut',
+      description:
+        'Now you can press <kbd>Cmd</kbd> + <kbd>Enter</kbd>/<kbd>Ctrl</kbd> + <kbd>Enter</kbd> to go to compare screen.',
+    },
+  },
+]
+
 const actionBarTutorial: Tutorial[] = [
   {
     element: '#toggleScrollInSyncSection',
@@ -60,7 +71,7 @@ const backButtonTutorial: Tutorial[] = [
     popover: {
       title: 'Go back to edit screen',
       description:
-        'Now your data persists between the page navigation. Only if you have clicked on "Compare" button',
+        'Now your data persists between the page navigation. <br/> PS: Works only if you have clicked on "Compare" button',
     },
   },
 ]
@@ -80,6 +91,10 @@ const tutorialsMetadata: TutorialsMetadata = {
     {
       tutorial: labelsTutorial,
       cookieName: 'isSkipTutorial',
+    },
+    {
+      tutorial: submitShortcutTutorial,
+      cookieName: 'isSkipSubmitKbdShortcutTutorial',
     },
   ],
 }

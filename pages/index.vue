@@ -60,6 +60,7 @@
           <button
             class="inline-flex items-center justify-center w-48 px-4 py-2 transition-transform transform bg-blue-600 rounded-md shadow-lg outline-none  text-gray-50 focus:ring-4 active:scale-y-75"
             aria-label="Click here to compare the inputted text blocks"
+            id="submitButton"
           >
             Compare
           </button>
@@ -85,6 +86,15 @@ export default Vue.extend({
   },
   mounted() {
     showTutorials(this.$cookies, this.$route.path, this.$cookies.isDarkMode)
+    document.addEventListener('keydown', (event) => {
+      const { metaKey, ctrlKey, key } = event
+      if ((metaKey || ctrlKey) && key === 'Enter') {
+        const button: HTMLButtonElement = document.getElementById(
+          'submitButton'
+        ) as HTMLButtonElement
+        button.click()
+      }
+    })
   },
   methods: {
     checkForm(e: Event) {
