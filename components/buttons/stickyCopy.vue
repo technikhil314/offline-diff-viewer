@@ -49,7 +49,7 @@ export default Vue.extend({
   props: {
     clickHandler: {
       type: Function,
-      default: () => {},
+      required: true,
     },
     ariaLabel: {
       type: String,
@@ -62,7 +62,7 @@ export default Vue.extend({
     }
   },
   methods: {
-    handleClick(e) {
+    handleClick(e: MouseEvent) {
       this.copied = true
       this.clickHandler(e)
       setTimeout(() => {

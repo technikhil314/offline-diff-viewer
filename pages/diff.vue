@@ -93,8 +93,8 @@ export default Vue.extend({
   layout: 'main',
   data() {
     return {
-      lhsDiff: this.lhsDiff,
-      rhsDiff: this.rhsDiff,
+      lhsDiff: [],
+      rhsDiff: [],
       copied: false,
     }
   },
@@ -103,13 +103,13 @@ export default Vue.extend({
     const gunzip = pako.ungzip(Buffer.from(undoUrlSafeBase64(_diff), 'base64'))
     const diff = JSON.parse(Buffer.from(gunzip).toString('utf8'))
     this.lhsDiff = diff
-      .map((item) => {
+      .map((item: Array<string | number>) => {
         const hunkState = item[0]
         if (hunkState === -1 || hunkState === 0) {
           const className =
             hunkState === -1 ? 'isModified bg-red-300 dark:bg-red-500' : ''
           return `<span class="break-all inline p-0 m-0 ${className}">${escapeHtml(
-            item[1]
+            item[1] as string
           )}</span>`
         }
         return false
@@ -118,13 +118,13 @@ export default Vue.extend({
       .join('')
       .split('\n')
     this.rhsDiff = diff
-      .map((item) => {
+      .map((item: Array<string | number>) => {
         const hunkState = item[0]
         if (hunkState === 1 || hunkState === 0) {
           const className =
             hunkState === 1 ? 'isModified bg-green-400 dark:bg-green-900' : ''
           return `<span class="break-all inline p-0 m-0 ${className}">${escapeHtml(
-            item[1]
+            item[1] as string
           )}</span>`
         }
         return false
@@ -142,7 +142,7 @@ export default Vue.extend({
     )
   },
   methods: {
-    putToClipboard(textToPut, toastContent) {
+    putToClipboard(textToPut: string, toastContent: string) {
       navigator.clipboard.writeText(textToPut)
       this.$store.commit('toast/show', {
         show: true,
@@ -173,9 +173,10 @@ export default Vue.extend({
         this.copied = false
       }, 5000)
     },
-    copyTextToClipboard(e) {
+    copyTextToClipboard(e: Event) {
+      const copyTextButton = e.currentTarget as HTMLButtonElement
       this.putToClipboard(
-        e.currentTarget.parentNode.parentNode.innerText
+        (copyTextButton.parentNode?.parentNode as HTMLElement).innerText
           .split('\n\n')
           .join('\n'),
         'Text copied to your clipboard'

@@ -58,9 +58,10 @@ export default Vue.extend({
     },
   },
   methods: {
-    copyTextToClipboard(e) {
+    copyTextToClipboard(e: Event) {
+      const copyTextButton = e.currentTarget as HTMLButtonElement
       putToClipboard(
-        e.currentTarget.parentNode.parentNode.innerText
+        (copyTextButton.parentNode?.parentNode as HTMLElement).innerText
           .split('\n\n')
           .join('\n'),
         'Text copied to your clipboard',
