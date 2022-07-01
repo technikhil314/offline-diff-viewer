@@ -86,7 +86,13 @@ export default Vue.extend({
   },
   mounted() {
     showTutorials(this.$cookies, this.$route.path, this.$cookies.isDarkMode)
-    document.addEventListener('keydown', (event) => {
+    document.addEventListener('keydown', this.handleCtrlEnter)
+  },
+  beforeDestroy() {
+    document.removeEventListener('keydown', this.handleCtrlEnter)
+  },
+  methods: {
+    handleCtrlEnter(event: KeyboardEvent) {
       const { metaKey, ctrlKey, key } = event
       if ((metaKey || ctrlKey) && key === 'Enter') {
         const button: HTMLButtonElement = document.getElementById(
@@ -94,9 +100,7 @@ export default Vue.extend({
         ) as HTMLButtonElement
         button.click()
       }
-    })
-  },
-  methods: {
+    },
     checkForm(e: Event) {
       e.preventDefault()
       const formData = new FormData(e.currentTarget as HTMLFormElement)

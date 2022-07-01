@@ -78,9 +78,22 @@ export default Vue.extend({
           },
         }
       )
+      document.addEventListener('keydown', this.handleCtrlC)
     }
   },
+  beforeDestroy() {
+    document.removeEventListener('keydown', this.handleCtrlC)
+  },
   methods: {
+    handleCtrlC(event: KeyboardEvent) {
+      const { metaKey, ctrlKey, key } = event
+      if ((metaKey || ctrlKey) && key === 'c') {
+        const button: HTMLButtonElement = document.getElementById(
+          'copyLinkButton'
+        ) as HTMLButtonElement
+        button.click()
+      }
+    },
     copyUrlToClipboard() {
       putToClipboard(
         window.location.href,

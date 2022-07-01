@@ -64,6 +64,17 @@ const backButtonTutorial: Tutorial[] = [
   },
 ]
 
+const copyLinkShortcutTutorial: Tutorial[] = [
+  {
+    element: '#copyLinkButton',
+    popover: {
+      title: 'Copy link with ease',
+      description:
+        'Now you can press <kbd>Cmd</kbd>+<kbd>C</kbd>/<kbd>Ctrl</kbd>+<kbd>C</kbd> any time on this screen to copy link to this diff.',
+    },
+  },
+]
+
 const tutorialsMetadata: TutorialsMetadata = {
   '/v1/diff': [
     {
@@ -73,6 +84,10 @@ const tutorialsMetadata: TutorialsMetadata = {
     {
       tutorial: backButtonTutorial,
       cookieName: 'isSkipBackButtonPersistsDataTutorial',
+    },
+    {
+      tutorial: copyLinkShortcutTutorial,
+      cookieName: 'isSkipCopyLinkShortcutTutorial',
     },
   ],
   '/': [
