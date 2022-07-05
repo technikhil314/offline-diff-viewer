@@ -22,7 +22,7 @@
     "
   >
     <div class="flex gap-4">
-      <ToggleInSync :click-handler="toggleInSyncScroll" />
+      <ToggleInSync />
       <NextDiff :click-handler="goToNextDiff" />
       <PrevDiff :click-handler="goToPreviousDiff" />
     </div>
@@ -39,7 +39,12 @@ import CopyLink from './buttons/copyLink.vue'
 import { putToClipboard } from '~/helpers/utils'
 import { DiffActionBarData } from '~/helpers/types'
 export default Vue.extend({
-  components: { PrevDiff, NextDiff, ToggleInSync, CopyLink },
+  components: {
+    PrevDiff,
+    NextDiff,
+    ToggleInSync,
+    CopyLink,
+  },
   data(): DiffActionBarData {
     return {
       copied: false,
@@ -104,9 +109,6 @@ export default Vue.extend({
       setTimeout(() => {
         this.copied = false
       }, 5000)
-    },
-    toggleInSyncScroll() {
-      this.$store.commit('scrollInSync/toggle')
     },
     goToNextDiff() {
       const currentNode = this.treeWalker?.currentNode

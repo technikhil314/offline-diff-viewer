@@ -7,7 +7,6 @@
       type="button"
       @click="clickHandler"
     >
-      Previous diff
       <svg
         class="w-4 h-4"
         fill="none"
@@ -22,6 +21,7 @@
           d="M8 7l4-4m0 0l4 4m-4-4v18"
         ></path>
       </svg>
+      Previous diff
     </button>
   </div>
 </template>
