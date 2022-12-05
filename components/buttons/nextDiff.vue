@@ -8,6 +8,7 @@
       @click="clickHandler"
     >
       <svg
+        aria-hidden="true"
         class="w-4 h-4"
         fill="none"
         stroke="currentColor"
@@ -21,7 +22,7 @@
           d="M16 17l-4 4m0 0l-4-4m4 4V3"
         ></path>
       </svg>
-      Next diff
+      <span aria-hidden="true">Next diff</span>
     </button>
   </div>
   </template>

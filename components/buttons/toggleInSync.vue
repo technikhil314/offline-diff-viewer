@@ -3,10 +3,13 @@
     <label
       for="toggleScrollInSync"
       class="text-gray-800 select-none dark:text-gray-50"
+      id="toggleScrollInSyncLabel"
+      aria-controls="toggleScrollInSync"
     >
       Scroll in sync
     </label>
     <input
+      aria-labelledby="toggleScrollInSyncLabel"
       id="toggleScrollInSync"
       type="checkbox"
       :checked="isEnabled"
