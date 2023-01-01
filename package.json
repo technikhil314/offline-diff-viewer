@@ -10,7 +10,7 @@
     "generate": "npm run clean && nuxt generate",
     "lint:jsts": "eslint --ext \".ts,.js,.vue\" --ignore-path .gitignore .",
     "lint:style": "stylelint \"**/*.{vue,css}\" --ignore-path .gitignore",
-    "prepare": "husky install",
+    "prepare": "npx husky install",
     "lint": "npm run lint:jsts -- --fix && npm run lint:style",
     "test": "jest"
   },
