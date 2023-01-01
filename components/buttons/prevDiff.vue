@@ -7,8 +7,8 @@
       type="button"
       @click="clickHandler"
     >
-      Previous diff
       <svg
+        aria-hidden="true"
         class="w-4 h-4"
         fill="none"
         stroke="currentColor"
@@ -22,6 +22,7 @@
           d="M8 7l4-4m0 0l4 4m-4-4v18"
         ></path>
       </svg>
+      <span aria-hidden="true">Previous diff</span>
     </button>
   </div>
 </template>

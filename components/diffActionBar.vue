@@ -22,7 +22,7 @@
     "
   >
     <div class="flex gap-4">
-      <ToggleInSync :click-handler="toggleInSyncScroll" />
+      <ToggleInSync />
       <NextDiff :click-handler="goToNextDiff" />
       <PrevDiff :click-handler="goToPreviousDiff" />
     </div>
@@ -39,7 +39,12 @@ import CopyLink from './buttons/copyLink.vue'
 import { putToClipboard } from '~/helpers/utils'
 import { DiffActionBarData } from '~/helpers/types'
 export default Vue.extend({
-  components: { PrevDiff, NextDiff, ToggleInSync, CopyLink },
+  components: {
+    PrevDiff,
+    NextDiff,
+    ToggleInSync,
+    CopyLink,
+  },
   data(): DiffActionBarData {
     return {
       copied: false,
@@ -78,9 +83,22 @@ export default Vue.extend({
           },
         }
       )
+      document.addEventListener('keydown', this.handleCtrlC)
     }
   },
+  beforeDestroy() {
+    document.removeEventListener('keydown', this.handleCtrlC)
+  },
   methods: {
+    handleCtrlC(event: KeyboardEvent) {
+      const { metaKey, ctrlKey, key } = event
+      if ((metaKey || ctrlKey) && key === 'c') {
+        const button: HTMLButtonElement = document.getElementById(
+          'copyLinkButton'
+        ) as HTMLButtonElement
+        button.click()
+      }
+    },
     copyUrlToClipboard() {
       putToClipboard(
         window.location.href,
@@ -91,9 +109,6 @@ export default Vue.extend({
       setTimeout(() => {
         this.copied = false
       }, 5000)
-    },
-    toggleInSyncScroll() {
-      this.$store.commit('scrollInSync/toggle')
     },
     goToNextDiff() {
       const currentNode = this.treeWalker?.currentNode

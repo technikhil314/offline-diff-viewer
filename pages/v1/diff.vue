@@ -8,14 +8,12 @@
       >
         <SingleDiff
           :id="'lhsDiff'"
-          :is-sroll-in-sync-enabled="isSrollInSyncEnabled"
           :modified-class-string="'bg-red-200 dark:bg-red-800'"
           :label="lhsLabel"
           :diff="lhsDiff"
         />
         <SingleDiff
           :id="'rhsDiff'"
-          :is-sroll-in-sync-enabled="isSrollInSyncEnabled"
           :modified-class-string="'bg-green-200 dark:bg-green-700'"
           :label="rhsLabel"
           :diff="rhsDiff"
@@ -25,23 +23,26 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Vue from 'vue'
 import pako from 'pako'
 import { undoUrlSafeBase64, escapeHtml } from '../../helpers/utils'
 import showTutorials from '../../helpers/driverjsTutorials'
+import singleDiff from '~/components/singleDiff.vue'
+import DiffActionBar from '~/components/diffActionBar.vue'
+import Navbar from '~/components/navbar.vue'
 export default Vue.extend({
+  components: { singleDiff, DiffActionBar, Navbar },
   layout: 'main',
   data() {
     return {
-      lhsDiff: this.lhsDiff || [],
-      rhsDiff: this.rhsDiff || [],
-      rhsLabel: this.rhsLabel || '',
-      lhsLabel: this.lhsLabel || '',
-      isSrollInSyncEnabled: this.isSrollInSyncEnabled,
+      lhsDiff: [],
+      rhsDiff: [],
+      rhsLabel: '',
+      lhsLabel: '',
     }
   },
-  beforeCreate() {
+  beforeMount() {
     const _diff = this.$route.hash
     if (_diff) {
       const gunzip = pako.ungzip(
@@ -52,13 +53,13 @@ export default Vue.extend({
       this.lhsLabel = lhsLabel
       this.rhsLabel = rhsLabel
       this.lhsDiff = diff
-        .map((item) => {
+        .map((item: Array<string | number>) => {
           const hunkState = item[0]
           if (hunkState === -1 || hunkState === 0) {
             const className =
               hunkState === -1 ? 'isModified bg-red-300 dark:bg-red-500' : ''
             return `<span class="break-all inline p-0 m-0 ${className}">${escapeHtml(
-              item[1]
+              item[1] as string
             )}</span>`
           }
           return false
@@ -67,13 +68,13 @@ export default Vue.extend({
         .join('')
         .split('\n')
       this.rhsDiff = diff
-        .map((item) => {
+        .map((item: Array<string | number>) => {
           const hunkState = item[0]
           if (hunkState === 1 || hunkState === 0) {
             const className =
               hunkState === 1 ? 'isModified bg-green-400 dark:bg-green-900' : ''
             return `<span class="break-all inline p-0 m-0 ${className}">${escapeHtml(
-              item[1]
+              item[1] as string
             )}</span>`
           }
           return false

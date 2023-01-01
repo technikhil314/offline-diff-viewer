@@ -4,6 +4,7 @@ export interface Cookies {
   isSkipScrollInSyncTutorial: boolean
   isSkipBackButtonPersistsDataTutorial: boolean
   isSkipSubmitKbdShortcutTutorial: boolean
+  isSkipCopyLinkShortcutTutorial: boolean
 }
 
 export interface Tutorial {

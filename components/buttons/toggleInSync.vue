@@ -3,25 +3,32 @@
     <label
       for="toggleScrollInSync"
       class="text-gray-800 select-none dark:text-gray-50"
+      id="toggleScrollInSyncLabel"
+      aria-controls="toggleScrollInSync"
     >
       Scroll in sync
     </label>
     <input
+      aria-labelledby="toggleScrollInSyncLabel"
       id="toggleScrollInSync"
       type="checkbox"
-      checked
+      :checked="isEnabled"
       class="form-checkbox"
-      @click="clickHandler"
+      @click="toggleInSyncScroll"
     />
   </div>
 </template>
 <script lang="ts">
 import Vue from 'vue'
 export default Vue.extend({
-  props: {
-    clickHandler: {
-      type: Function,
-      required: true,
+  computed: {
+    isEnabled() {
+      return this.$store.state.scrollInSync.isEnabled
+    },
+  },
+  methods: {
+    toggleInSyncScroll() {
+      this.$store.commit('scrollInSync/toggle')
     },
   },
 })
