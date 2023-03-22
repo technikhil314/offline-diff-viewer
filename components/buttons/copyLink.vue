@@ -2,24 +2,7 @@
   <div>
     <button
       type="button"
-      class="
-        inline-flex
-        items-center
-        justify-center
-        gap-1
-        p-2
-        text-sm
-        transition-transform
-        transform
-        rounded-md
-        shadow
-        outline-none
-        justify-self-end
-        focus:ring-4
-        active:scale-y-75
-        hover:scale-105 hover:shadow-lg
-        copy-uri-button
-      "
+      class="inline-flex items-center justify-center gap-1 p-2 text-sm transition-transform transform rounded-md shadow outline-none justify-self-end focus:ring-4 active:scale-y-75 hover:scale-105 hover:shadow-lg copy-uri-button"
       aria-label="Click here to copy url to clipboard"
       id="copyLinkButton"
       :class="{
