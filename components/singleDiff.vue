@@ -5,15 +5,11 @@
     </p>
     <div
       :id="id"
-      class="relative flex-1 px-4 py-2 border-2 rounded-md  dark:border-gray-500 line-number-gutter min-h-80"
+      class="relative flex-1 px-4 py-2 border-2 rounded-md dark:border-gray-500 line-number-gutter min-h-80"
       :class="{
         'overflow-y-auto max-h-screen--nav': !isSrollInSyncEnabled,
       }"
     >
-      <StickyCopy
-        :aria-label="'Copy the content to clipboard'"
-        :click-handler="copyTextToClipboard"
-      />
       <div
         v-for="(lineDiff, index) in diff"
         :key="index"
@@ -30,10 +26,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import StickyCopy from './buttons/stickyCopy.vue'
 import { putToClipboard } from '~/helpers/utils'
 export default Vue.extend({
-  components: { StickyCopy },
   props: {
     diff: {
       type: Array,
