@@ -28,3 +28,11 @@ export interface DiffActionBarData {
   copied: Boolean
   treeWalker: TreeWalker | null
 }
+
+export interface DiffData {
+  lhs: any[]
+  rhs: any[]
+  rhsLabel: string
+  lhsLabel: string
+  monacoDiffEditor: any
+}
