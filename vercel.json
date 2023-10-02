@@ -9,5 +9,12 @@
         ]
       }
     }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/v2",
+      "permanent": false
+    }
   ]
 }

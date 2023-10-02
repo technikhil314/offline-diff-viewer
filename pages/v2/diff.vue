@@ -2,9 +2,9 @@
   <div class="page-contents">
     <Navbar :show-back-button="true" />
     <main class="outline-none" tabindex="0">
-      <DiffActionBar />
+      <DiffActionBar :diff-navigator="diffNavigator" />
       <section
-        class="flex items-stretch w-full gap-4 font-mono text-gray-800  dark:text-gray-50"
+        class="flex items-stretch w-full gap-4 font-mono text-gray-800 dark:text-gray-50"
       >
         <div
           id="monaco-diff-viewer"
@@ -32,6 +32,7 @@ export default Vue.extend({
       rhsLabel: '',
       lhsLabel: '',
       monacoDiffEditor: {},
+      diffNavigator: {},
     }
   },
   head() {
@@ -77,6 +78,7 @@ export default Vue.extend({
         enabled: false,
       },
       wordWrap: 'on',
+      contextmenu: false,
     }
     if (monacoDiffViewerEl) {
       this.monacoDiffEditor = monaco.editor.createDiffEditor(
@@ -90,6 +92,14 @@ export default Vue.extend({
           original: monaco.editor.createModel(this.lhs, 'javascript'),
           modified: monaco.editor.createModel(this.rhs, 'javascript'),
         })
+        this.diffNavigator = monaco.editor.createDiffNavigator(
+          this.monacoDiffEditor,
+          {
+            followsCaret: true,
+            ignoreCharChanges: true,
+            alwaysRevealFirst: true,
+          }
+        )
       }
     }
   },

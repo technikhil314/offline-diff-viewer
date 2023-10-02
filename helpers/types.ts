@@ -35,4 +35,5 @@ export interface DiffData {
   rhsLabel: string
   lhsLabel: string
   monacoDiffEditor: any
+  diffNavigator: any
 }
