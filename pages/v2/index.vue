@@ -68,7 +68,10 @@
 <script lang="ts">
 import Vue from 'vue'
 import pako from 'pako'
-import { doUrlSafeBase64 } from '../../helpers/utils'
+import {
+  doUrlSafeBase64,
+  getMonacoEditorDefaultOptions,
+} from '../../helpers/utils'
 import showTutorials from '../../helpers/driverjsTutorials'
 import Navbar from '~/components/v2/navbar.vue'
 declare namespace monaco {
@@ -106,17 +109,7 @@ export default Vue.extend({
     const lhs = document.getElementById('lhs')
     const rhs = document.getElementById('rhs')
     const theme = this.$cookies.isDarkMode ? 'vs-dark' : 'light'
-    const monacoEditorOptions = {
-      language: 'javascript',
-      theme,
-      fontSize: parseFloat(getComputedStyle(document.documentElement).fontSize),
-      scrollBeyondLastLine: false,
-      scrollBeyondLastColumn: false,
-      minimap: {
-        enabled: false,
-      },
-      wordWrap: 'on',
-    }
+    const monacoEditorOptions = getMonacoEditorDefaultOptions(theme)
     if (lhs) {
       this.lhsEditor = monaco.editor.create(lhs, {
         ...monacoEditorOptions,

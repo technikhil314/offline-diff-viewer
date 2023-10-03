@@ -18,7 +18,7 @@
 <script lang="ts">
 import pako from 'pako'
 import Vue from 'vue'
-import { undoUrlSafeBase64 } from '../../helpers/utils'
+import { getMonacoEditorDefaultOptions, undoUrlSafeBase64 } from '../../helpers/utils'
 import DiffActionBar from '~/components/v2/diffActionBar.vue'
 import Navbar from '~/components/v2/navbar.vue'
 import { DiffData } from '~/helpers/types'
@@ -67,24 +67,13 @@ export default Vue.extend({
   mounted() {
     const monacoDiffViewerEl = document.getElementById('monaco-diff-viewer')
     const theme = this.$cookies.isDarkMode ? 'vs-dark' : 'light'
-    const monacoEditorOptions = {
-      language: 'javascript',
-      theme,
-      fontSize: parseFloat(getComputedStyle(document.documentElement).fontSize),
-      readOnly: true,
-      scrollBeyondLastLine: false,
-      scrollBeyondLastColumn: false,
-      minimap: {
-        enabled: false,
-      },
-      wordWrap: 'on',
-      contextmenu: false,
-    }
+    const monacoEditorOptions = getMonacoEditorDefaultOptions(theme);
     if (monacoDiffViewerEl) {
       this.monacoDiffEditor = monaco.editor.createDiffEditor(
         monacoDiffViewerEl,
         {
           ...monacoEditorOptions,
+          readOnly: true
         }
       ) as any
       if (this.monacoDiffEditor) {
