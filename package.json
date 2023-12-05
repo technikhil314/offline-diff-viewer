@@ -15,7 +15,7 @@
     "test": "jest"
   },
   "engines": {
-    "node": ">=14 <=16"
+    "node": ">=18"
   },
   "lint-staged": {
     "*.{js,vue,ts}": "eslint",
