@@ -61,7 +61,8 @@ export default Vue.extend({
           {
             ...monacoEditorOptions,
             readOnly: true,
-            wordWrap: 'on'
+            wordWrap: 'on',
+            diffAlgorithm: 'advanced'
           }
         ) as any
         if (this.monacoDiffEditor) {
