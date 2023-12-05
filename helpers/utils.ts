@@ -65,11 +65,10 @@ export function getMonacoEditorDefaultOptions(theme: string) {
     theme,
     fontSize: parseFloat(getComputedStyle(document.documentElement).fontSize),
     scrollBeyondLastLine: false,
-    scrollBeyondLastColumn: false,
+    scrollBeyondLastColumn: 0,
     minimap: {
       enabled: false,
     },
-    wordWrap: 'on',
     contextmenu: false,
   }
 }

@@ -37,3 +37,12 @@ export interface DiffData {
   monacoDiffEditor: any
   diffNavigator: any
 }
+
+export interface v2DiffData {
+  lhs: string
+  rhs: string
+  rhsLabel: string
+  lhsLabel: string
+  monacoDiffEditor: any
+  diffNavigator: any
+}

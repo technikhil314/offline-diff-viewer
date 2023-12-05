@@ -54,7 +54,23 @@
         <div class="self-end flex-grow-0 w-full mt-4 text-center">
           <button
             id="submitButton"
-            class="inline-flex items-center justify-center w-48 px-4 py-2 transition-transform transform bg-blue-600 rounded-md shadow-lg outline-none text-gray-50 focus:ring-4 active:scale-y-75"
+            class="
+              inline-flex
+              items-center
+              justify-center
+              w-48
+              px-4
+              py-2
+              transition-transform
+              transform
+              bg-blue-600
+              rounded-md
+              shadow-lg
+              outline-none
+              text-gray-50
+              focus:ring-4
+              active:scale-y-75
+            "
             aria-label="Click here to compare the inputted text blocks"
           >
             Compare
@@ -68,15 +84,13 @@
 <script lang="ts">
 import Vue from 'vue'
 import pako from 'pako'
+import loader from '@monaco-editor/loader'
 import {
   doUrlSafeBase64,
   getMonacoEditorDefaultOptions,
 } from '../../helpers/utils'
 import showTutorials from '../../helpers/driverjsTutorials'
 import Navbar from '~/components/v2/navbar.vue'
-declare namespace monaco {
-  let editor: any
-}
 export default Vue.extend({
   components: { Navbar },
   layout: 'main',
@@ -87,21 +101,6 @@ export default Vue.extend({
       rhsEditor: null,
     }
   },
-  head() {
-    return {
-      script: [
-        {
-          src: 'https://unpkg.com/monaco-editor/min/vs/loader.js',
-        },
-        {
-          src: 'https://unpkg.com/monaco-editor/min/vs/editor/editor.main.nls.js',
-        },
-        {
-          src: 'https://unpkg.com/monaco-editor/min/vs/editor/editor.main.js',
-        },
-      ],
-    }
-  },
   mounted() {
     showTutorials(this.$cookies, this.$route.path, this.$cookies.isDarkMode)
     document.addEventListener('keydown', this.handleCtrlEnter)
@@ -110,18 +109,22 @@ export default Vue.extend({
     const rhs = document.getElementById('rhs')
     const theme = this.$cookies.isDarkMode ? 'vs-dark' : 'light'
     const monacoEditorOptions = getMonacoEditorDefaultOptions(theme)
-    if (lhs) {
-      this.lhsEditor = monaco.editor.create(lhs, {
-        ...monacoEditorOptions,
-        value: this.lhs || '',
-      })
-    }
-    if (rhs) {
-      this.rhsEditor = monaco.editor.create(rhs, {
-        ...monacoEditorOptions,
-        value: this.rhs || '',
-      })
-    }
+    loader.init().then((monaco) => {
+      if (lhs) {
+        this.lhsEditor = monaco.editor.create(lhs, {
+          ...monacoEditorOptions,
+          value: this.lhs || '',
+          wordWrap: 'on',
+        })
+      }
+      if (rhs) {
+        this.rhsEditor = monaco.editor.create(rhs, {
+          ...monacoEditorOptions,
+          value: this.rhs || '',
+          wordWrap: 'on'
+        })
+      }
+    })
   },
   beforeDestroy() {
     document.removeEventListener('keydown', this.handleCtrlEnter)

@@ -17,37 +17,23 @@
 
 <script lang="ts">
 import pako from 'pako'
+import loader from '@monaco-editor/loader'
 import Vue from 'vue'
 import { getMonacoEditorDefaultOptions, undoUrlSafeBase64 } from '../../helpers/utils'
 import DiffActionBar from '~/components/v2/diffActionBar.vue'
 import Navbar from '~/components/v2/navbar.vue'
-import { DiffData } from '~/helpers/types'
+import { v2DiffData } from '~/helpers/types'
 export default Vue.extend({
   components: { DiffActionBar, Navbar },
   layout: 'main',
-  data(): DiffData {
+  data(): v2DiffData {
     return {
-      lhs: [],
-      rhs: [],
+      lhs: "",
+      rhs: "",
       rhsLabel: '',
       lhsLabel: '',
       monacoDiffEditor: {},
       diffNavigator: {},
-    }
-  },
-  head() {
-    return {
-      script: [
-        {
-          src: 'https://unpkg.com/monaco-editor/min/vs/loader.js',
-        },
-        {
-          src: 'https://unpkg.com/monaco-editor/min/vs/editor/editor.main.nls.js',
-        },
-        {
-          src: 'https://unpkg.com/monaco-editor/min/vs/editor/editor.main.js',
-        },
-      ],
     }
   },
   beforeMount() {
@@ -68,29 +54,32 @@ export default Vue.extend({
     const monacoDiffViewerEl = document.getElementById('monaco-diff-viewer')
     const theme = this.$cookies.isDarkMode ? 'vs-dark' : 'light'
     const monacoEditorOptions = getMonacoEditorDefaultOptions(theme);
-    if (monacoDiffViewerEl) {
-      this.monacoDiffEditor = monaco.editor.createDiffEditor(
-        monacoDiffViewerEl,
-        {
-          ...monacoEditorOptions,
-          readOnly: true
-        }
-      ) as any
-      if (this.monacoDiffEditor) {
-        this.monacoDiffEditor.setModel({
-          original: monaco.editor.createModel(this.lhs, 'javascript'),
-          modified: monaco.editor.createModel(this.rhs, 'javascript'),
-        })
-        this.diffNavigator = monaco.editor.createDiffNavigator(
-          this.monacoDiffEditor,
+    loader.init().then((monaco) => {
+      if (monacoDiffViewerEl) {
+        this.monacoDiffEditor = monaco.editor.createDiffEditor(
+          monacoDiffViewerEl,
           {
-            followsCaret: true,
-            ignoreCharChanges: true,
-            alwaysRevealFirst: true,
+            ...monacoEditorOptions,
+            readOnly: true,
+            wordWrap: 'on'
           }
-        )
+        ) as any
+        if (this.monacoDiffEditor) {
+          this.monacoDiffEditor.setModel({
+            original: monaco.editor.createModel(this.lhs, 'javascript'),
+            modified: monaco.editor.createModel(this.rhs, 'javascript'),
+          })
+          this.diffNavigator = monaco.editor.createDiffNavigator(
+            this.monacoDiffEditor,
+            {
+              followsCaret: true,
+              ignoreCharChanges: true,
+              alwaysRevealFirst: true,
+            }
+          )
+        }
       }
-    }
+    })
   },
 })
 </script>
