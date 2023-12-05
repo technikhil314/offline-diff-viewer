@@ -4,8 +4,45 @@
     <main class="outline-none" tabindex="0">
       <DiffActionBar :diff-navigator="diffNavigator" />
       <section
-        class="flex items-stretch w-full gap-4 font-mono text-gray-800 dark:text-gray-50"
+        class="
+          flex
+          items-stretch
+          flex-wrap
+          w-full
+          gap-4
+          font-mono
+          text-gray-800
+          dark:text-gray-50
+        "
       >
+        <div class="flex space-around w-full gap-4">
+          <p
+            class="
+              flex-grow-0 flex-shrink-0
+              w-1/2
+              text-lg
+              font-bold
+              text-center
+              capitalize
+              break-all
+            "
+          >
+            <span class="inline-block w-4/5">{{ lhsLabel }}</span>
+          </p>
+          <p
+            class="
+              flex-grow-0 flex-shrink-0
+              w-1/2
+              text-lg
+              font-bold
+              text-center
+              capitalize
+              break-all
+            "
+          >
+            <span class="inline-block w-4/5">{{ rhsLabel }}</span>
+          </p>
+        </div>
         <div
           id="monaco-diff-viewer"
           class="w-full h-screen p-2 border border-gray-600 rounded-md editor"
@@ -19,7 +56,10 @@
 import pako from 'pako'
 import loader from '@monaco-editor/loader'
 import Vue from 'vue'
-import { getMonacoEditorDefaultOptions, undoUrlSafeBase64 } from '../../helpers/utils'
+import {
+  getMonacoEditorDefaultOptions,
+  undoUrlSafeBase64,
+} from '../../helpers/utils'
 import DiffActionBar from '~/components/v2/diffActionBar.vue'
 import Navbar from '~/components/v2/navbar.vue'
 import { v2DiffData } from '~/helpers/types'
@@ -28,8 +68,8 @@ export default Vue.extend({
   layout: 'main',
   data(): v2DiffData {
     return {
-      lhs: "",
-      rhs: "",
+      lhs: '',
+      rhs: '',
       rhsLabel: '',
       lhsLabel: '',
       monacoDiffEditor: {},
@@ -53,7 +93,7 @@ export default Vue.extend({
   mounted() {
     const monacoDiffViewerEl = document.getElementById('monaco-diff-viewer')
     const theme = this.$cookies.isDarkMode ? 'vs-dark' : 'light'
-    const monacoEditorOptions = getMonacoEditorDefaultOptions(theme);
+    const monacoEditorOptions = getMonacoEditorDefaultOptions(theme)
     loader.init().then((monaco) => {
       if (monacoDiffViewerEl) {
         this.monacoDiffEditor = monaco.editor.createDiffEditor(
@@ -62,7 +102,7 @@ export default Vue.extend({
             ...monacoEditorOptions,
             readOnly: true,
             wordWrap: 'on',
-            diffAlgorithm: 'advanced'
+            diffAlgorithm: 'advanced',
           }
         ) as any
         if (this.monacoDiffEditor) {
