@@ -284,7 +284,5 @@ export default {
         config.devtool = 'source-map'
       }
     },
-  },
-
-  serverMiddleware: [{ path: '/test', handler: '~/serverMiddleware/ok.js' }],
+  }
 }
