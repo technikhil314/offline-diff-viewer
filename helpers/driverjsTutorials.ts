@@ -75,21 +75,24 @@ const copyLinkShortcutTutorial: Tutorial[] = [
   },
 ]
 
+const diffTutorials: TutorialMetadata[] = [
+  {
+    tutorial: actionBarTutorial,
+    cookieName: 'isSkipScrollInSyncTutorial',
+  },
+  {
+    tutorial: backButtonTutorial,
+    cookieName: 'isSkipBackButtonPersistsDataTutorial',
+  },
+  {
+    tutorial: copyLinkShortcutTutorial,
+    cookieName: 'isSkipCopyLinkShortcutTutorial',
+  },
+]
+
 const tutorialsMetadata: TutorialsMetadata = {
-  '/v1/diff': [
-    {
-      tutorial: actionBarTutorial,
-      cookieName: 'isSkipScrollInSyncTutorial',
-    },
-    {
-      tutorial: backButtonTutorial,
-      cookieName: 'isSkipBackButtonPersistsDataTutorial',
-    },
-    {
-      tutorial: copyLinkShortcutTutorial,
-      cookieName: 'isSkipCopyLinkShortcutTutorial',
-    },
-  ],
+  '/v1/diff': diffTutorials,
+  'v2/diff': diffTutorials,
   '/': [
     {
       tutorial: labelsTutorial,

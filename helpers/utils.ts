@@ -58,3 +58,17 @@ export function putToClipboard(
     theme: 'success',
   })
 }
+
+export function getMonacoEditorDefaultOptions(theme: string) {
+  return {
+    language: 'javascript',
+    theme,
+    fontSize: parseFloat(getComputedStyle(document.documentElement).fontSize),
+    scrollBeyondLastLine: false,
+    scrollBeyondLastColumn: 0,
+    minimap: {
+      enabled: false,
+    },
+    contextmenu: false,
+  }
+}

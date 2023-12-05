@@ -1,13 +1,9 @@
 {
-  "builds": [
+  "redirects": [
     {
-      "src": "nuxt.config.js",
-      "use": "@nuxtjs/vercel-builder",
-      "config": {
-        "serverFiles": [
-          "serverMiddleware/**"
-        ]
-      }
+      "source": "/",
+      "destination": "/v2",
+      "permanent": false
     }
   ]
 }

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" {{ HTML_ATTRS }} class="hidden">
+  <head {{ HEAD_ATTRS }}>
+    <script>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+      gtag('config', 'G-HBV7K2PRX6')
+    </script>
+    {{ HEAD }}
+  </head>
 
-<head {{ HEAD_ATTRS }}>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-HBV7K2PRX6');
-  </script>
-  {{ HEAD }}
-</head>
-
-<body {{ BODY_ATTRS }}>
-  {{ APP }}
-</body>
-
+  <body {{ BODY_ATTRS }}>
+    {{ APP }}
+  </body>
 </html>
