@@ -16,7 +16,7 @@ jobs:
         # This action generates changelog which then the release action consumes
       - name: Conventional Changelog Action
         id: changelog
-        uses: TriPSs/conventional-changelog-action@v3
+        uses: TriPSs/conventional-changelog-action@v5
         with:
           github-token: ${{ secrets.github_token }}
           skip-commit: 'true'
