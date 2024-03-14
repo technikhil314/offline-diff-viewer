@@ -35,7 +35,7 @@
     "monaco-languageclient": "^7.1.0",
     "nuxt": "^2.15.7",
     "pako": "^2.0.4",
-    "sass": "^1.43.4"
+    "sass": "^1.72.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",
