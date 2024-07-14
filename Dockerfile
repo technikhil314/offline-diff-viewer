@@ -14,7 +14,7 @@ FROM nginx:1.27.0-alpine-slim AS production-stage
 
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 
-COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 

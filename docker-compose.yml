@@ -8,8 +8,6 @@ services:
       - "3000:80"
     security_opt:
       - no-new-privileges:true
-    cap_drop:
-      - ALL
     volumes:
       - /var/log/nginx
     restart: unless-stopped
