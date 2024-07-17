@@ -1,13 +1,14 @@
-FROM node:16 AS build-stage
+FROM node:18 AS build-stage
 
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm ci
 
 COPY . .
 
+ENV NODE_OPTIONS=--openssl-legacy-provider
 RUN npm run generate
 
 FROM nginx:1.27.0-alpine-slim AS production-stage

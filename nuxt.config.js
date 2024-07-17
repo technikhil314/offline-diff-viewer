@@ -13,7 +13,6 @@ const canonicalLinks = domainAliases.map((x) => ({ rel: 'canonical', href: x }))
 const DESCRIPTION =
   'A privacy first diff viewer that is secure, easy, simple and for any text type'
 export default {
-  target: 'static',
   ssr: false,
   head: {
     title: `Diff viewer - ${DESCRIPTION}`,
