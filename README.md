@@ -77,6 +77,6 @@ $ npm run start
 # generate static project
 $ npm run generate
 
-# server with docker
+# serve with docker
 $ docker compose up -d --build
 ```
