@@ -1,0 +1,16 @@
+services:
+  offline-diff-viewer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: offline-diff-viewer
+    ports:
+      - "3000:80"
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - /var/log/nginx
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - NODE_OPTIONS=--openssl-legacy-provider
