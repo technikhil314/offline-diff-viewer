@@ -77,3 +77,29 @@ $ npm run start
 # generate static project
 $ npm run generate
 ```
+
+## Self Host
+This guide provides detailed instructions on how to self-host the offline-diff-viewer application using Docker and Docker Compose. Self-hosting allows you to run the application on your own server, providing you with full control over its environment and configuration.
+
+### Building and Running the Docker Container
+1. Build the Docker Image
+```bash
+$ docker build -t offline-diff-viewer .
+```
+2. Run the Docker Container via docker run command
+```bash
+$ docker run -d \
+  --name offline-diff-viewer \
+  -p 3000:80 \
+  --security-opt no-new-privileges:true \
+  -v /var/log/nginx:/var/log/nginx \
+  --restart unless-stopped \
+  -e NODE_ENV=production \
+  -e NODE_OPTIONS=--openssl-legacy-provider \
+  offline-diff-viewer
+```
+
+### Running the Container with Docker Compose
+```bash
+$ docker compose up -d --build
+```
