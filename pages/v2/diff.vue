@@ -1,44 +1,21 @@
 <template>
   <div class="page-contents">
+    <!-- Following hidden input is hacky way to update monaco editor theme when user changes theme manually -->
+    <input type="hidden" inert :value="onThemeChange" />
     <Navbar :show-back-button="true" />
     <main class="outline-none" tabindex="0">
       <DiffActionBar :diff-navigator="diffNavigator" />
       <section
-        class="
-          flex
-          items-stretch
-          flex-wrap
-          w-full
-          gap-4
-          font-mono
-          text-gray-800
-          dark:text-gray-50
-        "
+        class="flex flex-wrap items-stretch w-full gap-4 font-mono text-gray-800  dark:text-gray-50"
       >
-        <div class="flex space-around w-full gap-4">
+        <div class="flex w-full gap-4 space-around">
           <p
-            class="
-              flex-grow-0 flex-shrink-0
-              w-1/2
-              text-lg
-              font-bold
-              text-center
-              capitalize
-              break-all
-            "
+            class="flex-grow-0 flex-shrink-0 w-1/2 text-lg font-bold text-center capitalize break-all "
           >
             <span class="inline-block w-4/5">{{ lhsLabel }}</span>
           </p>
           <p
-            class="
-              flex-grow-0 flex-shrink-0
-              w-1/2
-              text-lg
-              font-bold
-              text-center
-              capitalize
-              break-all
-            "
+            class="flex-grow-0 flex-shrink-0 w-1/2 text-lg font-bold text-center capitalize break-all "
           >
             <span class="inline-block w-4/5">{{ rhsLabel }}</span>
           </p>
@@ -75,6 +52,13 @@ export default Vue.extend({
       monacoDiffEditor: {},
       diffNavigator: {},
     }
+  },
+  computed: {
+    onThemeChange() {
+      const theme = this.$store.state.theme.darkMode ? 'vs-dark' : 'light'
+      this.monacoDiffEditor?.updateOptions?.({ theme })
+      return this.$store.state.theme.darkMode
+    },
   },
   beforeMount() {
     const _diff = this.$route.hash

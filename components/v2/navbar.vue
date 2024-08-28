@@ -176,9 +176,10 @@ export default Vue.extend({
   mounted() {
     if (darkMode === null) {
       this.darkMode = darkMode = this.$cookies.isDarkMode
-      if (this.$cookies.isDarkMode) {
+      if (darkMode) {
         document.documentElement.classList.add('dark')
         document.cookie = `darkMode=${darkMode}; Secure; max-age=31536000; path=/;`
+        this.$store.commit('theme/set', darkMode)
       }
     }
     document.documentElement.classList.remove('hidden')
@@ -190,6 +191,7 @@ export default Vue.extend({
         'dark'
       )
       document.cookie = `darkMode=${!currentDarkMode}; Secure; max-age=31536000; path=/;`
+      this.$store.commit('theme/set', !currentDarkMode)
       this.darkMode = !currentDarkMode
     },
   },
