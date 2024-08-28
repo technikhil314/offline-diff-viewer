@@ -90,19 +90,22 @@ const diffTutorials: TutorialMetadata[] = [
   },
 ]
 
+const comparePageTutorials: TutorialMetadata[] = [
+  {
+    tutorial: labelsTutorial,
+    cookieName: 'isSkipTutorial',
+  },
+  {
+    tutorial: submitShortcutTutorial,
+    cookieName: 'isSkipSubmitKbdShortcutTutorial',
+  },
+]
+
 const tutorialsMetadata: TutorialsMetadata = {
   '/v1/diff': diffTutorials,
-  'v2/diff': diffTutorials,
-  '/': [
-    {
-      tutorial: labelsTutorial,
-      cookieName: 'isSkipTutorial',
-    },
-    {
-      tutorial: submitShortcutTutorial,
-      cookieName: 'isSkipSubmitKbdShortcutTutorial',
-    },
-  ],
+  '/v2/diff': diffTutorials,
+  '/': comparePageTutorials,
+  '/v2': comparePageTutorials,
 }
 
 export default async function showTutorials(

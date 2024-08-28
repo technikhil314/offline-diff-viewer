@@ -1,6 +1,9 @@
+n
 <template>
   <div class="page-contents">
     <Navbar />
+    <!-- Following hidden input is hacky way to update monaco editor theme when user changes theme manually -->
+    <input type="hidden" inert :value="onThemeChange" />
     <main class="text-gray-800 outline-none dark:text-gray-50" tabindex="0">
       <section>
         <header>
@@ -54,23 +57,7 @@
         <div class="self-end flex-grow-0 w-full mt-4 text-center">
           <button
             id="submitButton"
-            class="
-              inline-flex
-              items-center
-              justify-center
-              w-48
-              px-4
-              py-2
-              transition-transform
-              transform
-              bg-blue-600
-              rounded-md
-              shadow-lg
-              outline-none
-              text-gray-50
-              focus:ring-4
-              active:scale-y-75
-            "
+            class="inline-flex items-center justify-center w-48 px-4 py-2 transition-transform transform bg-blue-600 rounded-md shadow-lg outline-none  text-gray-50 focus:ring-4 active:scale-y-75"
             aria-label="Click here to compare the inputted text blocks"
           >
             Compare
@@ -101,6 +88,14 @@ export default Vue.extend({
       rhsEditor: null,
     }
   },
+  computed: {
+    onThemeChange() {
+      const theme = this.$store.state.theme.darkMode ? 'vs-dark' : 'light'
+      this.lhsEditor?.updateOptions({ theme })
+      this.rhsEditor?.updateOptions({ theme })
+      return this.$store.state.theme.darkMode
+    },
+  },
   mounted() {
     showTutorials(this.$cookies, this.$route.path, this.$cookies.isDarkMode)
     document.addEventListener('keydown', this.handleCtrlEnter)
@@ -121,7 +116,7 @@ export default Vue.extend({
         this.rhsEditor = monaco.editor.create(rhs, {
           ...monacoEditorOptions,
           value: this.rhs || '',
-          wordWrap: 'on'
+          wordWrap: 'on',
         })
       }
     })

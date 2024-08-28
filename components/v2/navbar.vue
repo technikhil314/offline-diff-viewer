@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="sticky top-0 left-0 right-0 z-10 text-gray-800 shadow-lg dark:shadow-dark bg-gray-50 dark:bg-gray-900 dark:text-gray-50"
+    class="sticky top-0 left-0 right-0 z-10 text-gray-800 shadow-lg  dark:shadow-dark bg-gray-50 dark:bg-gray-900 dark:text-gray-50"
   >
     <div class="container flex items-center py-4 m-auto">
       <div
@@ -66,8 +66,10 @@
           <slot name="right" />
           <button
             type="button"
-            class="inline-flex items-center justify-center ml-4 bg-transparent border-2 border-gray-700 rounded-full shadow-lg w-9 h-9 active:scale-y-75 hover:scale-105 hover:shadow-lg"
-            aria-label="Toggle Dark Mode"
+            class="inline-flex items-center justify-center ml-4 bg-transparent border-2 border-gray-700 rounded-full shadow-lg  w-9 h-9 active:scale-y-75 hover:scale-105 hover:shadow-lg"
+            :aria-label="
+              darkMode ? 'Switch to light theme' : 'Switch to dark theme'
+            "
             @click="toggleDarkMode"
           >
             <svg
@@ -173,19 +175,24 @@ export default Vue.extend({
   },
   mounted() {
     if (darkMode === null) {
-      darkMode = this.$cookies.isDarkMode
+      this.darkMode = darkMode = this.$cookies.isDarkMode
       if (darkMode) {
         document.documentElement.classList.add('dark')
         document.cookie = `darkMode=${darkMode}; Secure; max-age=31536000; path=/;`
+        this.$store.commit('theme/set', darkMode)
       }
     }
     document.documentElement.classList.remove('hidden')
   },
   methods: {
     toggleDarkMode() {
-      darkMode = !darkMode
-      document.documentElement.classList[darkMode ? 'add' : 'remove']('dark')
-      document.cookie = `darkMode=${darkMode}; Secure; max-age=31536000; path=/;`
+      const currentDarkMode = this.darkMode
+      document.documentElement.classList[!currentDarkMode ? 'add' : 'remove'](
+        'dark'
+      )
+      document.cookie = `darkMode=${!currentDarkMode}; Secure; max-age=31536000; path=/;`
+      this.$store.commit('theme/set', !currentDarkMode)
+      this.darkMode = !currentDarkMode
     },
   },
 })
