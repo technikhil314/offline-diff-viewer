@@ -1,4 +1,3 @@
-n
 <template>
   <div class="page-contents">
     <Navbar />
@@ -57,7 +56,23 @@ n
         <div class="self-end flex-grow-0 w-full mt-4 text-center">
           <button
             id="submitButton"
-            class="inline-flex items-center justify-center w-48 px-4 py-2 transition-transform transform bg-blue-600 rounded-md shadow-lg outline-none  text-gray-50 focus:ring-4 active:scale-y-75"
+            class="
+              inline-flex
+              items-center
+              justify-center
+              w-48
+              px-4
+              py-2
+              transition-transform
+              transform
+              bg-blue-600
+              rounded-md
+              shadow-lg
+              outline-none
+              text-gray-50
+              focus:ring-4
+              active:scale-y-75
+            "
             aria-label="Click here to compare the inputted text blocks"
           >
             Compare

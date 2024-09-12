@@ -6,16 +6,40 @@
     <main class="outline-none" tabindex="0">
       <DiffActionBar :diff-navigator="diffNavigator" />
       <section
-        class="flex flex-wrap items-stretch w-full gap-4 font-mono text-gray-800  dark:text-gray-50"
+        class="
+          flex flex-wrap
+          items-stretch
+          w-full
+          gap-4
+          font-mono
+          text-gray-800
+          dark:text-gray-50
+        "
       >
         <div class="flex w-full gap-4 space-around">
           <p
-            class="flex-grow-0 flex-shrink-0 w-1/2 text-lg font-bold text-center capitalize break-all "
+            class="
+              flex-grow-0 flex-shrink-0
+              w-1/2
+              text-lg
+              font-bold
+              text-center
+              capitalize
+              break-all
+            "
           >
             <span class="inline-block w-4/5">{{ lhsLabel }}</span>
           </p>
           <p
-            class="flex-grow-0 flex-shrink-0 w-1/2 text-lg font-bold text-center capitalize break-all "
+            class="
+              flex-grow-0 flex-shrink-0
+              w-1/2
+              text-lg
+              font-bold
+              text-center
+              capitalize
+              break-all
+            "
           >
             <span class="inline-block w-4/5">{{ rhsLabel }}</span>
           </p>
@@ -30,8 +54,8 @@
 </template>
 
 <script lang="ts">
-import pako from 'pako'
 import loader from '@monaco-editor/loader'
+import pako from 'pako'
 import Vue from 'vue'
 import {
   getMonacoEditorDefaultOptions,
@@ -51,6 +75,11 @@ export default Vue.extend({
       lhsLabel: '',
       monacoDiffEditor: {},
       diffNavigator: {},
+    }
+  },
+  head() {
+    return {
+      title: 'Diff Viewer - Diff view',
     }
   },
   computed: {
