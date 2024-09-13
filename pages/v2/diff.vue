@@ -30,8 +30,8 @@
 </template>
 
 <script lang="ts">
-import pako from 'pako'
 import loader from '@monaco-editor/loader'
+import pako from 'pako'
 import Vue from 'vue'
 import {
   getMonacoEditorDefaultOptions,
@@ -51,6 +51,11 @@ export default Vue.extend({
       lhsLabel: '',
       monacoDiffEditor: {},
       diffNavigator: {},
+    }
+  },
+  head() {
+    return {
+      title: 'Diff Viewer - Diff view',
     }
   },
   computed: {
@@ -103,6 +108,12 @@ export default Vue.extend({
             }
           )
         }
+        this.$store.commit('data/set', {
+          lhs: this.lhs,
+          rhs: this.rhs,
+          lhsLabel: this.lhsLabel,
+          rhsLabel: this.rhsLabel,
+        })
       }
     })
   },

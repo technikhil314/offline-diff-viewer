@@ -1,4 +1,3 @@
-n
 <template>
   <div class="page-contents">
     <Navbar />
@@ -17,7 +16,7 @@ n
       </section>
       <form class="flex flex-col w-full gap-4" @submit="checkForm">
         <section class="flex w-full gap-4 editor-wrapper">
-          <div class="flex flex-col w-1/2 gap-4">
+          <div class="relative flex flex-col w-1/2 gap-4">
             <label for="lhsLabel" class="relative">
               <input
                 id="lhsLabel"
@@ -34,8 +33,30 @@ n
               name="lhs"
               class="h-screen p-2 border border-gray-600 rounded-md editor"
             ></div>
+            <button
+              aria-label="Beautify entered text"
+              type="button"
+              title="Beautify"
+              class="absolute p-2 transition-all rounded-sm  top-16 right-3 aspect-square dark:hover:bg-slate-600 dark:bg-slate-600/50 hover:bg-slate-300 bg-gray-300/50"
+              @click="
+                lhsEditor.trigger('editor', 'editor.action.formatDocument')
+              "
+            >
+              <svg
+                viewBox="0 0 15 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+              >
+                <path
+                  d="M0 7.5h2m13 0h-2m-8 7H3.5a2 2 0 01-2-2v-10a2 2 0 012-2H5m5 14h1.5a2 2 0 002-2v-10a2 2 0 00-2-2H10"
+                  stroke="currentColor"
+                ></path>
+              </svg>
+            </button>
           </div>
-          <div class="flex flex-col w-1/2 gap-4">
+          <div class="relative flex flex-col w-1/2 gap-4">
             <label for="lhsLabel" class="relative">
               <input
                 id="rhsLabel"
@@ -52,15 +73,76 @@ n
               name="rhs"
               class="h-screen p-2 border border-gray-600 rounded-md editor"
             ></div>
+            <button
+              aria-label="Beautify entered text"
+              type="button"
+              title="Beautify"
+              class="absolute p-2 transition-all rounded-sm  top-16 right-3 aspect-square dark:hover:bg-slate-600 dark:bg-slate-600/50 hover:bg-slate-300 bg-gray-300/50"
+              @click="
+                rhsEditor.trigger('editor', 'editor.action.formatDocument')
+              "
+            >
+              <svg
+                viewBox="0 0 15 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+              >
+                <path
+                  d="M0 7.5h2m13 0h-2m-8 7H3.5a2 2 0 01-2-2v-10a2 2 0 012-2H5m5 14h1.5a2 2 0 002-2v-10a2 2 0 00-2-2H10"
+                  stroke="currentColor"
+                ></path>
+              </svg>
+            </button>
           </div>
         </section>
-        <div class="self-end flex-grow-0 w-full mt-4 text-center">
+        <div
+          class="flex self-end justify-center flex-grow-0 w-full gap-4 mt-4 text-center "
+        >
           <button
             id="submitButton"
-            class="inline-flex items-center justify-center w-48 px-4 py-2 transition-transform transform bg-blue-600 rounded-md shadow-lg outline-none  text-gray-50 focus:ring-4 active:scale-y-75"
+            class="inline-flex items-center justify-center w-48 gap-4 px-4 py-2 transition-transform transform bg-blue-600 rounded-md shadow-lg outline-none  text-gray-50 focus:ring-4 active:scale-y-75"
             aria-label="Click here to compare the inputted text blocks"
           >
             Compare
+            <span class="w-4 aspect-square">
+              <svg
+                viewBox="0 0 15 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+              >
+                <path
+                  d="M13.5 7.5l-4-4m4 4l-4 4m4-4H1"
+                  stroke="currentColor"
+                ></path>
+              </svg>
+            </span>
+          </button>
+          <button
+            id="submitButton"
+            class="inline-flex items-center justify-center w-48 gap-4 px-4 py-2 text-gray-800 transition-transform transform bg-yellow-300 rounded-md shadow-lg outline-none  focus:ring-4 active:scale-y-75"
+            aria-label="Click here to clear all the inputs"
+            type="button"
+            @click="clear"
+          >
+            <span class="w-4 aspect-square">
+              <svg
+                viewBox="0 0 15 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+              >
+                <path
+                  d="M4.5 3V1.5a1 1 0 011-1h4a1 1 0 011 1V3M0 3.5h15m-13.5 0v10a1 1 0 001 1h10a1 1 0 001-1v-10M7.5 7v5m-3-3v3m6-3v3"
+                  stroke="currentColor"
+                ></path>
+              </svg>
+            </span>
+            Clear
           </button>
         </div>
       </form>
@@ -190,6 +272,10 @@ export default Vue.extend({
           `,
         theme: 'error',
       })
+    },
+    clear() {
+      this.lhsEditor.getModel().setValue('')
+      this.rhsEditor.getModel().setValue('')
     },
   },
 })
