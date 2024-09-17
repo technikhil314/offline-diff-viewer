@@ -37,7 +37,18 @@
               aria-label="Beautify entered text"
               type="button"
               title="Beautify"
-              class="absolute p-2 transition-all rounded-sm  top-16 right-3 aspect-square dark:hover:bg-slate-600 dark:bg-slate-600/50 hover:bg-slate-300 bg-gray-300/50"
+              class="
+                absolute
+                p-2
+                transition-all
+                rounded-sm
+                top-16
+                right-3
+                aspect-square
+                dark:hover:bg-slate-600 dark:bg-slate-600/50
+                hover:bg-slate-300
+                bg-gray-300/50
+              "
               @click="
                 lhsEditor.trigger('editor', 'editor.action.formatDocument')
               "
@@ -77,7 +88,18 @@
               aria-label="Beautify entered text"
               type="button"
               title="Beautify"
-              class="absolute p-2 transition-all rounded-sm  top-16 right-3 aspect-square dark:hover:bg-slate-600 dark:bg-slate-600/50 hover:bg-slate-300 bg-gray-300/50"
+              class="
+                absolute
+                p-2
+                transition-all
+                rounded-sm
+                top-16
+                right-3
+                aspect-square
+                dark:hover:bg-slate-600 dark:bg-slate-600/50
+                hover:bg-slate-300
+                bg-gray-300/50
+              "
               @click="
                 rhsEditor.trigger('editor', 'editor.action.formatDocument')
               "
@@ -97,12 +119,27 @@
             </button>
           </div>
         </section>
-        <div
-          class="flex self-end justify-center flex-grow-0 w-full gap-4 mt-4 text-center "
-        >
+        <div class="relative flex justify-center flex-grow-0 w-full gap-4 mt-4">
           <button
             id="submitButton"
-            class="inline-flex items-center justify-center w-48 gap-4 px-4 py-2 transition-transform transform bg-blue-600 rounded-md shadow-lg outline-none  text-gray-50 focus:ring-4 active:scale-y-75"
+            class="
+              inline-flex
+              items-center
+              justify-center
+              w-40
+              gap-4
+              px-4
+              py-2
+              transition-transform
+              transform
+              bg-blue-600
+              rounded-md
+              shadow-lg
+              outline-none
+              text-gray-50
+              focus:ring-4
+              active:scale-y-75
+            "
             aria-label="Click here to compare the inputted text blocks"
           >
             Compare
@@ -122,8 +159,25 @@
             </span>
           </button>
           <button
-            id="submitButton"
-            class="inline-flex items-center justify-center w-48 gap-4 px-4 py-2 text-gray-800 transition-transform transform bg-yellow-300 rounded-md shadow-lg outline-none  focus:ring-4 active:scale-y-75"
+            class="
+              absolute
+              right-0
+              inline-flex
+              items-center
+              justify-center
+              gap-4
+              px-4
+              py-2
+              text-gray-800
+              transition-transform
+              transform
+              bg-yellow-300
+              rounded-md
+              shadow-lg
+              outline-none
+              focus:ring-4
+              active:scale-y-75
+            "
             aria-label="Click here to clear all the inputs"
             type="button"
             @click="clear"
