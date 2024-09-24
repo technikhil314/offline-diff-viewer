@@ -6,10 +6,10 @@
     <main class="text-gray-800 outline-none dark:text-gray-50" tabindex="0">
       <section>
         <header>
-          <h1 class="w-full mb-2 text-xl text-center">
+          <h1 class="w-full mb-2 text-center text-md">
             Find difference in any two text blocks and get easy sharable link
           </h1>
-          <h2 class="w-full mb-2 text-center text-md">
+          <h2 class="w-full mb-2 text-sm text-center">
             Don’t worry, We don’t store any of your data
           </h2>
         </header>
@@ -201,6 +201,7 @@
         </div>
       </form>
     </main>
+    <Footer />
   </div>
 </template>
 
@@ -214,8 +215,9 @@ import {
 } from '../../helpers/utils'
 import showTutorials from '../../helpers/driverjsTutorials'
 import Navbar from '~/components/v2/navbar.vue'
+import Footer from '~/components/v2/footer.vue'
 export default Vue.extend({
-  components: { Navbar },
+  components: { Navbar, Footer },
   layout: 'main',
   data() {
     return {
@@ -337,17 +339,18 @@ export default Vue.extend({
 
 <style scoped>
 main {
-  @apply grid gap-4;
+  @apply grid gap-2;
 
+  margin-top: 1rem;
   grid-template-rows: 100px 1fr;
   @media screen and (min-width: 768px) {
     grid-template-rows: 60px 1fr;
   }
 }
 .editor-wrapper {
-  max-height: calc(100vh - 20rem);
+  max-height: calc(100vh - 18rem);
 }
 .editor {
-  max-height: calc(100vh - 21rem);
+  max-height: calc(100vh - 20rem);
 }
 </style>

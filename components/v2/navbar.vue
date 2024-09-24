@@ -1,6 +1,17 @@
 <template>
   <nav
-    class="sticky top-0 left-0 right-0 z-10 text-gray-800 shadow-lg  dark:shadow-dark bg-gray-50 dark:bg-gray-900 dark:text-gray-50"
+    class="
+      sticky
+      top-0
+      left-0
+      right-0
+      z-10
+      text-gray-800
+      shadow-lg
+      dark:shadow-dark
+      bg-gray-50
+      dark:bg-gray-900 dark:text-gray-50
+    "
   >
     <div class="container flex items-center py-4 m-auto">
       <div
@@ -66,7 +77,20 @@
           <slot name="right" />
           <button
             type="button"
-            class="inline-flex items-center justify-center ml-4 bg-transparent border-2 border-gray-700 rounded-full shadow-lg  w-9 h-9 active:scale-y-75 hover:scale-105 hover:shadow-lg"
+            class="
+              inline-flex
+              items-center
+              justify-center
+              ml-4
+              bg-transparent
+              border-2 border-gray-700
+              rounded-full
+              shadow-lg
+              w-9
+              h-9
+              active:scale-y-75
+              hover:scale-105 hover:shadow-lg
+            "
             :aria-label="
               darkMode ? 'Switch to light theme' : 'Switch to dark theme'
             "
