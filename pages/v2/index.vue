@@ -349,6 +349,6 @@ main {
 }
 .editor,
 .editor-wrapper {
-  max-height: calc(100vh - 18rem);
+  max-height: max(500px, calc(100vh - 18rem));
 }
 </style>

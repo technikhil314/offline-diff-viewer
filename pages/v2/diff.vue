@@ -150,6 +150,6 @@ export default Vue.extend({
 
 <style>
 .editor {
-  max-height: calc(100vh - 17rem);
+  max-height: max(500px, calc(100vh - 17rem));
 }
 </style>
