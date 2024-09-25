@@ -3,7 +3,25 @@
     <button
       id="toggleInlineDiffView"
       type="button"
-      class="inline-flex items-center justify-center px-1 py-1 text-sm text-gray-600 transition-transform transform bg-gray-300 border border-gray-800 rounded-sm outline-none  dark:border-gray-400 dark:text-white dark:bg-gray-800 align-center focus:ring-4 active:scale-y-75 hover:scale-105 hover:shadow-lg"
+      class="
+        inline-flex
+        items-center
+        justify-center
+        px-1
+        py-1
+        text-sm text-gray-600
+        transition-transform
+        transform
+        bg-gray-300
+        border border-gray-800
+        rounded-sm
+        outline-none
+        dark:border-gray-400 dark:text-white dark:bg-gray-800
+        align-center
+        focus:ring-4
+        active:scale-y-75
+        hover:scale-105 hover:shadow-lg
+      "
       @click="toggleInlineDiffView"
     >
       <svg
@@ -15,7 +33,7 @@
         viewBox="0 0 122.88 101.61"
         stroke="currentColor"
         xml:space="preserve"
-        class="w-4 h-4 mr-1 transition-all duration-500 transform transform-gpu"
+        class="w-4 h-4 mr-1 transition-all duration-500 transform-gpu"
         :class="{
           'rotate-90': isEnabled,
         }"

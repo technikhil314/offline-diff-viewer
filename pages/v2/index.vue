@@ -53,18 +53,7 @@
                 lhsEditor.trigger('editor', 'editor.action.formatDocument')
               "
             >
-              <svg
-                viewBox="0 0 15 15"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                width="15"
-                height="15"
-              >
-                <path
-                  d="M0 7.5h2m13 0h-2m-8 7H3.5a2 2 0 01-2-2v-10a2 2 0 012-2H5m5 14h1.5a2 2 0 002-2v-10a2 2 0 00-2-2H10"
-                  stroke="currentColor"
-                ></path>
-              </svg>
+              <PrettyCode />
             </button>
           </div>
           <div class="relative flex flex-col w-1/2 gap-4">
@@ -104,18 +93,7 @@
                 rhsEditor.trigger('editor', 'editor.action.formatDocument')
               "
             >
-              <svg
-                viewBox="0 0 15 15"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                width="15"
-                height="15"
-              >
-                <path
-                  d="M0 7.5h2m13 0h-2m-8 7H3.5a2 2 0 01-2-2v-10a2 2 0 012-2H5m5 14h1.5a2 2 0 002-2v-10a2 2 0 00-2-2H10"
-                  stroke="currentColor"
-                ></path>
-              </svg>
+              <PrettyCode />
             </button>
           </div>
         </section>
@@ -144,18 +122,7 @@
           >
             Compare
             <span class="w-4 aspect-square">
-              <svg
-                viewBox="0 0 15 15"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                width="15"
-                height="15"
-              >
-                <path
-                  d="M13.5 7.5l-4-4m4 4l-4 4m4-4H1"
-                  stroke="currentColor"
-                ></path>
-              </svg>
+              <Forward />
             </span>
           </button>
           <button
@@ -183,18 +150,7 @@
             @click="clear"
           >
             <span class="w-4 aspect-square">
-              <svg
-                viewBox="0 0 15 15"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                width="15"
-                height="15"
-              >
-                <path
-                  d="M4.5 3V1.5a1 1 0 011-1h4a1 1 0 011 1V3M0 3.5h15m-13.5 0v10a1 1 0 001 1h10a1 1 0 001-1v-10M7.5 7v5m-3-3v3m6-3v3"
-                  stroke="currentColor"
-                ></path>
-              </svg>
+              <Bin />
             </span>
             Clear
           </button>
@@ -216,8 +172,11 @@ import {
 import showTutorials from '../../helpers/driverjsTutorials'
 import Navbar from '~/components/v2/navbar.vue'
 import Footer from '~/components/v2/footer.vue'
+import Bin from '~/components/icons/bin.vue'
+import Forward from '~/components/icons/forward.vue'
+import PrettyCode from '~/components/icons/prettyCode.vue'
 export default Vue.extend({
-  components: { Navbar, Footer },
+  components: { Navbar, Footer, Bin, Forward, PrettyCode },
   layout: 'main',
   data() {
     return {
