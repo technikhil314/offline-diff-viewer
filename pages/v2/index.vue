@@ -347,10 +347,8 @@ main {
     grid-template-rows: 60px 1fr;
   }
 }
+.editor,
 .editor-wrapper {
   max-height: calc(100vh - 18rem);
-}
-.editor {
-  max-height: calc(100vh - 20rem);
 }
 </style>

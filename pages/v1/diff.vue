@@ -1,25 +1,36 @@
 <template>
-  <div class="page-contents">
-    <Navbar :show-back-button="true" />
-    <main class="outline-none" tabindex="0">
-      <DiffActionBar />
-      <section
-        class="flex items-stretch w-full gap-4 font-mono text-gray-800  dark:text-gray-50"
-      >
-        <SingleDiff
-          :id="'lhsDiff'"
-          :modified-class-string="'bg-red-200 dark:bg-red-800'"
-          :label="lhsLabel"
-          :diff="lhsDiff"
-        />
-        <SingleDiff
-          :id="'rhsDiff'"
-          :modified-class-string="'bg-green-200 dark:bg-green-700'"
-          :label="rhsLabel"
-          :diff="rhsDiff"
-        />
-      </section>
-    </main>
+  <div class="contents">
+    <div class="page-contents">
+      <Navbar :show-back-button="true" />
+      <main class="outline-none" tabindex="0">
+        <DiffActionBar />
+        <section
+          class="
+            flex
+            items-stretch
+            w-full
+            gap-4
+            font-mono
+            text-gray-800
+            dark:text-gray-50
+          "
+        >
+          <SingleDiff
+            :id="'lhsDiff'"
+            :modified-class-string="'bg-red-200 dark:bg-red-800'"
+            :label="lhsLabel"
+            :diff="lhsDiff"
+          />
+          <SingleDiff
+            :id="'rhsDiff'"
+            :modified-class-string="'bg-green-200 dark:bg-green-700'"
+            :label="rhsLabel"
+            :diff="rhsDiff"
+          />
+        </section>
+      </main>
+    </div>
+    <Footer />
   </div>
 </template>
 
