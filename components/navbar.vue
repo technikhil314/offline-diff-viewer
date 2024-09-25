@@ -79,6 +79,14 @@
               <Github />
             </a>
           </li>
+          <li class="relative inline-block ml-2 lg:ml-4">
+            <a
+              href="https://github.com/sponsors/technikhil314"
+              title="If you like and enjoy using this product then please considering sponsoring my work."
+            >
+              <Sponsor />
+            </a>
+          </li>
         </ul>
       </nav>
     </div>
@@ -92,9 +100,10 @@ import Back from '~/components/icons/back.vue'
 import Sun from '~/components/icons/sun.vue'
 import Moon from '~/components/icons/moon.vue'
 import Brand from '~/components/icons/brand.vue'
+import Sponsor from '~/components/icons/sponsor.vue'
 let darkMode: Boolean | null = null
 export default Vue.extend({
-  components: { Github, Sun, Moon, Back, Brand },
+  components: { Github, Sun, Moon, Back, Brand, Sponsor },
   props: {
     showBackButton: {
       type: Boolean,
