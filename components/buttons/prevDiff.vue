@@ -14,10 +14,9 @@
         bg-gray-300
         border border-gray-800
         rounded-sm
-        outline-none
+        focus-visible:ring-4
         dark:border-gray-400 dark:text-white dark:bg-gray-800
         align-center
-        focus:ring-4
         active:scale-y-75
         hover:scale-105 hover:shadow-lg
       "

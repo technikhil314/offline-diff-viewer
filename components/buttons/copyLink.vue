@@ -14,9 +14,8 @@
         transform
         rounded-md
         shadow
-        outline-none
         justify-self-end
-        focus:ring-4
+        focus-visible:ring-4
         active:scale-y-75
         hover:scale-105 hover:shadow-lg
         copy-uri-button
