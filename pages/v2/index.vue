@@ -6,10 +6,10 @@
     <main class="text-gray-800 outline-none dark:text-gray-50" tabindex="0">
       <section>
         <header>
-          <h1 class="w-full mb-2 text-xl text-center">
+          <h1 class="w-full mb-2 text-center text-md">
             Find difference in any two text blocks and get easy sharable link
           </h1>
-          <h2 class="w-full mb-2 text-center text-md">
+          <h2 class="w-full mb-2 text-sm text-center">
             Don’t worry, We don’t store any of your data
           </h2>
         </header>
@@ -37,23 +37,23 @@
               aria-label="Beautify entered text"
               type="button"
               title="Beautify"
-              class="absolute p-2 transition-all rounded-sm  top-16 right-3 aspect-square dark:hover:bg-slate-600 dark:bg-slate-600/50 hover:bg-slate-300 bg-gray-300/50"
+              class="
+                absolute
+                p-2
+                transition-all
+                rounded-sm
+                top-16
+                right-3
+                aspect-square
+                dark:hover:bg-slate-600 dark:bg-slate-600/50
+                hover:bg-slate-300
+                bg-gray-300/50
+              "
               @click="
                 lhsEditor.trigger('editor', 'editor.action.formatDocument')
               "
             >
-              <svg
-                viewBox="0 0 15 15"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                width="15"
-                height="15"
-              >
-                <path
-                  d="M0 7.5h2m13 0h-2m-8 7H3.5a2 2 0 01-2-2v-10a2 2 0 012-2H5m5 14h1.5a2 2 0 002-2v-10a2 2 0 00-2-2H10"
-                  stroke="currentColor"
-                ></path>
-              </svg>
+              <PrettyCode />
             </button>
           </div>
           <div class="relative flex flex-col w-1/2 gap-4">
@@ -77,76 +77,87 @@
               aria-label="Beautify entered text"
               type="button"
               title="Beautify"
-              class="absolute p-2 transition-all rounded-sm  top-16 right-3 aspect-square dark:hover:bg-slate-600 dark:bg-slate-600/50 hover:bg-slate-300 bg-gray-300/50"
+              class="
+                absolute
+                p-2
+                transition-all
+                rounded-sm
+                top-16
+                right-3
+                aspect-square
+                dark:hover:bg-slate-600 dark:bg-slate-600/50
+                hover:bg-slate-300
+                bg-gray-300/50
+              "
               @click="
                 rhsEditor.trigger('editor', 'editor.action.formatDocument')
               "
             >
-              <svg
-                viewBox="0 0 15 15"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                width="15"
-                height="15"
-              >
-                <path
-                  d="M0 7.5h2m13 0h-2m-8 7H3.5a2 2 0 01-2-2v-10a2 2 0 012-2H5m5 14h1.5a2 2 0 002-2v-10a2 2 0 00-2-2H10"
-                  stroke="currentColor"
-                ></path>
-              </svg>
+              <PrettyCode />
             </button>
           </div>
         </section>
-        <div
-          class="flex self-end justify-center flex-grow-0 w-full gap-4 mt-4 text-center "
-        >
+        <div class="relative flex justify-center flex-grow-0 w-full gap-4 mt-4">
           <button
             id="submitButton"
-            class="inline-flex items-center justify-center w-48 gap-4 px-4 py-2 transition-transform transform bg-blue-600 rounded-md shadow-lg outline-none  text-gray-50 focus:ring-4 active:scale-y-75"
+            class="
+              inline-flex
+              items-center
+              justify-center
+              w-40
+              gap-4
+              px-4
+              py-2
+              transition-transform
+              transform
+              bg-blue-600
+              rounded-md
+              shadow-lg
+              outline-none
+              text-gray-50
+              focus:ring-4
+              active:scale-y-75
+            "
             aria-label="Click here to compare the inputted text blocks"
           >
             Compare
             <span class="w-4 aspect-square">
-              <svg
-                viewBox="0 0 15 15"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                width="15"
-                height="15"
-              >
-                <path
-                  d="M13.5 7.5l-4-4m4 4l-4 4m4-4H1"
-                  stroke="currentColor"
-                ></path>
-              </svg>
+              <Forward />
             </span>
           </button>
           <button
-            id="submitButton"
-            class="inline-flex items-center justify-center w-48 gap-4 px-4 py-2 text-gray-800 transition-transform transform bg-yellow-300 rounded-md shadow-lg outline-none  focus:ring-4 active:scale-y-75"
+            class="
+              absolute
+              right-0
+              inline-flex
+              items-center
+              justify-center
+              gap-4
+              px-4
+              py-2
+              text-gray-800
+              transition-transform
+              transform
+              bg-yellow-300
+              rounded-md
+              shadow-lg
+              outline-none
+              focus:ring-4
+              active:scale-y-75
+            "
             aria-label="Click here to clear all the inputs"
             type="button"
             @click="clear"
           >
             <span class="w-4 aspect-square">
-              <svg
-                viewBox="0 0 15 15"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                width="15"
-                height="15"
-              >
-                <path
-                  d="M4.5 3V1.5a1 1 0 011-1h4a1 1 0 011 1V3M0 3.5h15m-13.5 0v10a1 1 0 001 1h10a1 1 0 001-1v-10M7.5 7v5m-3-3v3m6-3v3"
-                  stroke="currentColor"
-                ></path>
-              </svg>
+              <Bin />
             </span>
             Clear
           </button>
         </div>
       </form>
     </main>
+    <Footer />
   </div>
 </template>
 
@@ -160,8 +171,12 @@ import {
 } from '../../helpers/utils'
 import showTutorials from '../../helpers/driverjsTutorials'
 import Navbar from '~/components/v2/navbar.vue'
+import Footer from '~/components/v2/footer.vue'
+import Bin from '~/components/icons/bin.vue'
+import Forward from '~/components/icons/forward.vue'
+import PrettyCode from '~/components/icons/prettyCode.vue'
 export default Vue.extend({
-  components: { Navbar },
+  components: { Navbar, Footer, Bin, Forward, PrettyCode },
   layout: 'main',
   data() {
     return {
@@ -283,17 +298,16 @@ export default Vue.extend({
 
 <style scoped>
 main {
-  @apply grid gap-4;
+  @apply grid gap-2;
 
+  margin-top: 1rem;
   grid-template-rows: 100px 1fr;
   @media screen and (min-width: 768px) {
     grid-template-rows: 60px 1fr;
   }
 }
+.editor,
 .editor-wrapper {
-  max-height: calc(100vh - 20rem);
-}
-.editor {
-  max-height: calc(100vh - 21rem);
+  max-height: max(500px, calc(100vh - 18rem));
 }
 </style>

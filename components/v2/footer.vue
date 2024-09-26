@@ -2,8 +2,9 @@
   <footer
     class="
       sticky
-      py-4
-      mt-4
+      pt-4
+      pb-2
+      mt-2
       text-center text-gray-800
       top-full
       bg-inherit

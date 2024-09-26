@@ -1,7 +1,20 @@
 <template>
   <div class="sticky top-0 text-right z-1">
     <button
-      class="absolute top-0 right-0 p-2 text-gray-800 transition-all transform rounded-full shadow  dark:text-gray-50 z-1 hover:shadow-lg hover:scale-110 hover:rotate-12"
+      class="
+        absolute
+        top-0
+        right-0
+        p-2
+        text-gray-800
+        transition-all
+        transform
+        rounded-full
+        shadow
+        dark:text-gray-50
+        z-1
+        hover:shadow-lg hover:scale-110 hover:rotate-12
+      "
       :class="{
         'bg-gray-100 dark:bg-gray-600': !copied,
         'bg-green-500': copied,
@@ -11,7 +24,7 @@
       @click="handleClick"
     >
       <span aria-live="assertive" role="status">
-        <span aria-label="copy to clipboard" v-show="!copied">
+        <span v-show="!copied" aria-label="copy to clipboard">
           <svg
             aria-hidden="true"
             class="w-6 h-6"
@@ -28,7 +41,7 @@
             ></path>
           </svg>
         </span>
-        <span aria-label="copied" v-show="copied">
+        <span v-show="copied" aria-label="copied">
           <svg
             aria-hidden="true"
             class="w-6 h-6"

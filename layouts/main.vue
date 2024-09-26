@@ -3,7 +3,6 @@
     <SkipToNav />
     <Toast />
     <Nuxt />
-    <Footer />
   </div>
 </template>
 <script lang="ts">
