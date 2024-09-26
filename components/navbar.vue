@@ -19,12 +19,12 @@
         id="backToDataLink"
         class="hidden mr-4 md:block hover:scale-110 filter hover:drop-shadow-md"
       >
-        <NuxtLink to="/">
+        <NuxtLink to="/v2">
           <Back />
         </NuxtLink>
       </div>
       <div class="flex-shrink-0 mr-6">
-        <NuxtLink to="/">
+        <NuxtLink to="/v2">
           <Brand />
         </NuxtLink>
       </div>
