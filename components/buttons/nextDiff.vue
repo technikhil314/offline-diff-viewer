@@ -2,24 +2,7 @@
   <div id="nextDiffSection" class="inline-flex items-center gap-1">
     <button
       id="nextDiff"
-      class="
-        inline-flex
-        items-center
-        justify-center
-        px-1
-        py-1
-        text-sm text-gray-600
-        transition-transform
-        transform
-        bg-gray-300
-        border border-gray-800
-        rounded-sm
-        dark:border-gray-400 dark:text-white dark:bg-gray-800
-        align-center
-        focus-visible:ring-4
-        active:scale-y-75
-        hover:scale-105 hover:shadow-lg
-      "
+      class="inline-flex items-center justify-center px-1 py-1 text-sm text-gray-600 transition-transform transform bg-gray-300 border border-gray-800 rounded-sm  dark:border-gray-400 dark:text-white dark:bg-gray-800 align-center focus-visible:ring-4 active:scale-y-75 hover:scale-105 hover:shadow-lg"
       aria-label="Go to next diff"
       type="button"
       @click="clickHandler"

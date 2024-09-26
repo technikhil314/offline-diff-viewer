@@ -1,16 +1,6 @@
 <template>
   <footer
-    class="
-      sticky
-      pt-4
-      pb-2
-      mt-2
-      text-center text-gray-800
-      top-full
-      bg-inherit
-      dark:text-gray-50
-      min-h-max
-    "
+    class="sticky pt-4 pb-2 mt-2 text-center text-gray-800  top-full bg-inherit dark:text-gray-50 min-h-max"
   >
     Made with &hearts; using
     <a

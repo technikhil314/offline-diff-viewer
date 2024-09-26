@@ -1,16 +1,16 @@
 <template>
   <div id="toggleScrollInSyncSection" class="inline-flex items-center gap-1">
     <label
+      id="toggleScrollInSyncLabel"
       for="toggleScrollInSync"
       class="text-gray-800 select-none dark:text-gray-50"
-      id="toggleScrollInSyncLabel"
       aria-controls="toggleScrollInSync"
     >
       Scroll in sync
     </label>
     <input
-      aria-labelledby="toggleScrollInSyncLabel"
       id="toggleScrollInSync"
+      aria-labelledby="toggleScrollInSyncLabel"
       type="checkbox"
       :checked="isEnabled"
       class="form-checkbox"

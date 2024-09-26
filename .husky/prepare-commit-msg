@@ -1,4 +1,14 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+if [ "$2" = "message" ]; then
+  echo "Skipping prepare-commit-msg hook due to message."
+  exit 0
+fi
+
+if [ "$2" = "commit" ]; then
+  echo "Skipping prepare-commit-msg hook due to amend."
+  exit 0
+fi
+
 exec </dev/tty && npx cz --hook || true

@@ -2,45 +2,35 @@
   <div class="contents">
     <div class="page-contents">
       <!-- Following hidden input is hacky way to update monaco editor theme when user changes theme manually -->
-      <input type="hidden" inert :value="onThemeChange" />
+      <input
+        type="hidden"
+        class="invisible none"
+        aria-hidden="true"
+        inert
+        :value="onThemeChange"
+      />
       <Navbar :show-back-button="true" />
       <main class="outline-none" tabindex="0">
-        <DiffActionBar :diff-navigator="diffNavigator" />
+        <DiffActionBar
+          :diff-navigator="diffNavigator"
+          :on-diff-fashion="toggleDiffFashion"
+        />
         <section
-          class="
-            flex flex-wrap
-            items-stretch
-            w-full
-            gap-4
-            font-mono
-            text-gray-800
-            dark:text-gray-50
-          "
+          class="flex flex-wrap items-stretch w-full gap-4 font-mono text-gray-800  dark:text-gray-50"
         >
-          <div class="flex w-full gap-4 space-around">
+          <div
+            :class="{
+              'flex w-full gap-4 space-around transition-opacity': true,
+              'opacity-0': !isSideBySideDiff,
+            }"
+          >
             <p
-              class="
-                flex-grow-0 flex-shrink-0
-                w-1/2
-                text-lg
-                font-bold
-                text-center
-                capitalize
-                break-all
-              "
+              class="flex-grow-0 flex-shrink-0 w-1/2 text-lg font-bold text-center capitalize break-all "
             >
               <span class="inline-block w-4/5">{{ lhsLabel }}</span>
             </p>
             <p
-              class="
-                flex-grow-0 flex-shrink-0
-                w-1/2
-                text-lg
-                font-bold
-                text-center
-                capitalize
-                break-all
-              "
+              class="flex-grow-0 flex-shrink-0 w-1/2 text-lg font-bold text-center capitalize break-all "
             >
               <span class="inline-block w-4/5">{{ rhsLabel }}</span>
             </p>
@@ -79,6 +69,7 @@ export default Vue.extend({
       lhsLabel: '',
       monacoDiffEditor: {},
       diffNavigator: {},
+      isSideBySideDiff: true,
     }
   },
   head() {
@@ -144,6 +135,12 @@ export default Vue.extend({
         })
       }
     })
+  },
+  methods: {
+    toggleDiffFashion(value: boolean) {
+      this.monacoDiffEditor?.updateOptions?.({ renderSideBySide: value })
+      this.isSideBySideDiff = value
+    },
   },
 })
 </script>
