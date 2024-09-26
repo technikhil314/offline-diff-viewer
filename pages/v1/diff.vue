@@ -5,15 +5,7 @@
       <main class="outline-none" tabindex="0">
         <DiffActionBar />
         <section
-          class="
-            flex
-            items-stretch
-            w-full
-            gap-4
-            font-mono
-            text-gray-800
-            dark:text-gray-50
-          "
+          class="flex items-stretch w-full gap-4 font-mono text-gray-800  dark:text-gray-50"
         >
           <SingleDiff
             :id="'lhsDiff'"

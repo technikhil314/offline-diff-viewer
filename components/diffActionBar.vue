@@ -1,6 +1,25 @@
 <template>
   <section
-    class="flex items-center justify-between px-4 py-2 mb-4 sticky top-[70px] dark:bg-gray-700 bg-gray-300 dark:bg-opacity-50 bg-opacity-50 backdrop-blur-sm rounded-md shadow-lg border border-gray-500 w-full z-10"
+    class="
+      flex
+      items-center
+      justify-between
+      px-4
+      py-2
+      mb-4
+      sticky
+      top-[70px]
+      dark:bg-gray-700
+      bg-gray-300
+      dark:bg-opacity-50
+      bg-opacity-50
+      backdrop-blur-sm
+      rounded-md
+      shadow-lg
+      border border-gray-500
+      w-full
+      z-10
+    "
   >
     <div class="flex gap-4">
       <ToggleInSync />

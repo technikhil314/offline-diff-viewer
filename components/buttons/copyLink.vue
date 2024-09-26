@@ -3,23 +3,7 @@
     <button
       id="copyLinkButton"
       type="button"
-      class="
-        inline-flex
-        items-center
-        justify-center
-        gap-1
-        p-2
-        text-sm
-        transition-transform
-        transform
-        rounded-md
-        shadow
-        justify-self-end
-        focus-visible:ring-4
-        active:scale-y-75
-        hover:scale-105 hover:shadow-lg
-        copy-uri-button
-      "
+      class="inline-flex items-center justify-center gap-1 p-2 text-sm transition-transform transform rounded-md shadow  justify-self-end focus-visible:ring-4 active:scale-y-75 hover:scale-105 hover:shadow-lg copy-uri-button"
       aria-label="Click here to copy url to clipboard"
       :class="{
         'bg-blue-500 text-white': !copied,

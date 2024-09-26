@@ -30,14 +30,7 @@
               id="lhs"
               rows="28"
               name="lhs"
-              class="
-                flex-1
-                w-full
-                bg-transparent
-                rounded-md
-                resize-none
-                form-textarea
-              "
+              class="flex-1 w-full bg-transparent rounded-md resize-none  form-textarea"
               v-html="lhs"
             ></textarea>
           </div>
@@ -57,14 +50,7 @@
               id="rhs"
               rows="28"
               name="rhs"
-              class="
-                flex-1
-                w-full
-                bg-transparent
-                rounded-md
-                resize-none
-                form-textarea
-              "
+              class="flex-1 w-full bg-transparent rounded-md resize-none  form-textarea"
               v-html="rhs"
             >
             </textarea>
@@ -72,25 +58,9 @@
         </section>
         <div class="self-end flex-grow-0 w-full text-center">
           <button
-            class="
-              inline-flex
-              items-center
-              justify-center
-              w-48
-              px-4
-              py-2
-              transition-transform
-              transform
-              bg-blue-600
-              rounded-md
-              shadow-lg
-              outline-none
-              text-gray-50
-              focus:ring-4
-              active:scale-y-75
-            "
-            aria-label="Click here to compare the inputted text blocks"
             id="submitButton"
+            class="inline-flex items-center justify-center w-48 px-4 py-2 transition-transform transform bg-blue-600 rounded-md shadow-lg outline-none  text-gray-50 focus:ring-4 active:scale-y-75"
+            aria-label="Click here to compare the inputted text blocks"
           >
             Compare
           </button>
