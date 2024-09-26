@@ -12,7 +12,7 @@
     "lint:style": "stylelint \"**/*.{vue,css}\" --ignore-path .gitignore",
     "prepare": "npx husky install",
     "lint": "npm run lint:jsts -- --fix && npm run lint:style",
-    "test": "jest"
+    "test": "jest --passWithNoTests"
   },
   "engines": {
     "node": ">=18"
