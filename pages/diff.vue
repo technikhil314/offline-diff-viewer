@@ -1,133 +1,90 @@
 <template>
-  <div class="page-contents">
-    <Navbar :show-back-button="true">
-      <template #right>
-        <button
-          type="button"
-          class="
-            inline-flex
-            justify-center
-            px-4
-            py-2
-            transition-transform
-            transform
-            rounded-md
-            shadow
-            outline-none
-            copy-uri-button
-            align-center
-            focus:ring-4
-            active:scale-y-75
-          "
-          :class="{
-            'bg-blue-500 text-white': !copied,
-            'bg-green-500 text-gray-800': copied,
-          }"
-          @click="copyUrlToClipboard"
-        >
-          <span v-show="copied" class="inline-flex justify-center">
-            <svg
-              class="inline-block w-6 h-6 ml-[-4px]"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
-              ></path>
-            </svg>
-            <span class="hidden ml-2 md:inline-block">Copied</span>
-          </span>
-          <span v-show="!copied" class="inline-flex justify-center">
-            <svg
-              class="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-              ></path>
-            </svg>
-            <span class="hidden ml-2 md:inline-block">Copy link</span>
-          </span>
-        </button>
-      </template>
-    </Navbar>
-    <main class="outline-none" tabindex="0">
-      <div
-        class="
-          flex
-          items-stretch
-          w-full
-          gap-4
-          font-mono
-          text-gray-800
-          dark:text-gray-50
-        "
-      >
-        <div
-          class="
-            relative
-            flex-1
-            px-4
-            py-2
-            overflow-y-auto
-            border-2
-            rounded-md
-            dark:border-gray-500
-            max-h-screen--nav
-            line-number-gutter
-            min-h-80
-          "
-        >
-          <RTStickyCopyButton :click-handler="copyTextToClipboard" />
-          <div
-            v-for="(lineDiff, index) in lhsDiff"
-            :key="index"
+  <div class="contents">
+    <div class="page-contents">
+      <Navbar :show-back-button="true">
+        <template #right>
+          <button
+            type="button"
+            class="inline-flex justify-center px-4 py-2 transition-transform transform rounded-md shadow outline-none  copy-uri-button align-center focus:ring-4 active:scale-y-75"
             :class="{
-              'bg-red-200 dark:bg-red-800': lineDiff.includes('isModified'),
+              'bg-blue-500 text-white': !copied,
+              'bg-green-500 text-gray-800': copied,
             }"
+            @click="copyUrlToClipboard"
           >
-            <p class="break-all whitespace-pre-wrap" v-html="lineDiff"></p>
+            <span v-show="copied" class="inline-flex justify-center">
+              <svg
+                class="inline-block w-6 h-6 ml-[-4px]"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+                ></path>
+              </svg>
+              <span class="hidden ml-2 md:inline-block">Copied</span>
+            </span>
+            <span v-show="!copied" class="inline-flex justify-center">
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                ></path>
+              </svg>
+              <span class="hidden ml-2 md:inline-block">Copy link</span>
+            </span>
+          </button>
+        </template>
+      </Navbar>
+      <main class="outline-none" tabindex="0">
+        <div
+          class="flex items-stretch w-full gap-4 font-mono text-gray-800  dark:text-gray-50"
+        >
+          <div
+            class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md  dark:border-gray-500 max-h-screen--nav line-number-gutter min-h-80"
+          >
+            <RTStickyCopyButton :click-handler="copyTextToClipboard" />
+            <div
+              v-for="(lineDiff, index) in lhsDiff"
+              :key="index"
+              :class="{
+                'bg-red-200 dark:bg-red-800': lineDiff.includes('isModified'),
+              }"
+            >
+              <p class="break-all whitespace-pre-wrap" v-html="lineDiff"></p>
+            </div>
+          </div>
+          <div
+            class="relative flex-1 px-4 py-2 overflow-y-auto border-2 rounded-md  dark:border-gray-500 min-h-80 line-number-gutter max-h-screen--nav"
+          >
+            <RTStickyCopyButton :click-handler="copyTextToClipboard" />
+            <div
+              v-for="(lineDiff, index) in rhsDiff"
+              :key="index"
+              :class="{
+                'bg-green-200 dark:bg-green-700':
+                  lineDiff.includes('isModified'),
+              }"
+            >
+              <p class="break-all whitespace-pre-wrap" v-html="lineDiff"></p>
+            </div>
           </div>
         </div>
-        <div
-          class="
-            relative
-            flex-1
-            px-4
-            py-2
-            overflow-y-auto
-            border-2
-            rounded-md
-            dark:border-gray-500
-            min-h-80
-            line-number-gutter
-            max-h-screen--nav
-          "
-        >
-          <RTStickyCopyButton :click-handler="copyTextToClipboard" />
-          <div
-            v-for="(lineDiff, index) in rhsDiff"
-            :key="index"
-            :class="{
-              'bg-green-200 dark:bg-green-700': lineDiff.includes('isModified'),
-            }"
-          >
-            <p class="break-all whitespace-pre-wrap" v-html="lineDiff"></p>
-          </div>
-        </div>
-      </div>
-    </main>
+      </main>
+    </div>
     <Footer />
   </div>
 </template>
