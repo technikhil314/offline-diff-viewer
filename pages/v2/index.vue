@@ -2,7 +2,13 @@
   <div class="page-contents">
     <Navbar />
     <!-- Following hidden input is hacky way to update monaco editor theme when user changes theme manually -->
-    <input type="hidden" inert :value="onThemeChange" />
+    <input
+      type="hidden"
+      inert
+      :value="onThemeChange"
+      class="invisible none"
+      aria-hidden="true"
+    />
     <main class="text-gray-800 outline-none dark:text-gray-50" tabindex="0">
       <section>
         <header>

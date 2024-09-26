@@ -2,7 +2,13 @@
   <div class="contents">
     <div class="page-contents">
       <!-- Following hidden input is hacky way to update monaco editor theme when user changes theme manually -->
-      <input type="hidden" inert :value="onThemeChange" />
+      <input
+        type="hidden"
+        class="invisible none"
+        aria-hidden="true"
+        inert
+        :value="onThemeChange"
+      />
       <Navbar :show-back-button="true" />
       <main class="outline-none" tabindex="0">
         <DiffActionBar :diff-navigator="diffNavigator" />
