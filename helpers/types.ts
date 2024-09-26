@@ -45,4 +45,5 @@ export interface v2DiffData {
   lhsLabel: string
   monacoDiffEditor: any
   diffNavigator: any
+  isSideBySideDiff: boolean
 }

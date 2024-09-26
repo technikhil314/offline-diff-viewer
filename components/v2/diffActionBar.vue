@@ -20,7 +20,10 @@
       <NextDiff :click-handler="goToNextDiff" />
       <PrevDiff :click-handler="goToPreviousDiff" />
     </div>
-    <CopyLink :click-handler="copyUrlToClipboard" :copied="copied"></CopyLink>
+    <div class="flex items-center gap-4">
+      <DiffStyle :click-handler="toggleDiffFashion" />
+      <CopyLink :click-handler="copyUrlToClipboard" :copied="copied"></CopyLink>
+    </div>
   </section>
 </template>
 
@@ -29,6 +32,7 @@ import Vue from 'vue'
 import PrevDiff from '../buttons/prevDiff.vue'
 import NextDiff from '../buttons/nextDiff.vue'
 import CopyLink from '../buttons/copyLink.vue'
+import DiffStyle from '../buttons/diffStyle.vue'
 import { putToClipboard } from '~/helpers/utils'
 import { DiffActionBarData } from '~/helpers/types'
 export default Vue.extend({
@@ -36,10 +40,15 @@ export default Vue.extend({
     PrevDiff,
     NextDiff,
     CopyLink,
+    DiffStyle,
   },
   props: {
     diffNavigator: {
       type: Object,
+      required: true,
+    },
+    onDiffFashion: {
+      type: Function,
       required: true,
     },
   },
@@ -87,6 +96,9 @@ export default Vue.extend({
     },
     goToPreviousDiff() {
       this.diffNavigator.previous()
+    },
+    toggleDiffFashion(value: boolean) {
+      this.onDiffFashion(value)
     },
   },
 })
