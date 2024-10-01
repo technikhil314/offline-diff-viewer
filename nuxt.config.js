@@ -76,6 +76,10 @@ export default {
         property: 'og:url',
         content: `${BASE_URL}/128x128.png`,
       },
+      {
+        name: 'google-adsense-account',
+        content: 'ca-pub-4467877923505914',
+      },
     ],
     link: [
       { rel: 'manifest', href: '/manifest.json' },
@@ -284,5 +288,5 @@ export default {
         config.devtool = 'source-map'
       }
     },
-  }
+  },
 }
