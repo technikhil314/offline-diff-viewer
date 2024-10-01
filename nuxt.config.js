@@ -2,20 +2,18 @@ import path from 'path'
 import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin'
 
 const BASE_URL = 'https://diffviewer.vercel.app'
-const domainAliases = [
-  'https://diffchecker.vercel.app/',
-  'https://textdiff.vercel.app/',
-  'https://differencer.vercel.app/',
-  'https://diffie.vercel.app/',
-  'https://differencefinder.vercel.app/',
-]
-const canonicalLinks = domainAliases.map((x) => ({ rel: 'canonical', href: x }))
 const DESCRIPTION =
   'A privacy first diff viewer that is secure, easy, simple and for any text type'
 export default {
   ssr: false,
   head: {
     title: `Diff viewer - ${DESCRIPTION}`,
+    script: [
+      {
+        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4467877923505914',
+        crossorigin: 'anonymous',
+      },
+    ],
     meta: [
       { charset: 'utf-8' },
       { name: 'color-scheme', content: 'dark light' },
@@ -229,7 +227,6 @@ export default {
         sizes: '180x180',
         href: '/light-apple-touch-icon-180x180.png',
       },
-      ...canonicalLinks,
     ],
   },
 
