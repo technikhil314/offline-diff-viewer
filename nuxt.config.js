@@ -4,6 +4,14 @@ import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin'
 const BASE_URL = 'https://diffviewer.vercel.app'
 const DESCRIPTION =
   'A privacy first diff viewer that is secure, easy, simple and for any text type'
+const domainAliases = [
+  'https://diffchecker.vercel.app/',
+  'https://textdiff.vercel.app/',
+  'https://differencer.vercel.app/',
+  'https://diffie.vercel.app/',
+  'https://differencefinder.vercel.app/',
+]
+const canonicalLinks = domainAliases.map((x) => ({ rel: 'canonical', href: x }))
 export default {
   ssr: false,
   head: {
@@ -17,7 +25,10 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'color-scheme', content: 'dark light' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      {
+        name: 'viewport',
+        content: 'width=750px; initial-scale=1',
+      },
       { name: 'format-detection', content: 'telephone=no' },
       { name: 'theme-color', content: '#2563EB' },
       { name: 'og:url', property: 'og:url', content: `${BASE_URL}` },
@@ -227,6 +238,7 @@ export default {
         sizes: '180x180',
         href: '/light-apple-touch-icon-180x180.png',
       },
+      ...canonicalLinks,
     ],
   },
 
