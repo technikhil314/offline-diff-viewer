@@ -74,7 +74,7 @@ export default Vue.extend({
   },
   head() {
     return {
-      title: 'Diff Viewer - Diff view',
+      title: 'Diff view | Diff Viewer',
     }
   },
   computed: {
