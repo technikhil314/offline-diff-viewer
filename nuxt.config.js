@@ -4,16 +4,6 @@ import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin'
 const BASE_URL = 'https://diffviewer.vercel.app'
 const DESCRIPTION =
   'A tool that helps you compare any two text blocks without sending any of your data to our servers'
-const domainAliases = [
-  'https://diffchecker.vercel.app/',
-  'https://textdiff.vercel.app/',
-  'https://differencer.vercel.app/',
-  'https://diffie.vercel.app/',
-  'https://differencefinder.vercel.app/',
-  'https://differentiator.vercel.app/',
-  'https://text-differentiator.vercel.app/',
-]
-const canonicalLinks = domainAliases.map((x) => ({ rel: 'canonical', href: x }))
 export default {
   ssr: false,
   head: {
@@ -245,7 +235,6 @@ export default {
         sizes: '180x180',
         href: '/light-apple-touch-icon-180x180.png',
       },
-      ...canonicalLinks,
     ],
   },
 
