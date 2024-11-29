@@ -2,12 +2,14 @@ import path from 'path'
 import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin'
 
 const BASE_URL = 'https://diffviewer.vercel.app'
-const DESCRIPTION =
+const TITLE_DESCRIPTION =
   'A tool that helps you compare any two text blocks without sending any of your data to our servers'
+const DESCRIPTION =
+  'A diff checker tool and/or utility that allows you to analyze and contrast two pieces of text without transmitting your information to our servers.'
 export default {
   ssr: false,
   head: {
-    title: `${DESCRIPTION} | Diff Viewer`,
+    title: `${TITLE_DESCRIPTION} | Diff Viewer`,
     script: [
       {
         src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4467877923505914',
@@ -19,7 +21,7 @@ export default {
       {
         name: 'keywords',
         content:
-          'compare text, difference, diff view, diff viewer, hamming distance, difference, data privacy, differentiate, differentiator, text differentiator',
+          'compare text, difference, diff view, diff viewer, diff checker, hamming distance, difference, data privacy, differentiate, differentiator, text differentiator',
       },
       { name: 'color-scheme', content: 'dark light' },
       {
