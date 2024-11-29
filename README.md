@@ -14,7 +14,7 @@ You can take a look at the source code itself. All your data is kept as hash fra
 1. Images
 2. Audio wave format
 
-## Resoning for building yet another diff viewer tool
+## Reason for building yet another diff viewer tool
 
 I realise we are missing a diff viewer that is
 
