@@ -1,9 +1,15 @@
 {
+  "version": 2,
   "redirects": [
     {
       "source": "/",
       "destination": "/v2",
       "permanent": false
     }
-  ]
+  ],
+  "functions": {
+    "api/ok.js": {
+      "maxDuration": 50
+    }
+  }
 }
