@@ -1,8 +1,13 @@
-// import { getTop10Records } from './db/index.js'
+import { getTop10Records } from './db/index.js'
 
 export const config = { runtime: 'nodejs' }
 
-export default function handler(_req, res) {
-  // const records = await getTop10Records()
-  res.json({ message: 'Hello World' })
+export default async function handler(_req, res) {
+  try {
+    const records = await getTop10Records()
+    res.json(records)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Internal server error' })
+  }
 }
