@@ -109,15 +109,7 @@ export default Vue.extend({
     if (!window.location.search.includes('id=')) {
       const _diff = this.$route.hash
       if (_diff) {
-        const gunzip = pako.ungzip(
-          Buffer.from(undoUrlSafeBase64(_diff), 'base64')
-        )
-        const diffData = JSON.parse(Buffer.from(gunzip).toString('utf8'))
-        const { lhs, rhs, lhsLabel, rhsLabel } = diffData
-        this.lhsLabel = lhsLabel
-        this.rhsLabel = rhsLabel
-        this.lhs = lhs
-        this.rhs = rhs
+        this.unzipCommitData(_diff)
       }
     }
   },
@@ -127,21 +119,7 @@ export default Vue.extend({
         if (!data) {
           return
         }
-        const gunzip = pako.ungzip(
-          Buffer.from(undoUrlSafeBase64(data), 'base64')
-        )
-        const diffData = JSON.parse(Buffer.from(gunzip).toString('utf8'))
-        const { lhs, rhs, lhsLabel, rhsLabel } = diffData
-        this.lhsLabel = lhsLabel
-        this.rhsLabel = rhsLabel
-        this.lhs = lhs
-        this.rhs = rhs
-        this.$store.commit('data/set', {
-          lhs: this.lhs,
-          rhs: this.rhs,
-          lhsLabel: this.lhsLabel,
-          rhsLabel: this.rhsLabel,
-        })
+        this.unzipCommitData(data)
         this.e2eDataStatusText = ''
         this.renderDiff()
       })
@@ -212,13 +190,22 @@ export default Vue.extend({
               }
             )
           }
-          this.$store.commit('data/set', {
-            lhs: this.lhs,
-            rhs: this.rhs,
-            lhsLabel: this.lhsLabel,
-            rhsLabel: this.rhsLabel,
-          })
         }
+      })
+    },
+    unzipCommitData(data: string) {
+      const gunzip = pako.ungzip(Buffer.from(undoUrlSafeBase64(data), 'base64'))
+      const diffData = JSON.parse(Buffer.from(gunzip).toString('utf8'))
+      const { lhs, rhs, lhsLabel, rhsLabel } = diffData
+      this.lhsLabel = lhsLabel
+      this.rhsLabel = rhsLabel
+      this.lhs = lhs
+      this.rhs = rhs
+      this.$store.commit('data/set', {
+        lhs: this.lhs,
+        rhs: this.rhs,
+        lhsLabel: this.lhsLabel,
+        rhsLabel: this.rhsLabel,
       })
     },
   },
