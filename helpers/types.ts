@@ -25,7 +25,8 @@ export type TutorialsMetadata = Record<string, TutorialMetadata[]>
 export interface DiffActionBarData {
   comparator: HTMLElement | null
   comparer: HTMLElement | null
-  copied: Boolean
+  copied: Boolean | null
+  e2eLink: string | null
   treeWalker: TreeWalker | null
 }
 
@@ -46,4 +47,5 @@ export interface v2DiffData {
   monacoDiffEditor: any
   diffNavigator: any
   isSideBySideDiff: boolean
+  e2eDataStatusText: string
 }

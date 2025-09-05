@@ -72,3 +72,30 @@ export function getMonacoEditorDefaultOptions(theme: string) {
     contextmenu: false,
   }
 }
+
+export function arrayBufferToBase64(buffer: ArrayBuffer) {
+  let binary = '';
+  const bytes = new Uint8Array(buffer);
+  const len = bytes.byteLength;
+  for (let i = 0; i < len; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return window.btoa(binary);
+}
+
+export function base64ToArrayBuffer(base64: string) {
+  const binaryString = window.atob(base64);
+  const len = binaryString.length;
+  const bytes = new Uint8Array(len);
+  for (let i = 0; i < len; i++) {
+    bytes[i] = binaryString.charCodeAt(i)
+  }
+  return bytes.buffer;
+}
+
+export function getRandomDiffId() {
+  const array = new Uint32Array(2);
+  const randomValues = crypto.getRandomValues(array);
+  const randomValuesHex = randomValues.map(value => value).join('');
+  return `diff-${randomValuesHex}`
+}

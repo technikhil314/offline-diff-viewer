@@ -18,8 +18,8 @@
     "node": "22.x"
   },
   "lint-staged": {
-    "*.{js,vue,ts}": "eslint",
-    "*.{css,vue}": "stylelint"
+    "*.{js,vue,ts}": "eslint --fix",
+    "*.{css,vue}": "stylelint --fix"
   },
   "dependencies": {
     "@monaco-editor/loader": "^1.4.0",

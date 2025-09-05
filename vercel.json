@@ -8,7 +8,10 @@
     }
   ],
   "functions": {
-    "api/ok.js": {
+    "api/createLink.js": {
+      "maxDuration": 50
+    },
+    "api/getLink.js": {
       "maxDuration": 50
     }
   }

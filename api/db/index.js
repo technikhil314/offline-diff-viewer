@@ -29,7 +29,8 @@ export async function getRecordById(id) {
   try {
     await client.connect()
     const res = await client.query(
-      `SELECT data, "creationTimestamp" FROM "${DB_SCHEMA}".e2e_data WHERE id = ${id};`
+      `SELECT data, "creationTimestamp" FROM "${DB_SCHEMA}".e2e_data WHERE id = $1;`,
+      [id]
     )
     return res.rows
   } catch (error) {
@@ -44,7 +45,8 @@ export async function insertRecord({ data, id }) {
   try {
     await client.connect()
     await client.query(
-      `INSERT INTO "${DB_SCHEMA}".e2e_data(data, id) VALUES ('${data}', '${id}');`
+      `INSERT INTO "${DB_SCHEMA}".e2e_data(data, id) VALUES ($1, $2);`,
+      [data, id]
     )
     return true
   } catch (error) {

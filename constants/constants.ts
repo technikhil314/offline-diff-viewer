@@ -1,0 +1,1 @@
+export const SIMPLE_DIFF_CHARACTER_LIMIT = 10000;
