@@ -51,6 +51,7 @@ export default Vue.extend({
       comparator: null,
       comparer: null,
       treeWalker: null,
+      e2eLink: null,
     }
   },
   mounted() {

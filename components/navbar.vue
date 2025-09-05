@@ -17,7 +17,6 @@
           <Brand />
         </NuxtLink>
       </div>
-
       <div class="flex items-center justify-between flex-1">
         <div class="items-center w-1/2">
           <a

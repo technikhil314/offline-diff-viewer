@@ -34,6 +34,7 @@ module.exports = {
     animation: {
       'linear-bounce': 'linear-bounce 1s linear infinite',
       wiggle: 'wiggle 1s linear infinite',
+      bounce: 'bounce 1s linear infinite',
     },
     zIndex: {
       1: 1,

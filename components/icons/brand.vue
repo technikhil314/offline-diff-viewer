@@ -2,7 +2,6 @@
   <svg
     height="40px"
     width="40px"
-    class="dark:text-white"
     fill="#000000"
     stroke="currentColor"
     xmlns="http://www.w3.org/2000/svg"
@@ -23,3 +22,8 @@
 import Vue from 'vue'
 export default Vue.extend({})
 </script>
+<style scoped>
+.dark svg {
+  filter: invert(1) hue-rotate(180deg);
+}
+</style>

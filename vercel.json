@@ -1,9 +1,18 @@
 {
+  "version": 2,
   "redirects": [
     {
       "source": "/",
       "destination": "/v2",
       "permanent": false
     }
-  ]
+  ],
+  "functions": {
+    "api/createLink.js": {
+      "maxDuration": 50
+    },
+    "api/getLink.js": {
+      "maxDuration": 50
+    }
+  }
 }
