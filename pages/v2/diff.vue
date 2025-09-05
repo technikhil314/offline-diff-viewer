@@ -73,7 +73,8 @@ import { getDecryptedText, getDepryctionKey } from '~/helpers/decrypt'
 import { v2DiffData } from '~/helpers/types'
 import {
   E2E_DATA_DECRYPTING_INFO,
-  E2E_DATA_ERROR,
+  E2E_DATA_DECRYPTION_ERROR,
+  E2E_DATA_FETCH_ERROR,
   E2E_DATA_FINALIZING_INFO,
   E2E_DATA_LOADING_INFO,
   E2E_DATA_NO_LONGER_AVAILABLE_ERROR,
@@ -134,12 +135,20 @@ export default Vue.extend({
     },
     async getE2EData() {
       this.e2eDataStatusText = E2E_DATA_LOADING_INFO
+      const url = new URL(window.location.href)
+      const id = url.searchParams.get('id')
+      const key = url.hash.replace(/^#/, '')
+      let response = null;
+        let data = null
       try {
-        const url = new URL(window.location.href)
-        const id = url.searchParams.get('id')
-        const key = url.hash.replace(/^#/, '')
-        const response = await fetch(`/api/getLink?id=${id}`)
-        const data = await response.json()
+        response = await fetch(`/api/getLink?id=${id}`)
+        data = await response.json()
+      } catch (error) {
+        console.error(error)
+        this.e2eDataStatusText = E2E_DATA_FETCH_ERROR
+        return null
+      }
+      try {
         if (data.length === 0) {
           this.e2eDataStatusText = E2E_DATA_NO_LONGER_AVAILABLE_ERROR
           return null
@@ -157,7 +166,7 @@ export default Vue.extend({
         return decryptedData
       } catch (error) {
         console.error(error)
-        this.e2eDataStatusText = E2E_DATA_ERROR
+        this.e2eDataStatusText = E2E_DATA_DECRYPTION_ERROR
         return null
       }
     },
