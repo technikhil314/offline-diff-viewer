@@ -5,11 +5,11 @@
     class="inline-flex gap-1 justify-center justify-self-end items-center p-2 text-sm rounded-md shadow transition-transform transform  focus-visible:ring-4 active:scale-y-75 hover:scale-105 hover:shadow-lg copy-uri-button"
     aria-label="Click here to copy url to clipboard"
     :class="{
-      'bg-blue-500 text-white': copied === false,
+      'bg-blue-500 text-white': !copied,
       'bg-green-500 text-gray-800': copied === true,
-      'bg-blue-500 text-white animate-pulse': copied === null,
+      'pointer-events-none': copied === null || copied === true,
     }"
-    :disabled="copied === null"
+    :disabled="copied === null || copied === true"
     @click="clickHandler"
   >
     <span
@@ -21,7 +21,14 @@
         <Copied />
       </span>
       <span v-show="copied" class="hidden md:inline-block">Copied</span>
-      <span v-show="!copied" class="inline" aria-hidden="true">
+      <span
+        v-show="!copied"
+        class="inline"
+        aria-hidden="true"
+        :class="{
+          'animate animate-wiggle': copied === null,
+        }"
+      >
         <Link />
       </span>
       <span v-show="!copied" class="hidden md:inline-block">{{
