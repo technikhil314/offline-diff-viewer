@@ -1,4 +1,5 @@
-import { insertRecord } from './db/index.js'
+import { getPool } from './db/index.js'
+import { insertRecord } from './db/insertRecord.js'
 
 export const config = { runtime: 'nodejs' }
 
@@ -20,3 +21,7 @@ export default async function handler(req, res) {
     res.status(500).json({ message: error.message || 'Internal server error' })
   }
 }
+
+process.on('SIGTERM', () => {
+  getPool().end()
+})
