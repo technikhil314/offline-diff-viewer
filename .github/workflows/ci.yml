@@ -24,13 +24,13 @@ jobs:
         uses: actions/checkout@master
 
       - name: Setup node env 🏗
-        uses: actions/setup-node@v2.1.5
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
           check-latest: true
 
       - name: Cache node_modules 📦
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v3
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
