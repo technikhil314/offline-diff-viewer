@@ -7,7 +7,7 @@ export const E2E_DATA_LOADING_INFO = 'Loading your end to end encrypted diff...'
 
 export const E2E_DATA_DECRYPTING_INFO = 'Decrypting your diff on your browser...'
 
-export const E2E_DATA_FINALIZING_INFO = 'Finalizing your diff...'
+export const E2E_DATA_FINALIZING_INFO = 'Diffing your data...'
 
 export const E2E_DATA_ERROR =
   "We couldn't fetch/decrypt your diff. Please try again later."
