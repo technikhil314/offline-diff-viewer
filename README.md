@@ -3,7 +3,8 @@
 A diff viewer that gives you sharable diff view links but does not store your data. (This takes inspiration from typescript playground how it stores your code in url itself) but the for very large data we will be doing end to end encryption just like `excalidraw` so you can still have sharable links without worrying if you should store your enterprise data or not.
 
 ## :bangbang: No data sent to server
-You can take a look at the source code itself. All your data is kept as hash fragment in URL which never makes its way to server. Totally avoiding man in middle and XSS attacks to steal your data or any data breach. The data always stays in your URL and browser and never makes its way on the wire. Thats the main motive behind developing this tool. More about reasoning, why and how can be found in [Motivation](#motivation) section below. 
+
+You can take a look at the source code itself. All your data is kept as hash fragment in URL which never makes its way to server. Totally avoiding man in middle and XSS attacks to steal your data or any data breach. The data always stays in your URL and browser and never makes its way on the wire. Thats the main motive behind developing this tool. More about reasoning, why and how can be found in [Motivation](#motivation) section below.
 
 # Formats currently supported
 
@@ -68,7 +69,14 @@ Please check all To dos and upcoming things [here](https://github.com/technikhil
 $ npm install
 
 # serve with hot reload at localhost:3000
+# Note that the command below will serve only via nuxt server and
+# wont run vercel functions used for e2e encryption link generation
 $ npm run dev
+
+# if you want to run vercel function during development
+# then first create a vercel project from this repo by logging in on vercel.com
+# then run following command and follow the instructions on terminal
+$ npx vercel dev
 
 # build for production and launch server
 $ npm run build
@@ -79,14 +87,19 @@ $ npm run generate
 ```
 
 ## Self Host
+
 This guide provides detailed instructions on how to self-host the offline-diff-viewer application using Docker and Docker Compose. Self-hosting allows you to run the application on your own server, providing you with full control over its environment and configuration.
 
 ### Building and Running the Docker Container
+
 1. Build the Docker Image
+
 ```bash
 $ docker build -t offline-diff-viewer .
 ```
+
 2. Run the Docker Container via docker run command
+
 ```bash
 $ docker run -d \
   --name offline-diff-viewer \
@@ -100,6 +113,7 @@ $ docker run -d \
 ```
 
 ### Running the Container with Docker Compose
+
 ```bash
 $ docker compose up -d --build
 ```
