@@ -3,9 +3,9 @@ import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin'
 
 const BASE_URL = 'https://diffviewer.vercel.app'
 const TITLE_DESCRIPTION =
-  'A tool that helps you compare any two text blocks without sending any of your data to our servers'
+  'A tool that helps you compare, differentiate, analyze, visualize text online'
 const DESCRIPTION =
-  'A diff checker tool and/or utility that allows you to analyze and contrast two pieces of text without transmitting your information to our servers.'
+  'A privacy focused tool and/or utility that allows you to compare/analyze/contrast/differentiate/visualize/analyze pieces of texts'
 export default {
   ssr: false,
   head: {
@@ -281,6 +281,7 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     extractCSS: true,
+    productionSourceMap: false,
     extend(config, { isClient }) {
       if (isClient && process.env.NODE_ENV === 'development') {
         config.resolve.alias.vscode = path.resolve(
