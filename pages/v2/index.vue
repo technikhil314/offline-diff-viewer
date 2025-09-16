@@ -144,7 +144,6 @@ export default Vue.extend({
     },
   },
   mounted() {
-    showTutorials(this.$cookies, this.$route.path, this.$cookies.isDarkMode)
     document.addEventListener('keydown', this.handleCtrlEnter)
     // Hover on each property to see its docs!
     const lhs = document.getElementById('lhs')
@@ -152,6 +151,7 @@ export default Vue.extend({
     const theme = this.$cookies.isDarkMode ? 'vs-dark' : 'light'
     const monacoEditorOptions = getMonacoEditorDefaultOptions(theme)
     loader.init().then((monaco) => {
+      showTutorials(this.$cookies, this.$route.path, this.$cookies.isDarkMode)
       if (lhs) {
         this.lhsEditor = monaco.editor.create(lhs, {
           ...monacoEditorOptions,

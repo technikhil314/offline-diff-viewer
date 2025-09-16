@@ -91,3 +91,4 @@ sw.*
 
 # Vercel cli
 .vercel
+.vercel_cache

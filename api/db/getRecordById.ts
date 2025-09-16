@@ -1,16 +1,17 @@
 import { DB_SCHEMA } from './dbConstants.js'
 import { getPool } from './index.js'
-export async function insertRecord({ data, id }) {
+
+export async function getRecordById(id: string) {
   const client = await getPool().connect()
   try {
-    await client.query(
-      `INSERT INTO "${DB_SCHEMA}".e2e_data(data, id) VALUES ($1, $2);`,
-      [data, id]
+    const res = await client.query(
+      `SELECT data, "creationTimestamp" FROM "${DB_SCHEMA}".e2e_data WHERE id = $1;`,
+      [id]
     )
-    return true
+    return res.rows
   } catch (error) {
     console.error(error)
-    return false
+    return null
   } finally {
     await client.release()
   }

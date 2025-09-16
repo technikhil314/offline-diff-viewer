@@ -5,6 +5,7 @@ export interface Cookies {
   isSkipBackButtonPersistsDataTutorial: boolean
   isSkipSubmitKbdShortcutTutorial: boolean
   isSkipCopyLinkShortcutTutorial: boolean
+  isSkipCopyE2ELinkTutorial: boolean
 }
 
 export interface Tutorial {

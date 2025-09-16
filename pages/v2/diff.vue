@@ -79,6 +79,7 @@ import {
   E2E_DATA_LOADING_INFO,
   E2E_DATA_NO_LONGER_AVAILABLE_ERROR,
 } from '~/constants/messages'
+import showTutorials from '~/helpers/driverjsTutorials'
 export default Vue.extend({
   components: { DiffActionBar, Navbar, Footer },
   layout: 'main',
@@ -138,8 +139,8 @@ export default Vue.extend({
       const url = new URL(window.location.href)
       const id = url.searchParams.get('id')
       const key = url.hash.replace(/^#/, '')
-      let response = null;
-        let data = null
+      let response = null
+      let data = null
       try {
         response = await fetch(`/api/getLink?id=${id}`)
         data = await response.json()
@@ -200,6 +201,7 @@ export default Vue.extend({
             )
           }
         }
+        showTutorials(this.$cookies, this.$route.path, this.$cookies.isDarkMode)
       })
     },
     unzipCommitData(data: string) {

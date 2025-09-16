@@ -6,6 +6,7 @@ import isSkipBackButtonPersistsDataTutorial from '~/helpers/isSkipBackButtonPers
 import isSkipSubmitKbdShortcutTutorial from '~/helpers/isSkipSubmitKbdShortcutTutorial'
 import { Cookies } from '~/helpers/types'
 import isSkipCopyLinkShortcutTutorial from '~/helpers/isSkipCopyLinkShortcutTutorial'
+import isSkipCopyE2ELinkTutorial from '~/helpers/isSkipCopyE2ELinkTutorial'
 
 declare module 'vue/types/vue' {
   interface Vue {
@@ -40,6 +41,7 @@ const cookieInjectorPlugin: Plugin = (_context, inject) => {
       isSkipBackButtonPersistsDataTutorial(),
     isSkipSubmitKbdShortcutTutorial: isSkipSubmitKbdShortcutTutorial(),
     isSkipCopyLinkShortcutTutorial: isSkipCopyLinkShortcutTutorial(),
+    isSkipCopyE2ELinkTutorial: isSkipCopyE2ELinkTutorial(),
   })
 }
 

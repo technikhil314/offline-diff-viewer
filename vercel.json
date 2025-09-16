@@ -8,10 +8,10 @@
     }
   ],
   "functions": {
-    "api/createLink.js": {
+    "api/createLink.ts": {
       "maxDuration": 50
     },
-    "api/getLink.js": {
+    "api/getLink.ts": {
       "maxDuration": 50
     }
   }

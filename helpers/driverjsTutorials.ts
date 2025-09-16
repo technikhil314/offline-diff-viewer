@@ -1,4 +1,4 @@
-import { Cookies, Tutorial, TutorialsMetadata, TutorialMetadata } from './types'
+import { Cookies, Tutorial, TutorialMetadata, TutorialsMetadata } from './types'
 // Need this to keep track of latest value of cookie otherwise users sees same tutorial untill they refresh the page after the cookie is dropped
 const _cookies: Partial<Cookies> = {}
 const labelsTutorial: Tutorial[] = [
@@ -75,7 +75,17 @@ const copyLinkShortcutTutorial: Tutorial[] = [
   },
 ]
 
-const diffTutorials: TutorialMetadata[] = [
+const CopyE2ELinkTutorial: Tutorial[] = [
+  {
+    element: '#copyLinkButton',
+    popover: {
+      title: 'Copy E2E link',
+      description: 'Now links for large data comparison are end-to-end encrytpted automatically. Read more about it on github repo.',
+    },
+  },
+]
+
+const diffV1Tutorials: TutorialMetadata[] = [
   {
     tutorial: actionBarTutorial,
     cookieName: 'isSkipScrollInSyncTutorial',
@@ -88,9 +98,28 @@ const diffTutorials: TutorialMetadata[] = [
     tutorial: copyLinkShortcutTutorial,
     cookieName: 'isSkipCopyLinkShortcutTutorial',
   },
+  {
+    tutorial: CopyE2ELinkTutorial,
+    cookieName: 'isSkipCopyE2ELinkTutorial',
+  }
 ]
 
-const comparePageTutorials: TutorialMetadata[] = [
+const diffV2Tutorials: TutorialMetadata[] = [
+  {
+    tutorial: CopyE2ELinkTutorial,
+    cookieName: 'isSkipCopyE2ELinkTutorial',
+  },
+  {
+    tutorial: backButtonTutorial,
+    cookieName: 'isSkipBackButtonPersistsDataTutorial',
+  },
+  {
+    tutorial: copyLinkShortcutTutorial,
+    cookieName: 'isSkipCopyLinkShortcutTutorial',
+  },
+]
+
+const comparePageV1Tutorials: TutorialMetadata[] = [
   {
     tutorial: labelsTutorial,
     cookieName: 'isSkipTutorial',
@@ -101,11 +130,18 @@ const comparePageTutorials: TutorialMetadata[] = [
   },
 ]
 
+const comparePageV2Tutorials: TutorialMetadata[] = [
+  {
+    tutorial: labelsTutorial,
+    cookieName: 'isSkipTutorial',
+  },
+]
+
 const tutorialsMetadata: TutorialsMetadata = {
-  '/v1/diff': diffTutorials,
-  '/v2/diff': diffTutorials,
-  '/': comparePageTutorials,
-  '/v2': comparePageTutorials,
+  '/v1/diff': diffV1Tutorials,
+  '/v2/diff': diffV2Tutorials,
+  '/': comparePageV1Tutorials,
+  '/v2': comparePageV2Tutorials,
 }
 
 export default async function showTutorials(
