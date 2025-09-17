@@ -3,10 +3,11 @@ import { Pool } from 'pg'
 let pool: Pool | null = null
 
 export function getPool() {
-  if (!process.env.DB_USER || !process.env.DB_HOST || !process.env.DB_NAME || !process.env.DB_PASSWORD || !process.env.DB_PORT) {
+  if (!process.env.DB_USER || !process.env.DB_HOST || !process.env.DB_NAME || !process.env.DB_PASSWORD) {
     throw new Error('Missing database environment variables')
   }
   if (!pool) {
+    // if ssl is true then port number is not needed
     pool = new Pool({
       user: process.env.DB_USER,
       host: process.env.DB_HOST,
