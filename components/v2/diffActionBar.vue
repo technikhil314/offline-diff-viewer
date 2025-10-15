@@ -19,6 +19,7 @@
     <div class="flex gap-4">
       <NextDiff :click-handler="goToNextDiff" />
       <PrevDiff :click-handler="goToPreviousDiff" />
+      <swapDiffContent :click-handler="swapDiffContent" />
     </div>
     <div class="flex gap-4 items-center">
       <DiffStyle :click-handler="toggleDiffFashion" />
@@ -33,6 +34,7 @@ import CopyLink from '../buttons/copyLink.vue'
 import DiffStyle from '../buttons/diffStyle.vue'
 import NextDiff from '../buttons/nextDiff.vue'
 import PrevDiff from '../buttons/prevDiff.vue'
+import SwapDiffContent from '../buttons/swapDiffContent.vue'
 import { SIMPLE_DIFF_CHARACTER_LIMIT } from '~/constants/constants'
 import {
   E2E_LINK_GENERATION_ERROR,
@@ -52,6 +54,7 @@ export default Vue.extend({
     NextDiff,
     CopyLink,
     DiffStyle,
+    SwapDiffContent,
   },
   props: {
     diffNavigator: {
@@ -59,6 +62,10 @@ export default Vue.extend({
       required: true,
     },
     onDiffFashion: {
+      type: Function,
+      required: true,
+    },
+    onSwapDiffContent: {
       type: Function,
       required: true,
     },
@@ -136,7 +143,7 @@ export default Vue.extend({
         const newUrl = new URL(window.location.origin)
         newUrl.pathname = '/v2/diff'
         newUrl.hash = `#${extractedEncryptionKey}`
-        newUrl.searchParams.set('id', id)
+        newUrl.searchParams.set('id', data.address)
         putToClipboard(
           newUrl.toString(),
           E2E_LINK_GENERATION_SUCCESS,
@@ -163,6 +170,9 @@ export default Vue.extend({
     },
     toggleDiffFashion(value: boolean) {
       this.onDiffFashion(value)
+    },
+    swapDiffContent() {
+      this.onSwapDiffContent()
     },
     showErrorToast(content: string) {
       this.$store.commit('toast/show', {

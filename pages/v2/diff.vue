@@ -14,6 +14,7 @@
         <DiffActionBar
           :diff-navigator="diffNavigator"
           :on-diff-fashion="toggleDiffFashion"
+          :on-swap-diff-content="swapDiffContent"
         />
         <section
           class="flex flex-wrap gap-4 items-stretch w-full font-mono text-gray-800  dark:text-gray-50"
@@ -133,6 +134,21 @@ export default Vue.extend({
     toggleDiffFashion(value: boolean) {
       this.monacoDiffEditor?.updateOptions?.({ renderSideBySide: value })
       this.isSideBySideDiff = value
+    },
+    swapDiffContent() {
+      const temp = this.lhs
+      this.lhs = this.rhs
+      this.rhs = temp
+      loader.init().then((monaco) => {
+        this.monacoDiffEditor.setModel({
+          original: monaco.editor.createModel(this.lhs, 'javascript'),
+          modified: monaco.editor.createModel(this.rhs, 'javascript'),
+        })
+        this.$store.commit('data/set', {
+          lhs: this.lhs,
+          rhs: this.rhs,
+        })
+      })
     },
     async getE2EData() {
       this.e2eDataStatusText = E2E_DATA_LOADING_INFO
