@@ -4,7 +4,9 @@ on:
     branches:
       - main
       - master
-
+permissions:
+  contents: read
+  packages: write
 jobs:
   changelog:
     runs-on: ubuntu-latest
@@ -12,7 +14,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
-
         # This action generates changelog which then the release action consumes
       - name: Conventional Changelog Action
         id: changelog
@@ -30,3 +31,26 @@ jobs:
           tag_name: ${{ steps.changelog.outputs.tag }}
           release_name: ${{ steps.changelog.outputs.tag }}
           body: ${{ steps.changelog.outputs.clean_changelog }}
+
+      - name: Login to GHCR
+        uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3.4.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@902fa8ec7d6ecbf8d84d538b9b233a880e428804 # v5.7.0
+        with:
+          images: ghcr.io/${{ github.repository }}:latest
+
+      - name: Build and push to ghcr
+        uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6.18.0
+        with:
+          push: true
+          tags: ghcr.io/${{ github.repository }}:latest,ghcr.io/${{ github.repository }}:${{ steps.changelog.outputs.tag }}
+          cache-from: type=registry,ref=ghcr.io/${{ github.repository }}:latest
+          platforms: linux/amd64
+          labels: |
+            ${{ steps.meta.outputs.labels }}
